@@ -1,0 +1,35 @@
+function get_password() {
+	prompt=$1
+	echo -en "" | rofi -dmenu -password -p "PASSWORD" -mesg $prompt -lines 0
+}
+
+function network_disconnect() {
+	network=$1
+	nmcli c down $network && notify-send "✔ Disconnected from $network" || notify-send "X Failed to disconnect from $network"
+}
+
+function network_connect() {
+	network=$1
+	password=$(get_password "Enter password for $network")
+	notify-send "Attempting to connect to network, please wait  "
+	echo $password | nmcli c up $network --ask && notify-send "✓ Successfully connected to $network" || notify-send "X Failed to connect to $network"
+}
+
+function network_actions() {
+	network=$1
+	selected=$(echo "Connect
+Disconnect" | rofi -dmenu -mesg $network)
+	
+	case $selected in
+		"Connect") network_connect $network ;;
+		"Disconnect") network_disconnect $network ;;
+	esac
+}
+
+
+function get_network() {
+	selected=$(nmcli --fields name connection | grep -v NAME | rofi -dmenu)
+	network_actions $selected
+}
+
+get_network

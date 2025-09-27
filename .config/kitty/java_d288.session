@@ -1,0 +1,12 @@
+# First, launch IDE
+cd ~/IdeaProjects/d288-back-end-programming/
+launch /home/miles/opt/idea/bin/idea.sh ./
+
+# Now create a new tab and launch the front end
+new_tab FrontEnd
+cd ~/IdeaProjects/d288-back-end-programming/frontend
+launch ng serve
+
+# Finally, create a new tab and open the front end in the browser
+new_tab firefox
+launch firefox localhost:4200

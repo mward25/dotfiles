@@ -1,0 +1,12 @@
+selected=$(echo "󱐋 Power Options
+  GPU Settings
+󰣆 Application Launcher
+󰲌 Terminal Application Launcher" | rofi -dmenu)
+
+
+case $selected in
+	"󱐋 Power Options") ~/.config/rofi/bin/power ;;
+	"  GPU Settings") ~/.config/rofi/bin/gpu ;;
+	"󰣆 Application Launcher") rofi -show drun ;;
+	"󰲌 Terminal Application Launcher") rofi -show run ;;
+esac

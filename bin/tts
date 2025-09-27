@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+# For text to speech
+#
+export VOICE_PATH="/usr/share/piper-voices/en/en_US/ljspeech/high/en_US-ljspeech-high.onnx"
+#export VOICE_PATH="/usr/share/piper-voices/en/en_US/lessac/medium/en_US-lessac-medium.onnx"
+# IF -M is passed, do male voice
+if [ "$1" == "-M" ]
+then
+	echo "Male voice"
+	export VOICE_PATH="/usr/share/piper-voices/en/en_US/hfc_male/medium/en_US-hfc_male-medium.onnx"
+fi
+echo $VOICE_PATH
+#tr '\n' ' ' | piper-tts -m $VOICE_PATH --output-raw | paplay --rate=22050 --format=s16le --raw
+#tr '\n' '.' | piper-tts -m $VOICE_PATH --output-raw | paplay -p --rate=$(expr 22050 / 2) --format=s16le --raw
+tr '\n' '... ' | piper-tts -m $VOICE_PATH --output-raw | aplay -r 22050 -f S16_LE -t raw -
+#mimic --voice en_US/m-ailabs_low  | paplay

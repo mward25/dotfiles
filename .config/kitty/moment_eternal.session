@@ -1,0 +1,5 @@
+cd ~/projects/NewEng/
+launch vim
+
+new_tab build_and_run
+cd ~/projects/NewEng/build/

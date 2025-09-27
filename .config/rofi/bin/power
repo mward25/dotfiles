@@ -1,0 +1,15 @@
+selected=$(echo " Lock Screen
+⏼ Power Off
+󰜉 Restart
+⏾ Suspend
+󱣻 Hibernate" | rofi -dmenu)
+
+echo "You selected $selected"
+
+case $selected in
+	" Lock Screen") lock ;;
+	"⏼ Power Off") shutdown now ;;
+	"󰜉 Restart") reboot ;;
+	"⏾ Suspend") systemctl sleep ;;
+	"󱣻 Hibernate") systemctl hibernate ;;
+esac
