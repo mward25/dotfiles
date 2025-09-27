@@ -1,0 +1,5 @@
+#!/bin/bash
+
+scrot -o /tmp/screenshot.png
+magick /tmp/screenshot.png -background black -spread 2 -blur 5 /tmp/screenshot_blur.png
+i3lock -i /tmp/screenshot_blur.png

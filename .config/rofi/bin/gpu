@@ -1,0 +1,6 @@
+selected=$(echo "󰤇 Fast Mode!
+󰳗 The turtle moves" | rofi -dmenu)
+case $selected in
+	"󰤇 Fast Mode!") systemctl start --user gamemoded && notify-send "󰤇 Fast Mode! Started!" ;;
+	"󰳗 The turtle moves") systemctl stop --user gamemoded && notify-send "󰳗 The turtle moves" ;;
+esac
