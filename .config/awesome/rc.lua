@@ -94,19 +94,30 @@ local terminal     = "kitty"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
-local browser      = "librewolf"
+local browser      = "firefox"
+
+beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+
+-- {{{ Libs
+local bling = require("bling")
+-- }}}
 
 awful.util.terminal = terminal
 awful.util.tagnames = { " ", " ", " ", " ", "🎜 ", " " }
 awful.layout.layouts = {
+    lain.layout.centerwork,
+    --awful.layout.suit.corner.se,
+    awful.layout.suit.spiral,
+    lain.layout.cascade.tile,
     awful.layout.suit.tile,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.floating,
+    
     --awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
-    awful.layout.suit.floating,
+    --bling.layout.mstab,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.max,
     --awful.layout.suit.max.fullscreen,
@@ -114,10 +125,7 @@ awful.layout.layouts = {
     --awful.layout.suit.corner.nw,
     --awful.layout.suit.corner.ne,
     --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
     --lain.layout.cascade,
-    --lain.layout.cascade.tile,
-    --lain.layout.centerwork,
     --lain.layout.centerwork.horizontal,
     --lain.layout.termfair,
     --lain.layout.termfair.center
@@ -161,7 +169,7 @@ awful.util.tasklist_buttons = mytable.join(
      awful.button({ }, 5, function() awful.client.focus.byidx(-1) end)
 )
 
-beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+
 
 -- }}}
 
@@ -651,6 +659,8 @@ tag.connect_signal("property::selected", backham)
 -- {{{ Auto Start
 -- Start Screenshot util
 awful.spawn.once("flameshot", false)
+-- Bluetooth Manager
+awful.spawn.once("blueberry-tray", false)
 -- Start compositor
 awful.spawn.once("picom --config " .. os.getenv("HOME") .. "/.config/picom/picom.conf", false)
 -- Avoid tearing on nvidia
