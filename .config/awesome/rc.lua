@@ -334,14 +334,14 @@ globalkeys = gears.table.join(
               {description = "select previous", group = "layout"}),
     awful.key({ modkey            }, "b", 
         function()
-            awful.screen.focused().mywibox.visible = false
+            awful.screen.focused().topbar.visible = false
             for _, c in ipairs(client.get()) do
                 awful.titlebar.hide(c, "top")
             end
         end, {description = "Hide all bars", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "b",
         function()
-            awful.screen.focused().mywibox.visible = true
+            awful.screen.focused().topbar.visible = true
             for _, c in ipairs(client.get()) do
                 awful.titlebar.show(c, "top")
             end
