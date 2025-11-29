@@ -16,7 +16,7 @@ export TESSDATA_PREFIX=/usr/share/tessdata/
 test -s ~/.alias && . ~/.alias || true
 
 # make x over ssh work
-export DISPLAY=:0.0
+#export DISPLAY=:0.0
 
 # I FOUND THIS AND I THINK IT IS AWESOME, SO I AM GOING TO USE IT
 export grep=rg
@@ -28,6 +28,8 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=1
 
 alias vi=nvim
 alias vim=nvim
+
+alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
 # make commands colorful
 alias ls="ls --color=auto --hyperlink=auto"

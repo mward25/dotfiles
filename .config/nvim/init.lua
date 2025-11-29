@@ -3,10 +3,10 @@ require("config.lazy")
 vim.cmd.colorscheme "catppuccin-macchiato"
 
 -- LSP Config
---vim.lsp.enable({
---	'clangd'
---	})
---vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
+vim.lsp.enable({
+	'clangd'
+	})
+vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 
 local space = " "
 vim.opt.listchars:append {
@@ -62,6 +62,7 @@ cmp.setup({
 		{ name = 'buffer' },
 	})
 })
+
 
 -- require("cmp_git").setup()
 	-- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

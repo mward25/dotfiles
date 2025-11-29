@@ -46,6 +46,9 @@ require("lazy").setup({
     { "tpope/vim-fugitive", name="vim-fugitive", priority = 1000 },
     { "tpope/vim-commentary", name="vim-commentary", priority = 1000 },
     { "tpope/vim-surround", name="vim-surround", priority = 1000 },
+
+    -- For non-default supported file formats
+    { "luisjure/csound-vim", name="csound-vim", priority=1000 },
     
   },
   -- Configure any other settings here. See the documentation for more details.
