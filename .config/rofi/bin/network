@@ -1,3 +1,4 @@
+#!/bin/bash
 function get_password() {
 	prompt=$1
 	echo -en "" | rofi -dmenu -password -p "PASSWORD" -mesg $prompt -lines 0

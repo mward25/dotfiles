@@ -1,5 +1,6 @@
 import Quickshell // for PanelWindow
 import QtQuick // for Text
+import QtQuick.Layouts // for Text
 
 PanelWindow {
   anchors {
@@ -10,10 +11,18 @@ PanelWindow {
 
   implicitHeight: 30
 
-  Text {
-    // center the bar in its parent component (the window)
-    anchors.centerIn: parent
+  RowLayout {
+    Text {
+      // center the bar in its parent component (the window)
+      //anchors.centerIn: parent
 
-    text: "Hello World"
+      text: "Hello World"
+    }
+    Text {
+      // center the bar in its parent component (the window)
+      //anchors.centerIn: parent
+      color: "purple"
+      text: "Potato"
+    }
   }
 }
