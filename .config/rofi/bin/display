@@ -1,0 +1,7 @@
+#!/bin/bash
+
+selected=$(echo "󰑓 Reload Display" | rofi -dmenu)
+
+case $selected in
+	"󰑓 Reload Display") autorandr --change ;;
+esac

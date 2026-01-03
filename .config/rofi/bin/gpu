@@ -1,3 +1,4 @@
+#!/bin/bash
 selected=$(echo "󰤇 Fast Mode!
 󰳗 The turtle moves" | rofi -dmenu)
 case $selected in

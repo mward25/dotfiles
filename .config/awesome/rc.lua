@@ -663,6 +663,8 @@ awful.spawn.once("flameshot", false)
 awful.spawn.once("blueberry-tray", false)
 -- Start compositor
 awful.spawn.once("picom --config " .. os.getenv("HOME") .. "/.config/picom/picom.conf", false)
+-- Start autorandr
+awful.spawn.once("autorandr --change", false)
 -- Avoid tearing on nvidia
 --awful.spawn.once("nvidia-settings --assign CurrentMetaMode=\"nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }\"", false)
 -- Start key binding util (xbindKeys)

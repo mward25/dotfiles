@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function bluetooth_pair() {
 	echo "power on
 default-agent
