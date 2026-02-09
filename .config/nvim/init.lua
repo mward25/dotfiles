@@ -6,6 +6,7 @@ vim.cmd.colorscheme "catppuccin-macchiato"
 vim.lsp.enable({
 	'clangd',
 	'qmlls',
+	'harper_ls'
 	})
 vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 
