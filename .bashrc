@@ -33,7 +33,7 @@ alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
 # make commands colorful
 alias ls="ls --color=auto --hyperlink=auto"
-alias less="less -r"
+#alias less="less -r"
 alias grep="grep --color=always"
 alias pdfgrep="pdfgrep --color=always"
 

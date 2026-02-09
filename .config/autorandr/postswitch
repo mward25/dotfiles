@@ -1,0 +1,3 @@
+#!/bin/bash
+
+notify-send "🖵 Changed profile to '$AUTORANDR_CURRENT_PROFILE'!!!"

@@ -673,4 +673,6 @@ awful.spawn.once("xbindkeys", false)
 awful.spawn.once("/usr/lib/xdg-desktop-portal-gtk --replace", false)
 -- Give the current day
 --awful.spawn("date | tts && task | tts")
+awful.spawn.once("syncthingtray-qt6", false)
+awful.spawn.once("1password")
 -- }}}

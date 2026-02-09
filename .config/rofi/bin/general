@@ -1,16 +1,14 @@
 #!/bin/bash
 
 selected=$(echo "󱐋 Power Options
-🖵 Display Options
-  GPU Settings
+ Relaunch Options
 󰣆 Application Launcher
 󰲌 Terminal Application Launcher" | rofi -dmenu)
 
 
 case $selected in
 	"󱐋 Power Options") ~/.config/rofi/bin/power ;;
-	"🖵 Display Options") ~/.config/rofi/bin/display ;;
-	"  GPU Settings") ~/.config/rofi/bin/gpu ;;
+	" Relaunch Options") ~/.config/rofi/bin/restart ;;
 	"󰣆 Application Launcher") rofi -show drun ;;
 	"󰲌 Terminal Application Launcher") rofi -show run ;;
 esac
