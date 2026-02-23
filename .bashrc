@@ -4,12 +4,13 @@ export GPG_TTY
 # Some applications read the EDITOR variable to determine your favourite text
 # editor. So uncomment the line below and enter the editor of your choice :-)
 export PAGER=less
-export EDITOR=/usr/bin/vim
+export EDITOR=nvim
 export BROWSER=firefox
 export TERMINAL=kitty
 export PGDATA=/var/lib/postgres/data
 # Use elk layout engine for d2 graphs
 export D2_LAYOUT=elk
+export MOZ_ENABLE_WAYLAND=1
 
 export PATH=$PATH:~/bin:~/.local/bin:/opt/google-cloud-cli/bin
 export TESSDATA_PREFIX=/usr/share/tessdata/
