@@ -90,7 +90,9 @@ which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
 export LIBGL_ALWAYS_INDIRECT=0
 
 # Make it so tab complete does not ring bell
-bind "set bell-style none"
+if [[ $- = *i* ]]; then
+    bind "set bell-style none"
+fi
 
 #PATH="/home/miles/perl5/bin${PATH:+:${PATH}}"; export PATH;
 #PERL5LIB="/home/miles/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -150,3 +152,6 @@ export PS1='\A \u@\h $(prompt_text) \w $ '
 # Ensure .bash_history is never truncated
 export HISTFILESIZE=
 export HISTSIZE=
+
+# OpenClaw Completion
+source "/home/miles/.openclaw/completions/openclaw.bash"
