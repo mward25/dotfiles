@@ -81,7 +81,8 @@ fi
 #     alias vim="vim -T kitty "
 # fi
 
-. /usr/share/bash-completion/completions/git
+
+source "$(pkg-config --variable=completionsdir bash-completion)"/git
 
 # If pandoc exists, generate completion
 which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
@@ -152,6 +153,3 @@ export PS1='\A \u@\h $(prompt_text) \w $ '
 # Ensure .bash_history is never truncated
 export HISTFILESIZE=
 export HISTSIZE=
-
-# OpenClaw Completion
-source "/home/miles/.openclaw/completions/openclaw.bash"
