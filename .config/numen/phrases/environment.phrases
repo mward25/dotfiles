@@ -4,27 +4,27 @@
 
 # Navigate to the window in the given direction
 west: stick off \
-	press super+Left
+	press super+h
 east: stick off \
-	press super+Right
+	press super+l
 north: stick off \
-	press super+Up
+	press super+k
 south: stick off \
-	press super+Down
+	press super+j
 
-# Cycle round the windows
-cycle: stick off \
-	press super+c
-recycle: stick off \
-	press super+C
+## Cycle round the windows
+#cycle: stick off \
+#	press super+c
+#recycle: stick off \
+#	press super+C
 
 # Close window
-exterminate: stick off \
-	press super+q
+#exterminate: stick off \
+#	press super+q
 
 # Toggle fullscreen
-screen: stick off \
-	press super+f
+#screen: stick off \
+#	press super+f
 
 
 

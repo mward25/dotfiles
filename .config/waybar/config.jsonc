@@ -17,6 +17,7 @@
     "modules-right": [
         //"mpd",
         "idle_inhibitor",
+        "custom/numen",
         "pulseaudio",
         "network",
         "power-profiles-daemon",
@@ -214,5 +215,10 @@
             "suspend": "systemctl suspend",
             "hibernate": "systemctl hibernate"
         }
+    },
+    "custom/numen": {
+        "exec": "pgrep -x numen >/dev/null && echo '🔴' || echo '󰟢 '",
+        "on-click": "pgrep -x numen && killall numen || numen &",
+        "interval": 2
     }
 }
