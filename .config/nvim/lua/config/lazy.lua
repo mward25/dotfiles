@@ -30,7 +30,6 @@ require("lazy").setup({
     { "tpope/vim-sleuth",            priority = 1000 },
     { "nvim-tree/nvim-tree.lua",     priority = 1000 },
     { "nvim-telescope/telescope.nvim", priority = 1000, dependencies = { 'nvim-lua/plenary.nvim' } },
-
     -- Config Defaults helpers
     { "neovim/nvim-lspconfig", name = "nvim-lspconfig", priority = 1000 },
     -- Completion Helpers
