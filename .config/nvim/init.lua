@@ -1,6 +1,6 @@
 require("config.lazy")
 
--- vim.cmd.colorscheme "catppuccin-macchiato"
+vim.cmd.colorscheme("modus")
 
 -- LSP Config
 vim.lsp.enable({
