@@ -82,7 +82,7 @@ fi
 # fi
 
 
-source "$(pkg-config --variable=completionsdir bash-completion)"/git
+[ -f "$(pkg-config --variable=completionsdir bash-completion)/git" ] && "$(pkg-config --variable=completionsdir bash-completion)/git"
 
 # If pandoc exists, generate completion
 which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
