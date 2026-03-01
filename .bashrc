@@ -87,7 +87,7 @@ fi
 which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
 
 # Make opengl work better
-export LIBGL_ALWAYS_INDIRECT=0
+#export LIBGL_ALWAYS_INDIRECT=0
 
 # Make it so tab complete does not ring bell
 if [[ $- = *i* ]]; then
