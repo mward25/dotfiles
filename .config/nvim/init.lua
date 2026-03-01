@@ -1,6 +1,6 @@
 require("config.lazy")
 
-vim.cmd.colorscheme("github-monochrome-light")
+--vim.cmd.colorscheme("github-monochrome-light")
 
 -- LSP Config
 vim.lsp.enable({
