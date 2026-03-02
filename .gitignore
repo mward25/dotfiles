@@ -1,1 +1,4 @@
 .vim/undo
+.config/koreader/cache
+.config/koreader/screenshots
+.config/koreader/settings/*.sqlite3
