@@ -30,7 +30,7 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=1
 alias vi=nvim
 alias vim=nvim
 
-alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+#alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
 # make commands colorful
 alias ls="ls --color=auto --hyperlink=auto"
@@ -88,7 +88,7 @@ fi
 which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
 
 # Make opengl work better
-#export LIBGL_ALWAYS_INDIRECT=0
+export LIBGL_ALWAYS_INDIRECT=0
 
 # Make it so tab complete does not ring bell
 if [[ $- = *i* ]]; then
