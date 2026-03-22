@@ -56,7 +56,8 @@ require("lazy").setup({
 
     -- For non-default supported file formats
     { "luisjure/csound-vim", name="csound-vim", priority=1000 },
-    
+    --require("config.lazy.snacks")
+    --require("config.avante_lazy_config")
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
