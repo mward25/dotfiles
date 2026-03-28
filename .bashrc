@@ -136,7 +136,7 @@ task_prompt()
 }
 
 # Set up prompt
-export PS1='\A \u@\h $(prompt_text) \w $ '
+export PS1='\A \u@\h $(prompt_text) \w:\n$ '
 
 
 # Configure themes
