@@ -43,12 +43,13 @@ require("lazy").setup({
        }
     },
     -- Tpope!!!
-    { "tpope/vim-fugitive", name="vim-fugitive", priority = 1000 },
+    --{ "tpope/vim-fugitive", name="vim-fugitive", priority = 1000 },
     { "tpope/vim-commentary", name="vim-commentary", priority = 1000 },
     { "tpope/vim-surround", name="vim-surround", priority = 1000 },
 
     -- For non-default supported file formats
     { "luisjure/csound-vim", name="csound-vim", priority=1000 },
+    require("config.neogit_config"),
     --require("config.lazy.snacks")
     --require("config.avante_lazy_config")
   },
