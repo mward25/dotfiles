@@ -22,7 +22,7 @@ test -s ~/.alias && . ~/.alias || true
 # I FOUND THIS AND I THINK IT IS AWESOME, SO I AM GOING TO USE IT
 export grep=rg
 
-export GH_EDITOR=vim
+export GH_EDITOR=nvim
 
 # Generate compile_commands.json
 export CMAKE_EXPORT_COMPILE_COMMANDS=1
@@ -135,8 +135,17 @@ task_prompt()
     #fi
 }
 
+get_prompt() {
+    local PROMPT_BACKGROUND="\[$(tput setab 8)\]"
+    local RESET="\[$(tput sgr0)\]"
+    local BRACKET_BACKGROUND="\[$(tput setab 13)\]"
+    local OPEN_BRACKET="${BRACKET_BACKGROUND}[${RESET}"
+    local CLOSE_BRACKET="${BRACKET_BACKGROUND}]${RESET}"
+    echo -n "${OPEN_BRACKET}${PROMPT_BACKGROUND}\A \u@\h \$(prompt_text) \w${CLOSE_BRACKET}\n"
+    printf '$ '
+}
 # Set up prompt
-export PS1='\A \u@\h $(prompt_text) \w:\n$ '
+export PS1="$(get_prompt)"
 
 
 # Configure themes
