@@ -49,6 +49,7 @@ require("lazy").setup({
 
     -- For non-default supported file formats
     { "luisjure/csound-vim", name="csound-vim", priority=1000 },
+    require("config.auto_session_config"),
     require("config.neogit_config"),
     --require("config.lazy.snacks")
     --require("config.avante_lazy_config")

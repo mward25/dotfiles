@@ -29,6 +29,8 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=1
 
 alias vi=nvim
 alias vim=nvim
+alias nvimdiff='nvim -d'
+alias vimdiff='nvimdiff'
 
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
@@ -162,3 +164,5 @@ export PS1="$(get_prompt)"
 # Ensure .bash_history is never truncated
 export HISTFILESIZE=
 export HISTSIZE=
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi
