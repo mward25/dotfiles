@@ -14,6 +14,8 @@ export MOZ_ENABLE_WAYLAND=1
 
 export PATH=$PATH:~/bin:~/.local/bin:/opt/google-cloud-cli/bin
 export TESSDATA_PREFIX=/usr/share/tessdata/
+# Use terminal scrolling
+export LESS="-R --mouse --wheel-lines=3"
 test -s ~/.alias && . ~/.alias || true
 
 # make x over ssh work
@@ -29,6 +31,8 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=1
 
 alias vi=nvim
 alias vim=nvim
+
+export DIFFPROG='nvim -d'
 
 #alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
