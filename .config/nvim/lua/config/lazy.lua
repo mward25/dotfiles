@@ -25,10 +25,11 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
   spec = {
     -- import your plugins
-    { "miikanissi/modus-themes.nvim",    name = "modus-themes.nvim",priority = 1000 },
-    { "tpope/vim-sleuth",                name = "vim-sleuth",       priority = 1000 },
-    { "nvim-tree/nvim-tree.lua",         name = "nvim-tree",        priority = 1000 },
-    { "nvim-telescope/telescope.nvim",   name = "telescope",        priority = 1000, tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' } },
+    { "miikanissi/modus-themes.nvim", priority = 1000 },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "tpope/vim-sleuth",            priority = 1000 },
+    { "nvim-tree/nvim-tree.lua",     priority = 1000 },
+    { "nvim-telescope/telescope.nvim", priority = 1000, dependencies = { 'nvim-lua/plenary.nvim' } },
 
     -- Config Defaults helpers
     { "neovim/nvim-lspconfig", name = "nvim-lspconfig", priority = 1000 },
@@ -46,6 +47,13 @@ require("lazy").setup({
     { "tpope/vim-fugitive", name="vim-fugitive", priority = 1000 },
     { "tpope/vim-commentary", name="vim-commentary", priority = 1000 },
     { "tpope/vim-surround", name="vim-surround", priority = 1000 },
+
+    -- Markdown rendering
+    {
+      'MeanderingProgrammer/render-markdown.nvim',
+      ft = { 'markdown' },
+      opts = {},
+    },
 
     -- For non-default supported file formats
     { "luisjure/csound-vim", name="csound-vim", priority=1000 },

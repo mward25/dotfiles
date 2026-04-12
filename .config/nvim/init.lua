@@ -1,12 +1,17 @@
 require("config.lazy")
 
-vim.cmd.colorscheme("modus")
+vim.cmd.colorscheme("catppuccin-macchiato")
+
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.showbreak = "=> "
 
 -- LSP Config
 vim.lsp.enable({
 	'clangd',
 	'qmlls',
-	'harper_ls'
+	'harper_ls',
+	'lua-language-server'
 	})
 vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 
@@ -93,5 +98,13 @@ cmp.setup({
 	-- 	capabilities = capabilities
 	-- }
 --vim.g.complete = ".,w,b,u,i,"
+
+-- Start treesitter highlighter for markdown (no nvim-treesitter needed)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown' },
+  callback = function(ev)
+    vim.treesitter.start(ev.buf, 'markdown')
+  end,
+})
 
 -- set listchars=tab:⎼\ ,trail:·,extends:>
