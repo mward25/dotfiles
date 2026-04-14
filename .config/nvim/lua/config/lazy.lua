@@ -21,6 +21,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Disable netrw before any plugins load (required by nvim-tree)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
@@ -33,6 +37,7 @@ require("lazy").setup({
 
     -- Config Defaults helpers
     { "neovim/nvim-lspconfig", priority = 1000 },
+    { "folke/trouble.nvim", opts = { focus = true } },
     -- Completion Helpers
     { "hrsh7th/nvim-cmp", priority = 1000,
       dependencies = { "hrsh7th/cmp-nvim-lsp",
@@ -51,6 +56,7 @@ require("lazy").setup({
     -- Markdown rendering
     {
       'MeanderingProgrammer/render-markdown.nvim',
+      dependencies = { 'nvim-mini/mini.icons' },
       ft = { 'markdown' },
       opts = {},
     },
@@ -59,6 +65,8 @@ require("lazy").setup({
     { "luisjure/csound-vim", name="csound-vim", priority=1000 },
     require("config.auto_session_config"),
     require("config.neogit_config"),
+    --require("config.nvim-origami_config"),
+    --require("config.ufo_config"),
     --require("config.lazy.snacks")
     --require("config.avante_lazy_config")
   },

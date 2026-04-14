@@ -34,6 +34,8 @@ alias vim=nvim
 alias nvimdiff='nvim -d'
 alias vimdiff='nvimdiff'
 
+alias summr="cat <(echo \"Write a quick summary of the following:\") - | ollama run qwen3:8b --think=false"
+
 export DIFFPROG='nvim -d'
 
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
@@ -116,38 +118,57 @@ prompt_text()
 {
     # Set prompt to blue
     #tput setaf 4
-    printf "{"
-    git branch --show-current --omit-empty 2>/dev/null | sed -z 's/\n//g'  
-    printf "}"
+    printf "{ %s }" "$(git branch --show-current --omit-empty 2>/dev/null | sed -z 's/\n//g')"
     # Reset prompt colors
     #tput setaf 7
     #tput sgr0
 }
 
-task_prompt()
-{
-    export TASK="task"
-    #printf "$(task +READY +DUETODAY count):$(task +READY count)"
-    #if [ `$TASK +READY +OVERDUE count` -gt "0" ]; then
-    #    printf "💀 "
-    #elif [ `$TASK +READY +DUETODAY count` -gt "0" ]; then
-    #    printf "❶ "
-    #elif [ `$TASK +READY +TOMORROW count` -gt "0" ]; then
-    #    printf "❷ "
-    #elif [ `$TASK +READY urgency \> 10 count` -gt "0" ]; then
-    #    printf "🤯"
-    #else
-    #    printf "$"
-    #fi
-}
+get_clock() {
+    local current_hour="$(date +'%H')"
 
+    case "$current_hour" in 
+         1) printf "󱑋" ;;
+         2) printf "󱑌" ;;
+         3) printf "󱑍" ;;
+         4) printf "󱑎" ;;
+         5) printf "󱑏" ;;
+         6) printf "󱑐" ;;
+         7) printf "󱑑" ;;
+         8) printf "󱑒" ;;
+         9) printf "󱑓" ;;
+        10) printf "󱑔" ;;
+        11) printf "󱑕" ;;
+        12) printf "󱑖" ;;
+        13) printf "󱑋" ;;
+        14) printf "󱑌" ;;
+        15) printf "󱑍" ;;
+        16) printf "󱑎" ;;
+        17) printf "󱑏" ;;
+        18) printf "󱑐" ;;
+        19) printf "󱑑" ;;
+        20) printf "󱑒" ;;
+        21) printf "󱑓" ;;
+        22) printf "󱑔" ;;
+        23) printf "󱑕" ;;
+        24) printf "󱑖" ;;
+    esac
+
+    printf " \\A"
+}
 get_prompt() {
-    local PROMPT_BACKGROUND="\[$(tput setab 8)\]"
+    #local PROMPT_BACKGROUND="\[$(tput setab 8)\]"
+    local PROMPT_BACKGROUND=""
     local RESET="\[$(tput sgr0)\]"
     local BRACKET_BACKGROUND="\[$(tput setab 13)\]"
     local OPEN_BRACKET="${BRACKET_BACKGROUND}[${RESET}"
     local CLOSE_BRACKET="${BRACKET_BACKGROUND}]${RESET}"
-    echo -n "${OPEN_BRACKET}${PROMPT_BACKGROUND}\A \u@\h \$(prompt_text) \w${CLOSE_BRACKET}\n"
+    #echo -n "${OPEN_BRACKET}${PROMPT_BACKGROUND}$(get_clock) \u@\h \$(prompt_text) \w${CLOSE_BRACKET}\n"
+    echo "---"
+    echo -n "${PROMPT_BACKGROUND}"
+    echo "$(get_clock) \u@\h"
+    echo "\$(prompt_text)" 
+    echo "\w"
     printf '$ '
 }
 # Set up prompt

@@ -1,19 +1,30 @@
 require("config.lazy")
 
+vim.opt.exrc = true
+vim.opt.secure = true
+
 vim.cmd.colorscheme("catppuccin-macchiato")
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.showbreak = "=> "
 
 -- LSP Config
+vim.lsp.config('qmlls', { cmd = { 'qmlls6' } })
 vim.lsp.enable({
 	'clangd',
 	'qmlls',
 	'harper_ls',
-	'lua-language-server'
+	'lua_ls'
 	})
 vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
+vim.keymap.set('n', '<leader>d', '<cmd>Trouble diagnostics toggle<cr>', { desc = "Trouble diagnostics" })
 vim.keymap.set('n', 'g]', function() vim.diagnostic.goto_next() end, { desc = "Next LSP diagnostic" })
 vim.keymap.set('n', 'g[', function() vim.diagnostic.goto_prev() end, { desc = "Prev LSP diagnostic" })
 
@@ -26,10 +37,6 @@ vim.opt.listchars:append {
 	nbsp=space
 }
 vim.opt.list = true
-
--- Disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 require("nvim-tree").setup()
 vim.g.mapleader = " "
@@ -110,3 +117,29 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- set listchars=tab:⎼\ ,trail:·,extends:>
+
+-- Window resize mode
+vim.keymap.set('n', '<leader>wr', function()
+    local amount = 2
+    local msg = "RESIZE (amount=" .. amount .. "): h/l wider/narrower  k/j taller/shorter  q/ESC/Enter to exit"
+    vim.api.nvim_echo({{msg, "Normal"}}, false, {})
+    while true do
+        local key = vim.fn.getchar()
+        local char = type(key) == "number" and vim.fn.nr2char(key) or key
+        if char == 'h' then
+            vim.cmd("vertical resize +" .. amount)
+        elseif char == 'l' then
+            vim.cmd("vertical resize -" .. amount)
+        elseif char == 'k' then
+            vim.cmd("resize +" .. amount)
+        elseif char == 'j' then
+            vim.cmd("resize -" .. amount)
+        elseif char == 'q' or key == 27 or key == 13 or key == 10 then
+            break
+        end
+        vim.api.nvim_echo({{msg, "Normal"}}, false, {})
+    end
+    vim.api.nvim_echo({{"", "Normal"}}, false, {})
+end, { desc = "Window resize mode" })
+
+--require("nvim-origami_setup")
