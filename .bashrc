@@ -29,8 +29,8 @@ export GH_EDITOR=nvim
 # Generate compile_commands.json
 export CMAKE_EXPORT_COMPILE_COMMANDS=1
 
-alias vi=nvim
-alias vim=nvim
+alias vi="nvim"
+alias vim="nvim"
 alias nvimdiff='nvim -d'
 alias vimdiff='nvimdiff'
 
@@ -38,13 +38,13 @@ alias summr="cat <(echo \"Write a quick summary of the following:\") - | ollama 
 
 export DIFFPROG='nvim -d'
 
-alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+#alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
 # make commands colorful
 alias ls="ls --color=auto --hyperlink=auto"
 #alias less="less -r"
-alias grep="grep --color=always"
-alias pdfgrep="pdfgrep --color=always"
+#alias grep="grep --color=always"
+#alias pdfgrep="pdfgrep --color=always"
 
 # Makes my stupid ls typos still work
 alias l="ls -al"
@@ -65,7 +65,7 @@ reflectionate() {
         sudo tee /etc/pacman.d/mirrorlist
 }
 
-alias dialog="Xdialog"
+#alias dialog="Xdialog"
 
 alias png2spritesheetH="convert *.png +append "
 alias png2spritesheetV="convert *.png -append "
@@ -100,7 +100,7 @@ source "$(pkg-config --variable=completionsdir bash-completion)"/git
 which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
 
 # Make opengl work better
-export LIBGL_ALWAYS_INDIRECT=0
+#export LIBGL_ALWAYS_INDIRECT=0
 
 # Make it so tab complete does not ring bell
 if [[ $- = *i* ]]; then
@@ -118,7 +118,7 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 
-prompt_text()
+git_prompt_text()
 {
     # Set prompt to blue
     #tput setaf 4
@@ -168,10 +168,10 @@ get_prompt_text() {
     local BRACKET_BACKGROUND="\[$(tput setab 13)\]"
     local OPEN_BRACKET="${BRACKET_BACKGROUND}[${RESET}"
     local CLOSE_BRACKET="${BRACKET_BACKGROUND}]${RESET}"
-    #echo -n "${OPEN_BRACKET}${PROMPT_BACKGROUND}$(get_clock) \u@\h \$(prompt_text) \w${CLOSE_BRACKET}\n"
+    #echo -n "${OPEN_BRACKET}${PROMPT_BACKGROUND}$(get_clock) \u@\h \$(git_prompt_text) \w${CLOSE_BRACKET}\n"
     echo -n "${PROMPT_BACKGROUND}"
     echo "$(get_clock) \u@\h"
-    echo "  \$(prompt_text)" 
+    echo "  \$(git_prompt_text)" 
     echo -n " \w"
 }
 get_prompt() {
