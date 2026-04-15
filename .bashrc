@@ -59,7 +59,11 @@ alias lssl=ls
 
 alias s="kitten ssh"
 
-alias update_mirros="reflector --sort rate -p \"https\" | sudo tee /etc/pacman.d/mirrorlist"
+reflectionate() {
+    reflector --sort rate \
+        -p \"https,http,ftp\" | \
+        sudo tee /etc/pacman.d/mirrorlist
+}
 
 alias dialog="Xdialog"
 
@@ -118,7 +122,8 @@ prompt_text()
 {
     # Set prompt to blue
     #tput setaf 4
-    printf "{ %s }" "$(git branch --show-current --omit-empty 2>/dev/null | sed -z 's/\n//g')"
+    printf "%s " "$(git branch --show-current --omit-empty 2>/dev/null | sed -z 's/\n//g')"
+
     # Reset prompt colors
     #tput setaf 7
     #tput sgr0
@@ -156,7 +161,7 @@ get_clock() {
 
     printf " \\A"
 }
-get_prompt() {
+get_prompt_text() {
     #local PROMPT_BACKGROUND="\[$(tput setab 8)\]"
     local PROMPT_BACKGROUND=""
     local RESET="\[$(tput sgr0)\]"
@@ -164,11 +169,20 @@ get_prompt() {
     local OPEN_BRACKET="${BRACKET_BACKGROUND}[${RESET}"
     local CLOSE_BRACKET="${BRACKET_BACKGROUND}]${RESET}"
     #echo -n "${OPEN_BRACKET}${PROMPT_BACKGROUND}$(get_clock) \u@\h \$(prompt_text) \w${CLOSE_BRACKET}\n"
-    echo "---"
     echo -n "${PROMPT_BACKGROUND}"
     echo "$(get_clock) \u@\h"
-    echo "\$(prompt_text)" 
-    echo "\w"
+    echo "  \$(prompt_text)" 
+    echo -n " \w"
+}
+get_prompt() {
+
+    #if which boxes 2>/dev/null ; then
+    #    echo -n "$(get_prompt_text)" | boxes -d ansi-heavy
+    #else
+    echo "---"
+    echo  "$(get_prompt_text)"
+    echo "---"
+    #fi
     printf '$ '
 }
 # Set up prompt
