@@ -28,6 +28,8 @@ vim.keymap.set('n', '<leader>d', '<cmd>Trouble diagnostics toggle<cr>', { desc =
 vim.keymap.set('n', 'g]', function() vim.diagnostic.goto_next() end, { desc = "Next LSP diagnostic" })
 vim.keymap.set('n', 'g[', function() vim.diagnostic.goto_prev() end, { desc = "Prev LSP diagnostic" })
 
+vim.opt.tabstop = 4
+
 local space = " "
 vim.opt.listchars:append {
 	tab = "——",
