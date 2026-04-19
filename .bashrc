@@ -70,9 +70,16 @@ reflectionate() {
 alias png2spritesheetH="convert *.png +append "
 alias png2spritesheetV="convert *.png -append "
 
-alias startMyDrive="rclone mount drive: ~/drive/mine &"
-alias startSharedDrive="rclone mount drive: --drive-shared-with-me  ~/drive/shared &"
-alias mountDrives="startMyDrive ; startSharedDrive"
+start_drive() {
+    rclone mount drive: ~/drive/mine &
+}
+start_shared_drive() {
+    rclone mount drive: --drive-shared-with-me  ~/drive/shared &
+}
+mount_drives() {
+    start_drive
+    start_shared_drive
+}
 
 alias clip="kitten clipboard"
 
