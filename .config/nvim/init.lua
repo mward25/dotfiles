@@ -1,6 +1,6 @@
 require("config.lazy")
 
-vim.cmd.colorscheme("catppuccin-macchiato")
+vim.cmd.colorscheme("modus_operandi")
 
 vim.opt.wrap = true
 vim.opt.linebreak = true
