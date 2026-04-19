@@ -153,3 +153,17 @@ export PS1='\A \u@\h $(prompt_text) \w $ '
 # Ensure .bash_history is never truncated
 export HISTFILESIZE=
 export HISTSIZE=
+
+# opencode
+export PATH=/data/data/com.termux/files/home/.opencode/bin:$PATH
+
+# Claude Code on Android - Custom Configuration
+# Useful aliases
+alias cl="claude-code"
+alias cls="claude-code stats"
+
+# Display useful info
+echo "🚀 Claude Code on Android/Termux Ready"
+echo "   Node: $(node --version)"
+echo "   Python: $(python --version)"
+
