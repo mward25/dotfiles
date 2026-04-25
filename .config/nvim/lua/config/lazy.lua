@@ -65,6 +65,7 @@ require("lazy").setup({
     { "luisjure/csound-vim", name="csound-vim", priority=1000 },
     require("config.auto_session_config"),
     require("config.neogit_config"),
+    require("config.vim-table-mode_config"),
     --require("config.nvim-origami_config"),
     --require("config.ufo_config"),
     --require("config.lazy.snacks")
