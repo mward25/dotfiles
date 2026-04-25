@@ -120,6 +120,8 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- set listchars=tab:⎼\ ,trail:·,extends:>
 
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = "Exit terminal mode" })
+
 -- Window resize mode
 vim.keymap.set('n', '<leader>wr', function()
     local amount = 2
