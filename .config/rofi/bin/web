@@ -1,0 +1,23 @@
+#!/bin/bash
+
+HISTORY_FILE="${XDG_DATA_HOME:-$HOME/.local/share}/rofi-web-history"
+BROWSER="${BROWSER:-firefox}"
+
+mkdir -p "$(dirname "$HISTORY_FILE")"
+touch "$HISTORY_FILE"
+
+query=$(cat "$HISTORY_FILE" | rofi -dmenu -mesg "Web search" -p "")
+
+[ -z "$query" ] && exit 0
+
+grep -Fxq "$query" "$HISTORY_FILE" || echo "$query" >> "$HISTORY_FILE"
+
+case "$(basename "${BROWSER:-firefox}")" in
+    firefox*)
+        exec "${BROWSER:-firefox}" --search "$query" ;;
+    google-chrome*|chrome*)
+        url=$(trurl "https://duckduckgo.com/" --set "query=q=$query")
+        exec "${BROWSER:-firefox}" "$url" ;;
+    *)
+        exec "${BROWSER:-firefox}" "$query" ;;
+esac
