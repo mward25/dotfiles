@@ -68,7 +68,7 @@ require("lazy").setup({
     require("config.vim-table-mode_config"),
     --require("config.nvim-origami_config"),
     --require("config.ufo_config"),
-    --require("config.lazy.snacks")
+    require("config.snacks_config"),
     --require("config.avante_lazy_config")
   },
   -- Configure any other settings here. See the documentation for more details.
