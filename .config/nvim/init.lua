@@ -147,3 +147,43 @@ vim.keymap.set('n', '<leader>wr', function()
 end, { desc = "Window resize mode" })
 
 --require("nvim-origami_setup")
+
+-- Shift-K lookup menu (man / tldr / web)
+local function lookup_word(word)
+    if not word or word == '' then return end
+
+    local options = {}
+    local actions = {}
+
+    if vim.fn.system('man -w ' .. vim.fn.shellescape(word) .. ' 2>/dev/null'):match('%S') then
+        table.insert(options, 'man')
+        actions['man'] = function() vim.cmd('Man ' .. vim.fn.fnameescape(word)) end
+    end
+
+    if vim.fn.executable('tldr') == 1 then
+        table.insert(options, 'tldr')
+        actions['tldr'] = function()
+            vim.cmd('split | terminal tldr ' .. vim.fn.shellescape(word))
+        end
+    end
+
+    table.insert(options, 'web browser')
+    actions['web browser'] = function()
+        vim.fn.jobstart({'firefox', '--search', 'What is ' .. word}, {detach = true})
+    end
+
+    vim.ui.select(options, { prompt = 'Look up: ' .. word }, function(choice)
+        actions[choice or 'web browser']()
+    end)
+end
+
+vim.keymap.set('n', 'K', function()
+    lookup_word(vim.fn.expand('<cword>'))
+end, { desc = 'Lookup word (man/tldr/web)' })
+
+vim.keymap.set('v', 'K', function()
+    local ls, cs = vim.fn.line("'<"), vim.fn.col("'<")
+    local le, ce = vim.fn.line("'>"), vim.fn.col("'>")
+    local lines = vim.api.nvim_buf_get_text(0, ls - 1, cs - 1, le - 1, ce, {})
+    lookup_word(table.concat(lines, ' '):match('^%s*(.-)%s*$'))
+end, { desc = 'Lookup selection (man/tldr/web)' })
