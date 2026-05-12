@@ -61,7 +61,8 @@ alias s="kitten ssh"
 
 reflectionate() {
     reflector --sort rate \
-        -p \"https,http,ftp\" | \
+        -a 8 \
+        -p "https,rsync,ftp" | \
         sudo tee /etc/pacman.d/mirrorlist
 }
 
