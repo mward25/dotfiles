@@ -102,7 +102,7 @@ fi
 # fi
 
 
-#[ -f "$(pkg-config --variable=completionsdir bash-completion)/git" ] && "$(pkg-config --variable=completionsdir bash-completion)/git"
+#[ -e "$(pkg-config --variable=completionsdir bash-completion)/git" ] && "$(pkg-config --variable=completionsdir bash-completion)/git"
 
 # If pandoc exists, generate completion
 which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
@@ -121,9 +121,9 @@ fi
 #PERL_MB_OPT="--install_base \"/home/miles/perl5\""; export PERL_MB_OPT;
 #PERL_MM_OPT="INSTALL_BASE=/home/miles/perl5"; export PERL_MM_OPT;
 
-[ -f ~/bin/timew_bash_complete_activate.sh ] && ~/bin/timew_bash_complete_activate.sh*
+[ -e ~/bin/timew_bash_complete_activate.sh ] && ~/bin/timew_bash_complete_activate.sh*
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -e ~/.fzf.bash ] && source ~/.fzf.bash
 
 
 git_prompt_text()
