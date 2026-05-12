@@ -3,7 +3,8 @@ selected=$(echo " Lock Screen
 ⏼ Power Off
 󰜉 Restart
 ⏾ Suspend
-󱣻 Hibernate" | rofi -dmenu)
+󱣻 Hibernate
+󰩈 Exit Desktop Environment" | rofi -dmenu)
 
 echo "You selected $selected"
 
@@ -13,4 +14,5 @@ case $selected in
 	"󰜉 Restart") reboot ;;
 	"⏾ Suspend") systemctl sleep ;;
 	"󱣻 Hibernate") systemctl hibernate ;;
+	"󰩈 Exit Desktop Environment") hyprctl dispatch exit;;
 esac
