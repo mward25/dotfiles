@@ -187,3 +187,14 @@ vim.keymap.set('v', 'K', function()
     local lines = vim.api.nvim_buf_get_text(0, ls - 1, cs - 1, le - 1, ce, {})
     lookup_word(table.concat(lines, ' '):match('^%s*(.-)%s*$'))
 end, { desc = 'Lookup selection (man/tldr/web)' })
+
+
+-- Highlight qrc as xml.
+vim.filetype.add({
+	extension = {
+		qrc = 'xml',
+	}
+})
+
+
+require('lualine').setup()
