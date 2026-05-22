@@ -1,7 +1,45 @@
 #!/bin/bash
+
+GAMEMODE_LIB="/usr/lib/libgamemode.so.0"
+
+gamemode_preload_is_set() {
+	systemctl --user show-environment | grep -q "^LD_PRELOAD=.*$GAMEMODE_LIB"
+}
+
+gamemode_preload_enable() {
+	gamemode_preload_is_set && return
+	CURRENT=$(systemctl --user show-environment | grep ^LD_PRELOAD= | cut -d= -f2-)
+	systemctl --user set-environment LD_PRELOAD="${CURRENT:+$CURRENT:}$GAMEMODE_LIB"
+}
+
+gamemode_preload_disable() {
+	gamemode_preload_is_set || return
+	CURRENT=$(systemctl --user show-environment | grep ^LD_PRELOAD= | cut -d= -f2-)
+	STRIPPED=$(echo "$CURRENT" | tr ':' '\n' | grep -vF "$GAMEMODE_LIB" | tr '\n' ':' | sed 's/:$//')
+	if [ -n "$STRIPPED" ]; then
+		systemctl --user set-environment LD_PRELOAD="$STRIPPED"
+	else
+		systemctl --user unset-environment LD_PRELOAD
+	fi
+}
+
 selected=$(echo "󰤇 Fast Mode!
 󰳗 The turtle moves" | rofi -dmenu)
 case $selected in
-	"󰤇 Fast Mode!") systemctl start --user gamemoded && notify-send "󰤇 Fast Mode! Started!" ;;
-	"󰳗 The turtle moves") systemctl stop --user gamemoded && notify-send "󰳗 The turtle moves" ;;
+	"󰤇 Fast Mode!") 
+		systemctl --user set-environment \
+			__NV_PRIME_RENDER_OFFLOAD=1 \
+			__GLX_VENDOR_LIBRARY_NAME=nvidia
+		gamemode_preload_enable
+		notify-send "󰤇 Fast Mode! Started!" ;;
+	"󰳗 The turtle moves") 
+		systemctl --user unset-environment \
+			__NV_PRIME_RENDER_OFFLOAD \
+			__GLX_VENDOR_LIBRARY_NAME
+		gamemode_preload_disable
+		notify-send "󰳗 The turtle moves" ;;
 esac
+#case $selected in
+#	"󰤇 Fast Mode!") systemctl start --user gamemoded && notify-send "󰤇 Fast Mode! Started!" ;;
+#	"󰳗 The turtle moves") systemctl stop --user gamemoded && notify-send "󰳗 The turtle moves" ;;
+#esac

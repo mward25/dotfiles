@@ -14,5 +14,5 @@ case $selected in
 	"󰜉 Restart") reboot ;;
 	"⏾ Suspend") systemctl sleep ;;
 	"󱣻 Hibernate") systemctl hibernate ;;
-	"󰩈 Exit Desktop Environment") hyprctl dispatch exit;;
+	"󰩈 Exit Desktop Environment") loginctl terminate-session "$XDG_SESSION_ID" ;;
 esac
