@@ -61,9 +61,14 @@ alias lssl=ls
 alias s="kitten ssh"
 
 reflectionate() {
+    sudo echo "Entering sudo"
     reflector --sort rate \
-        -a 8 \
-        -p "https,rsync,ftp" | \
+        --delay 1 \
+        -p "https,ftp" \
+        --threads 4 \
+        --verbose \
+        --country "US,NZ,AU,BD,CA,CO,DK,DE,GR,JP,MX,TW"\
+        --exclude mirrors.pablonara.com | \
         sudo tee /etc/pacman.d/mirrorlist
 }
 
