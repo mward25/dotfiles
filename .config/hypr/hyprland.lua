@@ -219,6 +219,44 @@ hl.device({
     sensitivity = -0.5,
 })
 
+--------------------------
+---- MIGRATED FUNCTIONS ----
+--------------------------
+
+-- Zoom factor management (replaces hypr_zoom.sh)
+local zoom_factor = 1.0
+local zoom_step = 0.1
+local zoom_min = 1.0
+local zoom_max = 5.0
+
+local function adjust_zoom(direction)
+    if direction == "in" then
+        zoom_factor = math.min(zoom_factor + zoom_step, zoom_max)
+    elseif direction == "out" then
+        zoom_factor = math.max(zoom_factor - zoom_step, zoom_min)
+    end
+    hl.dispatch(hl.dsp.global("cursor:zoom_factor", tostring(zoom_factor)))
+end
+
+-- Window resize with animation (replaces hypr_resize.sh)
+local function resize_window(x_delta, y_delta)
+    hl.dispatch(hl.dsp.global("misc:animate_manual_resizes", true))
+    hl.dispatch(hl.dsp.window.resize({ x = x_delta, y = y_delta, relative = true }))
+    hl.dispatch(hl.dsp.global("misc:animate_manual_resizes", false))
+end
+
+-- Special workspace toggle (replaces toggle_special.sh)
+local function toggle_special_workspace()
+    local active_window = hl.get_active_window()
+    if active_window and active_window.workspace then
+        if active_window.workspace.name:match("^special:") then
+            hl.dispatch(hl.dsp.window.move({ workspace = "previous" }))
+        else
+            hl.dispatch(hl.dsp.window.move({ workspace = "special:magic" }))
+        end
+    end
+end
+
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -241,8 +279,8 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/rofi/bin/web"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("toggle_numen.sh"))
 
 -- Zoom in/out (DPI scaling via cursor zoom factor)
-hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.exec_cmd("~/bin/hypr_zoom.sh in"))
-hl.bind(mainMod .. " + minus", hl.dsp.exec_cmd("~/bin/hypr_zoom.sh out"))
+hl.bind(mainMod .. " + SHIFT + minus", function() adjust_zoom("in") end)
+hl.bind(mainMod .. " + minus", function() adjust_zoom("out") end)
 
 -- Screenshot
 hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
@@ -260,10 +298,10 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "down" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "right" }))
 
 -- Resize window
-hl.bind(mainMod .. " + CTRL + H", hl.dsp.exec_cmd('hypr_resize.sh "-30" " 0"'))
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_cmd('hypr_resize.sh "0"   " 30"'))
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.exec_cmd('hypr_resize.sh "0"   "-30"'))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd('hypr_resize.sh "30"  " 0"'))
+hl.bind(mainMod .. " + CTRL + H", function() resize_window(-30, 0) end)
+hl.bind(mainMod .. " + CTRL + K", function() resize_window(0, 30) end)
+hl.bind(mainMod .. " + CTRL + J", function() resize_window(0, -30) end)
+hl.bind(mainMod .. " + CTRL + L", function() resize_window(30, 0) end)
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -278,7 +316,7 @@ hl.bind(mainMod .. " + u", hl.dsp.focus({ urgent_or_last = true }))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/toggle_special.sh"))
+hl.bind(mainMod .. " + SHIFT + S", toggle_special_workspace)
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
