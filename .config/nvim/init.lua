@@ -21,7 +21,8 @@ vim.lsp.enable({
 	'clangd',
 	'qmlls',
 	'harper_ls',
-	'lua_ls'
+	'lua_ls',
+	'yaml-language-server'
 	})
 vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 vim.keymap.set('n', '<leader>d', '<cmd>Trouble diagnostics toggle<cr>', { desc = "Trouble diagnostics" })
