@@ -60,6 +60,11 @@ require("lazy").setup({
       ft = { 'markdown' },
       opts = {},
     },
+    -- Status line
+    {
+      'nvim-lualine/lualine.nvim',
+      dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
 
     -- For non-default supported file formats
     { "luisjure/csound-vim", name="csound-vim", priority=1000 },
