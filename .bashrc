@@ -16,6 +16,7 @@ export PATH=$PATH:~/bin:~/.local/bin:/opt/google-cloud-cli/bin
 export TESSDATA_PREFIX=/usr/share/tessdata/
 # Use terminal scrolling
 export LESS="-R --wheel-lines=3"
+export DASHT_DOCSETS_DIR="$HOME/.local/share/Zeal/Zeal/docsets"
 test -s ~/.alias && . ~/.alias || true
 
 # make x over ssh work
