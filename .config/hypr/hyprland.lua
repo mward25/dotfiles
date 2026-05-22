@@ -46,7 +46,7 @@ hl.workspace_rule({ workspace = 9, monitor = "eDP-1", persistent = true })
 
 -- Set programs that you use
 local terminal    = "kitty"
-local fileManager = "pcmanfm"
+local fileManager = "pcmanfm-qt"
 local menu        = "rofi -show drun"
 
 -------------------
