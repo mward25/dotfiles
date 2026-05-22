@@ -12,19 +12,19 @@ local colors = require("catppuccin.macchiato")
 ---- MONITORS ----
 ------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
-    output   = "",
+    output   = "DP-2",
     mode     = "preferred",
     position = "auto",
-    scale    = "auto",
+    scale    = 1.25,
 })
 
 hl.monitor({
     output   = "eDP-1",
     mode     = "preferred", 
     position = "auto-left",
-    scale    = 1,
+    scale    = "auto",
 })
 
 -- Persistent workspaces
