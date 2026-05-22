@@ -67,8 +67,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("hypridle")
   hl.exec_cmd("sleep 5 && syncthingtray-qt6 --wait")
-  -- Confirmation notification that lua config loaded
-  hl.exec_cmd("sleep 5 && notify-send \"In Lua Config!\" &")
+  hl.exec_cmd("git annex assistant --autostart")
 end)
 
 -------------------------------
