@@ -1,5 +1,7 @@
 require("config.lazy")
 
+vim.opt.grepprg = "rg --vimgrep"
+
 vim.opt.exrc = true
 vim.opt.secure = true
 
@@ -15,8 +17,36 @@ vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.showbreak = "=> "
 
+vim.opt.spell = true
+vim.opt.spelloptions = "camel"
+
 -- LSP Config
 vim.lsp.config('qmlls', { cmd = { 'qmlls6' } })
+
+vim.lsp.config('harper_ls', {
+    settings = {
+        ["harper-ls"] = {
+            userDictPath = "",
+            fileDictPath = "",
+            filetypes = {
+                "markdown",
+                "tex",
+                "text",
+                "rst",          -- reStructuredText
+                "asciidoc",
+                "org",          -- Org mode
+                "mail",         -- mutt/email
+                "gitcommit",
+                "html",         -- debatable, but prose-heavy
+            },
+            linters = {
+                SpellCheck = false,
+                SentenceCapitalization=false,
+                SplitWords=false
+            },
+        },
+    },
+})
 vim.lsp.enable({
 	'clangd',
 	'qmlls',
@@ -41,7 +71,14 @@ vim.opt.listchars:append {
 }
 vim.opt.list = true
 
-require("nvim-tree").setup()
+require("nvim-tree").setup({ sync_root_with_cwd = true })
+
+local function nvimtree_sync_cwd()
+  require("nvim-tree.api").tree.change_root(vim.fn.getcwd(-1, 0))
+end
+vim.api.nvim_create_autocmd("TabEnter",   { callback = nvimtree_sync_cwd })
+vim.api.nvim_create_autocmd("DirChanged", { pattern = "tabpage", callback = nvimtree_sync_cwd })
+
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>")
 
