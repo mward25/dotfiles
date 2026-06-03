@@ -5,7 +5,7 @@ export GPG_TTY
 # editor. So uncomment the line below and enter the editor of your choice :-)
 export PAGER=less
 export EDITOR=nvim
-export BROWSER=firefox
+export BROWSER=qutebrowser
 export TERMINAL=kitty
 export PGDATA=/var/lib/postgres/data
 # Use elk layout engine for d2 graphs

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+!/bin/bash
+SCRIPT=$(
+cat <<- EOF
+	wget --mirror --recursive --convert-links \
+	 --adjust-extension --page-requisites \
+	 --show-progress --no-if-modified-since --progress=bar \
+	 -P ~/docs/ "$@"
+	notify-send "Finished downloading" "$@"
+EOF
+)
+
+kitty --title "wget-mirror" -- bash -c "$SCRIPT" &
