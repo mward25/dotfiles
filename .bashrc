@@ -75,6 +75,10 @@ reflectionate() {
         sudo tee /etc/pacman.d/mirrorlist
 }
 
+quilt_cd() {
+    export QUILT_PATCHES="$(realpath "$@")"
+}
+
 #alias dialog="Xdialog"
 
 alias png2spritesheetH="convert *.png +append "
