@@ -17,14 +17,21 @@ hl.monitor({
     output   = "DP-2",
     mode     = "preferred",
     position = "auto",
-    scale    = 1.25,
+    scale    = 1,
 })
 
 hl.monitor({
     output   = "eDP-1",
     mode     = "preferred", 
     position = "auto-left",
-    scale    = "auto",
+    scale    = 1,
+})
+
+hl.monitor({ 
+    output = "vnctest", 
+    mode = "1872x1404", 
+    position = "auto-down", 
+    scale = 1 
 })
 
 -- Persistent workspaces
@@ -283,7 +290,7 @@ hl.bind(mainMod .. " + SHIFT + minus", function() adjust_zoom("in") end)
 hl.bind(mainMod .. " + minus", function() adjust_zoom("out") end)
 
 -- Screenshot
-hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
+hl.bind("Print", hl.dsp.exec_cmd('hyprshot -z -m region --clipboard-only'))
 
 -- Move focus with mainMod + vim keys
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
@@ -298,10 +305,11 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "down" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "right" }))
 
 -- Resize window
-hl.bind(mainMod .. " + CTRL + H", function() resize_window(-30, 0) end)
-hl.bind(mainMod .. " + CTRL + K", function() resize_window(0, 30) end)
-hl.bind(mainMod .. " + CTRL + J", function() resize_window(0, -30) end)
-hl.bind(mainMod .. " + CTRL + L", function() resize_window(30, 0) end)
+local resize_vel = 10
+hl.bind(mainMod .. " + CTRL + H", function() resize_window(-resize_vel, 0)          end, { repeating = true })
+hl.bind(mainMod .. " + CTRL + K", function() resize_window(0,            resize_vel) end, { repeating = true })
+hl.bind(mainMod .. " + CTRL + J", function() resize_window(0,           -resize_vel) end, { repeating = true })
+hl.bind(mainMod .. " + CTRL + L", function() resize_window(resize_vel,   0)          end, { repeating = true })
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
