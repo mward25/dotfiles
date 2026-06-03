@@ -22,9 +22,6 @@ test -s ~/.alias && . ~/.alias || true
 # make x over ssh work
 #export DISPLAY=:0.0
 
-# I FOUND THIS AND I THINK IT IS AWESOME, SO I AM GOING TO USE IT
-export grep=rg
-
 export GH_EDITOR=nvim
 
 # Generate compile_commands.json
