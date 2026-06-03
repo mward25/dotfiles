@@ -60,6 +60,12 @@ alias lssl=ls
 
 alias s="kitten ssh"
 
+screen_off_until_enter() {
+    hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })' && \
+        read && \
+        hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })'
+}
+
 reflectionate() {
     sudo echo "Entering sudo"
     reflector --sort rate \
