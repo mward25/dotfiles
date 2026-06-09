@@ -29,8 +29,14 @@ vim.g.loaded_netrwPlugin = 1
 require("lazy").setup({
   spec = {
     -- import your plugins
-    { "miikanissi/modus-themes.nvim", priority = 1000 },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    --{ "miikanissi/modus-themes.nvim", priority = 1000 },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000,
+      config = function()
+        require("catppuccin").setup({
+          auto_integrations = true
+        })
+      end
+    },
     { "tpope/vim-sleuth",            priority = 1000 },
     { "nvim-tree/nvim-tree.lua",     priority = 1000 },
     { "nvim-telescope/telescope.nvim", priority = 1000, dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -64,6 +70,30 @@ require("lazy").setup({
     {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
+    {
+        "https://github.com/arborist-ts/arborist.nvim",
+        lazy=false,
+        config = function()
+        require("arborist").setup({
+            update_cadence = "daily",
+            install_popular=true
+        })
+        end
+    },
+    {
+      "danymat/neogen", 
+      config = function()
+        require('neogen').setup {
+          enabled = true,
+          input_after_comment = true,
+          snippet_engine = "vsnip"
+        }
+      end
+    },
+    {
+      "terrastruct/d2-vim",
+      ft = { "d2" },
     },
 
     -- For non-default supported file formats

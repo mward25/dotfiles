@@ -58,6 +58,7 @@ vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Action
 vim.keymap.set('n', '<leader>d', '<cmd>Trouble diagnostics toggle<cr>', { desc = "Trouble diagnostics" })
 vim.keymap.set('n', 'g]', function() vim.diagnostic.goto_next() end, { desc = "Next LSP diagnostic" })
 vim.keymap.set('n', 'g[', function() vim.diagnostic.goto_prev() end, { desc = "Prev LSP diagnostic" })
+vim.keymap.set('n', '<leader>gd', ":Neogen<CR>", { desc = "Prev LSP diagnostic" })
 
 vim.opt.tabstop = 4
 
@@ -149,12 +150,13 @@ cmp.setup({
 --vim.g.complete = ".,w,b,u,i,"
 
 -- Start treesitter highlighter for markdown (no nvim-treesitter needed)
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'markdown' },
-  callback = function(ev)
-    vim.treesitter.start(ev.buf, 'markdown')
-  end,
-})
+--vim.api.nvim_create_autocmd('FileType', {
+--  --pattern = { 'markdown' },
+--  callback = function(ev)
+--    --vim.treesitter.start(ev.buf, 'markdown')
+--    pcall(vim.treesitter.start, ev.buf)
+--  end,
+--})
 
 -- set listchars=tab:⎼\ ,trail:·,extends:>
 
@@ -234,5 +236,19 @@ vim.filetype.add({
 	}
 })
 
+-- vim.opt.runtimepath:append("/usr/share/tree-sitter")
+
+vim.filetype.add({ extension = { d2 = "d2" } })
 
 require('lualine').setup()
+
+
+-- require("tree-sitter-manager").setup({
+--       -- Default Options
+--       ensure_installed = "all", -- list of parsers to install at the start of a neovim session. If set to "all", install all parsers.
+--       -- ensure_installed = {}, -- list of parsers to install at the start of a neovim session. If set to "all", install all parsers.
+--       -- border = nil, -- border style for the window (e.g. "rounded", "single"), if nil, use the default border style defined by 'vim.o.winborder'. See :h 'winborder' for more info.
+--       -- auto_install = false, -- if enabled, install missing parsers when editing a new file
+--       highlight = false, -- treesitter highlighting is enabled by default
+--       -- languages = {}, -- override or add new parser sources
+-- })
