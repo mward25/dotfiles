@@ -102,9 +102,7 @@ local function draw_widget(
                         cr.operator = cairo.Operator.SOURCE
                         cr:paint()
                         self:get_children_by_id("thumbnail")[1].image =
-                            gears.surface.load(
-                                img
-                            )
+                            gears.surface.load(img)
                     end,
                     {
                         {
@@ -258,7 +256,8 @@ local enable = function(opts)
     local scroll_next_key = opts.scroll_next_key or 5
 
     local cycleClientsByIdx = opts.cycleClientsByIdx or awful.client.focus.byidx
-    local filterClients = opts.filterClients or awful.widget.tasklist.filter.currenttags
+    local filterClients = opts.filterClients
+        or awful.widget.tasklist.filter.currenttags
 
     local window_switcher_box = awful.popup({
         bg = "#00000000",
@@ -348,13 +347,19 @@ local enable = function(opts)
     }
 
     window_switcher_box:connect_signal("property::width", function()
-        if window_switcher_box.visible and #awful.screen.focused().selected_tag:clients() == 0 then
+        if
+            window_switcher_box.visible
+            and #awful.screen.focused().selected_tag:clients() == 0
+        then
             window_switcher_hide(window_switcher_box)
         end
     end)
 
     window_switcher_box:connect_signal("property::height", function()
-        if window_switcher_box.visible and #awful.screen.focused().selected_tag:clients() == 0 then
+        if
+            window_switcher_box.visible
+            and #awful.screen.focused().selected_tag:clients() == 0
+        then
             window_switcher_hide(window_switcher_box)
         end
     end)

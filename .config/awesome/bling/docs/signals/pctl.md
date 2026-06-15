@@ -13,7 +13,7 @@ This module relies on `playerctl` and `curl`. If you have this module disabled, 
 
 ![](https://user-images.githubusercontent.com/33443763/107377569-fa807900-6a9f-11eb-93c1-174c58eb7bf1.png)
 
-*screenshot by [javacafe](https://github.com/JavaCafe01)*
+_screenshot by [javacafe](https://github.com/JavaCafe01)_
 
 ### Usage
 
@@ -176,7 +176,7 @@ We can also link a playerctl function to a button click!
 ```lua
 local playerctl = bling.signal.playerctl.lib()
 button:buttons(gears.table.join(
-	awful.button({}, 1, function() 
+	awful.button({}, 1, function()
 		playerctl:play_pause()
 	end)
 ))
@@ -186,13 +186,13 @@ button:buttons(gears.table.join(
 
 By default, this module will output signals from the most recently active player. If you wish to customize the behavior furthur, the following configuration options are available depending on the selected backend. Here is a summary of the two backends and which configuration options they support:
 
-| Option              | playerctl_cli      | playerctl_lib      |
-| ------------------- | ------------------ | ------------------ |
-| ignore              | :heavy_check_mark: | :heavy_check_mark: |
-| player              | :heavy_check_mark: | :heavy_check_mark: |
-| update_on_activity  |                    | :heavy_check_mark: |
-| interval            | :heavy_check_mark: | :heavy_check_mark: |
-| debounce_delay      | :heavy_check_mark: | :heavy_check_mark: |
+| Option             | playerctl_cli      | playerctl_lib      |
+| ------------------ | ------------------ | ------------------ |
+| ignore             | :heavy_check_mark: | :heavy_check_mark: |
+| player             | :heavy_check_mark: | :heavy_check_mark: |
+| update_on_activity |                    | :heavy_check_mark: |
+| interval           | :heavy_check_mark: | :heavy_check_mark: |
+| debounce_delay     | :heavy_check_mark: | :heavy_check_mark: |
 
 - `ignore`: This option is either a string with a single name or a table of strings containing names of players that will be ignored by this module. It is empty by default.
 
@@ -203,7 +203,7 @@ By default, this module will output signals from the most recently active player
 - `interval`: This option is a number specifying the update interval for fetching the player position. It is 1 by default.
 
 - `debounce_delay`: This option is a number specifying the debounce timer interval. If a new metadata signal gets emitted before debounce_delay has passed, the last signal will be dropped.
-This is to help with some players sending multiple signals. It is `0.35` by default.
+  This is to help with some players sending multiple signals. It is `0.35` by default.
 
 These options can be set through a call to `bling.signal.playerctl.lib/cli()` or these theme variables:
 

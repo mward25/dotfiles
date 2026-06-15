@@ -34,4 +34,3 @@ Singleton {
   readonly property int radius: 10
   readonly property int pad: 10
 }
-

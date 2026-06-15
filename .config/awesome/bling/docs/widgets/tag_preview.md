@@ -4,7 +4,7 @@ This is a popup widget that will show a preview of a specified tag that illustra
 
 ![](https://imgur.com/zFdvs4K.gif)
 
-*gif by [javacafe](https://github.com/JavaCafe01)*
+_gif by [javacafe](https://github.com/JavaCafe01)_
 
 ### Usage
 
@@ -26,7 +26,7 @@ bling.widget.tag_preview.enable {
             }
         })
     end,
-	background_widget = wibox.widget {	-- Set a background image (like a wallpaper) for the widget 
+	background_widget = wibox.widget {	-- Set a background image (like a wallpaper) for the widget
         image = beautiful.wallpaper,
         horizontal_fit_policy = "fit",
         vertical_fit_policy   = "fit",
@@ -50,6 +50,7 @@ By default, the widget is not visible. You must implement when it will update an
 ### Example Implementation
 
 We can trigger the widget to show the specific tag when hovering over it in the taglist. The code shown below is the example taglist from the [AwesomeWM docs](https://awesomewm.org/doc/api/classes/awful.widget.taglist.html). We are going to update the widget and toggle it through the taglist's `create_callback` (bling addons are commented).
+
 ```lua
 s.mytaglist = awful.widget.taglist {
     screen  = s,

@@ -41,19 +41,19 @@ theme.mstab_tabbar_style = "default"   -- style of the tabbar ("default", "boxes
 
 ![](https://imgur.com/HZRgApE.png)
 
-*screenshot by [JavaCafe01](https://github.com/JavaCafe01)*
+_screenshot by [JavaCafe01](https://github.com/JavaCafe01)_
 
 #### Centered
 
 ![](https://media.discordapp.net/attachments/769673106842845194/780095998239834142/unknown.png)
 
-*screenshot by [HeavyRain266](https://github.com/HeavyRain266)*
+_screenshot by [HeavyRain266](https://github.com/HeavyRain266)_
 
 #### Equal area
 
 ![](https://imgur.com/JCFFywv.png)
 
-*screenshot by [bysmutheye](https://github.com/bysmutheye)*
+_screenshot by [bysmutheye](https://github.com/bysmutheye)_
 
 #### Deck
 
@@ -61,5 +61,4 @@ The left area shows the deck layout in action. In this screenshot it is used tog
 
 ![](https://cdn.discordapp.com/attachments/635625954219261982/877957824225894430/unknown.png)
 
-*screenshot by [JavaCafe01](https://github.com/JavaCafe01)*
-
+_screenshot by [JavaCafe01](https://github.com/JavaCafe01)_

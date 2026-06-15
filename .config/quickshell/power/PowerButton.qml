@@ -11,7 +11,7 @@ Button {
   property var cmd: ["notify-send", "\"please fill out cmd!\""]
 
   signal activated(var command)
-  
+
   icon.name: root.iconName
   icon.color: iconColor
   icon.width: 48

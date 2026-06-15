@@ -2,7 +2,7 @@
 
 !/bin/bash
 SCRIPT=$(
-cat <<- EOF
+  cat <<-EOF
 	wget --mirror --recursive --convert-links \
 	 --adjust-extension --page-requisites \
 	 --show-progress --no-if-modified-since --progress=bar \

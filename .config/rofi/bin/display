@@ -1,21 +1,21 @@
 #!/bin/bash
 
 function select_mode() {
-	selected=$(autorandr | rofi -dmenu)
-	selected=$(echo "$selected" | sed 's/(.*$//g')
-	#notify-send $selected
-	autorandr $selected
+  selected=$(autorandr | rofi -dmenu)
+  selected=$(echo "$selected" | sed 's/(.*$//g')
+  #notify-send $selected
+  autorandr $selected
 }
 
 function main_menu() {
 
-	selected=$(echo "󰑓 Reload Display
+  selected=$(echo "󰑓 Reload Display
  Select Preset" | rofi -dmenu)
 
-	case $selected in
-		"󰑓 Reload Display") autorandr --change ;;
-		" Select Preset") select_mode ;;
-	esac
+  case $selected in
+  "󰑓 Reload Display") autorandr --change ;;
+  " Select Preset") select_mode ;;
+  esac
 }
 
 main_menu

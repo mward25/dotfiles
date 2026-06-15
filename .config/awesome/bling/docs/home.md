@@ -9,6 +9,7 @@ Its unique selling point has always been the widget system, which allows for fan
 This project aims to fix that problem, adding new layouts and modules that make use of the widget system but primarily focusing on window managing features.
 
 ## Installation
+
 - Clone this repo into your `~/.config/awesome` folder
     - `git clone https://github.com/BlingCorp/bling.git ~/.config/awesome/bling`
 - Require the `bling` module in your `rc.lua`, making sure it's under the `beautiful` module initialization
@@ -25,6 +26,7 @@ local bling = require("bling")
 ```
 
 ## Contributors
+
 A special thanks to all our contributors...
 
 <a href="https://github.com/BlingCorp/bling/graphs/contributors">

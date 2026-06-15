@@ -3,11 +3,9 @@
 selected=$(echo " Waybar" | rofi -dmenu)
 
 case $selected in
-	" Waybar")
-		killall waybar && notify-send "Killed existing waybar" || notify-send "No waybar to kill"
-		waybar 1>~/.local/var/waybar.1.log \
-		       2>~/.local/var/waybar.2.log &
-	;;
+" Waybar")
+  killall waybar && notify-send "Killed existing waybar" || notify-send "No waybar to kill"
+  waybar 1>~/.local/var/waybar.1.log \
+    2>~/.local/var/waybar.2.log &
+  ;;
 esac
-
-

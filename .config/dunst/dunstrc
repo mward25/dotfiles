@@ -110,7 +110,7 @@
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
     separator_color = frame
-    
+
     highlight = "#8aadf4"
 
     # Sort messages by urgency.

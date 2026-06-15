@@ -6,7 +6,7 @@ let g:tex_flavor="latex"
 
 " Install Vim-Plug if it is not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim')) 
+if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -117,7 +117,7 @@ function CppConfigureAbbrevs()
     "autocmd FileType cpp iabbrev class class TMP {<CR>private:<CR>protected:<CR>public:<CR>};<ESC>k<i{?TMP<CR>ciw
 endfunction
 
-function ConfigureAbbrevs() 
+function ConfigureAbbrevs()
     " Create a table in latex easily
     iab ltab \begin{center} <CR>\begin{tabular}<CR>\end{tabular}<CR>\end{center}
 
@@ -164,7 +164,7 @@ function SetupStyleVariables()
     set list
 
     " No borders between windows
-    set fillchars=vert:\ 
+    set fillchars=vert:\
 
     " Writing (not-code) stuff
     autocmd! User GoyoEnter Limelight
@@ -225,7 +225,7 @@ function SetupNonPluginRelatedMappings()
     vnoremap <Leader>p "+p
     nnoremap <Leader>p "+p
 
-    nnoremap <Leader>f :find 
+    nnoremap <Leader>f :find
 endfunction
 
 function SetupNonPluginRelatedConfig()
@@ -267,8 +267,8 @@ function SetupLspConfig()
     let g:lspOpts = #{autoHighlightDiags: v:false,  useQuickfixForLocations: v:true, showInlayHints: v:false}
     autocmd VimEnter * call LspOptionsSet(g:lspOpts)
 
-    let g:vimCompleteOptions = #{ 
-                \ lsp:    #{ enable: v:true, priority: 8, filetypes: ['*'], maxCount: 200 }, 
+    let g:vimCompleteOptions = #{
+                \ lsp:    #{ enable: v:true, priority: 8, filetypes: ['*'], maxCount: 200 },
                 \ path:   #{ enable: v:true, priority: 7, filetypes: ['*'], maxCount: 20, },
                 \ ngram:  #{ enable: v:true, priority: 5, maxCount: 5,  bigram: v:true,  filetypes: ['text', 'markdown', 'd2'],  filetypesComments: ['*'],  },
                 \ buffer: #{ enable: v:true, priority: 1, filetypes: ['*'], }}
@@ -279,7 +279,7 @@ function SetupLspConfig()
     " Enable vimcomplete
     autocmd VimEnter * VimCompleteEnable
 
-    autocmd FileType c,cpp,typescript nnoremap gd :LspGotoDeclaration<CR> 
+    autocmd FileType c,cpp,typescript nnoremap gd :LspGotoDeclaration<CR>
     autocmd FileType c,cpp,typescript nnoremap gD :LspGotoDefinition<CR>
 
     "autocmd FileType c,cpp,typescript nnoremap <space> :LspHover<CR>

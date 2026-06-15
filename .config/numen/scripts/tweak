@@ -48,4 +48,4 @@ printf %s\\n "$(awk '
 			sub(/^the /, "")
 	}
 	{ print; print line }
-' "$NUMEN_STATE_DIR/transcripts" | awk '!seen[$0]++')" > "$NUMEN_STATE_DIR/transcripts"
+' "$NUMEN_STATE_DIR/transcripts" | awk '!seen[$0]++')" >"$NUMEN_STATE_DIR/transcripts"

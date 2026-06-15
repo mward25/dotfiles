@@ -6,9 +6,9 @@
 
   description = "Development shell flake";
   outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system: {
-    devShell = let 
+    devShell = let
       pkgs = nixpkgs.legacyPackages.${system};
-    in 
+    in
       pkgs.mkShell {
         packages = with pkgs; [
           deno

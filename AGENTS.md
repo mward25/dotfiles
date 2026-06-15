@@ -5,13 +5,13 @@ Dotfiles repository using GNU Stow for symlink management.
 ## Core Workflow
 
 - **Setup**: `stow .` creates symlinks from `~/dotfiles/` to `~/`
-- **Remove**: `stow -D .` removes all symlinks  
+- **Remove**: `stow -D .` removes all symlinks
 - **Adding new files**: Move real file to `~/dotfiles/`, then run `stow .`
 
 ## Critical Rules
 
 - **NEVER copy/move files to target locations** — use stow to create symlinks
-- **ALWAYS edit files in `~/dotfiles/`** — avoid working in symlinked paths to prevent permission issues  
+- **ALWAYS edit files in `~/dotfiles/`** — avoid working in symlinked paths to prevent permission issues
 - **When adding new dotfiles**: `mv ~/.config/foo/bar.conf ~/dotfiles/.config/foo/bar.conf && stow .`
 
 ## Directory Structure
@@ -23,7 +23,8 @@ Dotfiles repository using GNU Stow for symlink management.
 ## Dependencies for bin/ scripts
 
 Scripts may require these external tools (check before suggesting modifications):
-- `autorandr` + `nitrogen` (deskConfig)  
+
+- `autorandr` + `nitrogen` (deskConfig)
 - `scrot` + `magick` + `i3lock` (lock screen)
 - `dunst` + `espeak` (dunst_espeak.sh)
 
@@ -38,6 +39,7 @@ Scripts may require these external tools (check before suggesting modifications)
 ## Git Ignore Patterns
 
 Currently ignores:
-- `.vim/undo` (vim undo files)  
+
+- `.vim/undo` (vim undo files)
 - `.config/koreader/cache` and screenshots (e-reader app data)
 - `.config/koreader/settings/*.sqlite3` (databases)

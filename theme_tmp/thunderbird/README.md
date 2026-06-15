@@ -33,7 +33,6 @@
   <img src="https://raw.githubusercontent.com/catppuccin/thunderbird/main/assets/thunderbird-mocha.png"/>
 </details>
 
-
 ## Usage
 
 1. Clone this repository
@@ -44,8 +43,8 @@
 
 ## 💝 Thanks to
 
--   [elkrien](https://github.com/elkrien)
--   [nullishamy](https://github.com/nullishamy)
+- [elkrien](https://github.com/elkrien)
+- [nullishamy](https://github.com/nullishamy)
 
 &nbsp;
 

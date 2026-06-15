@@ -9,10 +9,10 @@ selected=$(echo " Lock Screen
 echo "You selected $selected"
 
 case $selected in
-	" Lock Screen") lock ;;
-	"⏼ Power Off") shutdown now ;;
-	"󰜉 Restart") reboot ;;
-	"⏾ Suspend") systemctl sleep ;;
-	"󱣻 Hibernate") systemctl hibernate ;;
-	"󰩈 Exit Desktop Environment") loginctl terminate-session "$XDG_SESSION_ID" ;;
+" Lock Screen") lock ;;
+"⏼ Power Off") shutdown now ;;
+"󰜉 Restart") reboot ;;
+"⏾ Suspend") systemctl sleep ;;
+"󱣻 Hibernate") systemctl hibernate ;;
+"󰩈 Exit Desktop Environment") loginctl terminate-session "$XDG_SESSION_ID" ;;
 esac

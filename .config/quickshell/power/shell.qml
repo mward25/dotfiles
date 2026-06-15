@@ -27,7 +27,7 @@ PanelWindow {
 
       palette.base: Theme.base
 
-      PowerButton { 
+      PowerButton {
         id: powerButton
         iconName: 'system-shutdown'
         //cmd: ["shutdown", "now"]

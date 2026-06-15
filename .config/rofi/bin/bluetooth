@@ -1,36 +1,36 @@
 #!/bin/bash
 
 function bluetooth_pair() {
-	echo "power on
+  echo "power on
 default-agent
 menu scan
 transport le" | bluetoothctl
-	device=$(bluetoothctl --timeout 20 scan on | rofi -dmenu -mesg "Select a device to pair with")
-	echo $device
+  device=$(bluetoothctl --timeout 20 scan on | rofi -dmenu -mesg "Select a device to pair with")
+  echo $device
 }
 function bluetooth_connect() {
-	true
+  true
 }
 function bluetooth_disconnect() {
-	true
+  true
 }
 function bluetooth_forget() {
-	device=$(bt-device -l | rofi -dmenu -mesg "Select device to forget")
-	device_mac=$(echo $device | sed 's/.*(\(.*\))/\1/g')
-	bt-device -r $device_mac
+  device=$(bt-device -l | rofi -dmenu -mesg "Select device to forget")
+  device_mac=$(echo $device | sed 's/.*(\(.*\))/\1/g')
+  bt-device -r $device_mac
 }
 
 function bluetooth_actions() {
-	selected=$(echo -en "Pair
+  selected=$(echo -en "Pair
 Connect
 Disconnect
 Forget" | rofi -dmenu -mesg "Bluetooth Options")
-	case $selected in
-		"Pair") bluetooth_pair ;;
-		"Connect") bluetooth_connect ;;
-		"Disconnect") bluetooth_disconnect ;;
-		"Forget") bluetooth_forget ;;
-	esac
+  case $selected in
+  "Pair") bluetooth_pair ;;
+  "Connect") bluetooth_connect ;;
+  "Disconnect") bluetooth_disconnect ;;
+  "Forget") bluetooth_forget ;;
+  esac
 }
 
 bluetooth_actions

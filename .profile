@@ -31,7 +31,7 @@ if [ -x /usr/bin/fortune ] ; then
          #ARRAY=("cividis" "cool" "cubehelix" "fruits" "inferno" "magma" "plasma" "rainbow" "rd-yl-gn" "sinebow" "spectral" "turbo" "viridis" "warm")
          #animStyle=${ARRAY[$(expr $RANDOM % 14)]}
          #toilet -f future -w $(expr $COLUMNS - $COLUMNS / 3) "`fortune -n 400`" | boxes -d spring | boxes -d unicornthink | boxes -d parchment | aa2u  | lolcrab -g $animStyle -a --speed 255 -d 2
-         #toilet -f future -w $(expr $COLUMNS / 2) "`fortune -n 800`" | boxes -d spring | boxes -d unicornthink | boxes -d parchment | aa2u  
+         #toilet -f future -w $(expr $COLUMNS / 2) "`fortune -n 800`" | boxes -d spring | boxes -d unicornthink | boxes -d parchment | aa2u
          #mbsync gmail &
          mbsync gmail > /dev/null &
          # Update notmuch
