@@ -55,6 +55,7 @@ vim.lsp.enable({
 	'yaml-language-server'
 	})
 vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
+vim.keymap.set('x', 'g.', vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions (visual)" })
 vim.keymap.set('n', '<leader>d', '<cmd>Trouble diagnostics toggle<cr>', { desc = "Trouble diagnostics" })
 vim.keymap.set('n', 'g]', function() vim.diagnostic.goto_next() end, { desc = "Next LSP diagnostic" })
 vim.keymap.set('n', 'g[', function() vim.diagnostic.goto_prev() end, { desc = "Prev LSP diagnostic" })
@@ -161,6 +162,10 @@ cmp.setup({
 -- set listchars=tab:⎼\ ,trail:·,extends:>
 
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = "Exit terminal mode" })
+
+vim.keymap.set('n', '<C-t>',   ':tabnew<CR>',  { desc = "New tab" })
+vim.keymap.set('n', '<C-Tab>', ':tabnext<CR>', { desc = "Next tab" })
+vim.keymap.set('n', '<C-S-Tab>', ':tabprev<CR>', { desc = "Previous tab" })
 
 -- Window resize mode
 vim.keymap.set('n', '<leader>wr', function()
