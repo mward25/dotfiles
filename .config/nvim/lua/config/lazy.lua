@@ -42,24 +42,11 @@ require("lazy").setup({
 		},
 		{ "tpope/vim-sleuth", priority = 1000 },
 		{ "nvim-tree/nvim-tree.lua", priority = 1000 },
-		{ "nvim-telescope/telescope.nvim", priority = 1000, dependencies = { "nvim-lua/plenary.nvim" } },
+		require("config.telescope"),
 
 		-- Config Defaults helpers
 		{ "neovim/nvim-lspconfig", priority = 1000 },
 		{ "folke/trouble.nvim", opts = { focus = true } },
-		-- Completion Helpers
-		{
-			"hrsh7th/nvim-cmp",
-			priority = 1000,
-			dependencies = {
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-cmdline",
-				"hrsh7th/cmp-vsnip",
-				"hrsh7th/vim-vsnip",
-			},
-		},
 		-- Tpope!!!
 		--{ "tpope/vim-fugitive", name="vim-fugitive", priority = 1000 },
 		{ "tpope/vim-commentary", name = "vim-commentary", priority = 1000 },
@@ -107,9 +94,12 @@ require("lazy").setup({
 		require("config.auto_session_config"),
 		require("config.neogit_config"),
 		require("config.vim-table-mode_config"),
+		require("config.snacks_config"),
+		require("config.codecompanion"),
+		require("config.cmp"),
+
 		--require("config.nvim-origami_config"),
 		--require("config.ufo_config"),
-		require("config.snacks_config"),
 		--require("config.avante_lazy_config")
 	},
 	-- Configure any other settings here. See the documentation for more details.
