@@ -1,1 +1,32 @@
 skip-commit-generation-prompt = true
+
+# Auto-copy git-town configuration when switching worktrees.
+# Git-town stores its settings under `git-town.*` in `.git/config`; each new
+# worktree gets its own `.git/config`, which triggers git-town's setup wizard.
+# This hook copies all `git-town.*` keys from the default branch worktree so
+# git-town is immediately usable in the destination worktree.
+[post-switch]
+copy-git-town-config = """
+  # Git-town config lives in `.git/config` under `git-town.*`. Each worktree has
+  # its own `.git/config`, so copy those settings from the canonical source
+  # worktree (default branch, falling back to the primary worktree) into the
+  # destination worktree. This prevents git-town's setup wizard from re-running.
+  source_path="{{ worktree_path_of_branch(default_branch) }}"
+  if [ -z "$source_path" ]; then
+    source_path="{{ primary_worktree_path }}"
+  fi
+  dest_path="{{ worktree_path }}"
+  if [ -d "$source_path/.git" ] && [ -d "$dest_path/.git" ] && [ "$source_path" != "$dest_path" ]; then
+    git -C "$source_path" config --local --get-regexp '^git-town\\.' 2>/dev/null | while read -r key value; do
+      git -C "$dest_path" config --local "$key" "$value"
+    done
+  fi
+"""
+
+# Git-town aliases that operate in the current worktree.
+# `wt hack` creates a new worktree for the branch and then runs `git-town hack`
+# inside it so the branch is started the git-town way, just in a worktree.
+[aliases]
+hack = "wt switch {{ args }} && git town hack {{ args }}"
+ship = "git town ship {{ args }}"
+sync = "git town sync {{ args }}"
