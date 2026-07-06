@@ -51,6 +51,7 @@ vim.lsp.enable({
 	"clangd",
 	"qmlls",
 	"harper_ls",
+	"rust-analyzer",
 	"lua_ls",
 	"yaml-language-server",
 })
@@ -63,7 +64,7 @@ end, { desc = "Next LSP diagnostic" })
 vim.keymap.set("n", "g[", function()
 	vim.diagnostic.goto_prev()
 end, { desc = "Prev LSP diagnostic" })
-vim.keymap.set("n", "<leader>gd", ":Neogen<CR>", { desc = "Prev LSP diagnostic" })
+vim.keymap.set("n", "<leader>gd", ":Neogen<CR>", { desc = "Generate annotation (Neogen)" })
 
 vim.opt.tabstop = 4
 
@@ -88,7 +89,6 @@ vim.api.nvim_create_autocmd("DirChanged", { pattern = "tabpage", callback = nvim
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>")
 
--- Telescope setup
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
@@ -96,22 +96,12 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live gr
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
--- Start treesitter highlighter for markdown (no nvim-treesitter needed)
---vim.api.nvim_create_autocmd('FileType', {
---  --pattern = { 'markdown' },
---  callback = function(ev)
---    --vim.treesitter.start(ev.buf, 'markdown')
---    pcall(vim.treesitter.start, ev.buf)
---  end,
---})
-
--- set listchars=tab:⎼\ ,trail:·,extends:>
-
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "<C-Tab>", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<C-S-Tab>", ":tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<C-w><leader>c", ":tabclose<CR>", { desc = "Close current tab" })
 
 -- Window resize mode
 vim.keymap.set("n", "<leader>wr", function()
@@ -136,8 +126,6 @@ vim.keymap.set("n", "<leader>wr", function()
 	end
 	vim.api.nvim_echo({ { "", "Normal" } }, false, {})
 end, { desc = "Window resize mode" })
-
---require("nvim-origami_setup")
 
 -- Shift-K lookup menu (man / tldr / web)
 local function lookup_word(word)
@@ -177,31 +165,15 @@ vim.keymap.set("n", "K", function()
 end, { desc = "Lookup word (man/tldr/web)" })
 
 vim.keymap.set("v", "K", function()
-	local ls, cs = vim.fn.line("'<"), vim.fn.col("'<")
-	local le, ce = vim.fn.line("'>"), vim.fn.col("'>")
-	local lines = vim.api.nvim_buf_get_text(0, ls - 1, cs - 1, le - 1, ce, {})
+	local line_start, col_start = vim.fn.line("'<"), vim.fn.col("'<")
+	local line_end, col_end = vim.fn.line("'>"), vim.fn.col("'>")
+	local lines = vim.api.nvim_buf_get_text(0, line_start - 1, col_start - 1, line_end - 1, col_end, {})
 	lookup_word(table.concat(lines, " "):match("^%s*(.-)%s*$"))
 end, { desc = "Lookup selection (man/tldr/web)" })
 
--- Highlight qrc as xml.
 vim.filetype.add({
 	extension = {
 		qrc = "xml",
+		d2 = "d2",
 	},
 })
-
--- vim.opt.runtimepath:append("/usr/share/tree-sitter")
-
-vim.filetype.add({ extension = { d2 = "d2" } })
-
-require("lualine").setup()
-
--- require("tree-sitter-manager").setup({
---       -- Default Options
---       ensure_installed = "all", -- list of parsers to install at the start of a neovim session. If set to "all", install all parsers.
---       -- ensure_installed = {}, -- list of parsers to install at the start of a neovim session. If set to "all", install all parsers.
---       -- border = nil, -- border style for the window (e.g. "rounded", "single"), if nil, use the default border style defined by 'vim.o.winborder'. See :h 'winborder' for more info.
---       -- auto_install = false, -- if enabled, install missing parsers when editing a new file
---       highlight = false, -- treesitter highlighting is enabled by default
---       -- languages = {}, -- override or add new parser sources
--- })

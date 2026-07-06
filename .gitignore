@@ -2,3 +2,6 @@
 .config/koreader/cache
 .config/koreader/screenshots
 .config/koreader/settings/*.sqlite3
+
+# OpenCode deepwork session state
+.slim/deepwork

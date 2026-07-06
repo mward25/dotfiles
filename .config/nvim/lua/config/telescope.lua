@@ -4,8 +4,6 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		"BurntSushi/ripgrep",
-		"sharkdp/fd",
 		"nvim-tree/nvim-web-devicons",
 	},
 }

@@ -24,7 +24,7 @@ hl.monitor({
 	output = "eDP-1",
 	mode = "preferred",
 	position = "auto-left",
-	scale = 1,
+	scale = 2,
 })
 
 hl.monitor({
@@ -38,7 +38,13 @@ hl.monitor({
 -- Default workspace config
 hl.workspace_rule({ workspace = 1, monitor = "DP-2", persistent = true })
 hl.workspace_rule({ workspace = 2, monitor = "DP-2", persistent = true })
-hl.workspace_rule({ workspace = 3, monitor = "DP-2", persistent = true })
+hl.workspace_rule({
+	workspace = 3,
+	monitor = "DP-2",
+	persistent = true,
+	layout = "scrolling",
+	layout_opts = { direction = "right" },
+})
 hl.workspace_rule({ workspace = 4, monitor = "DP-2", persistent = true })
 hl.workspace_rule({ workspace = 5, monitor = "DP-2", persistent = true })
 
@@ -74,7 +80,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("nm-applet")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("sleep 5 && syncthingtray-qt6 --wait")
-	hl.exec_cmd("git annex assistant --autostart")
+	hl.exec_cmd("superproductivity")
+	--hl.exec_cmd("git annex assistant --autostart")
 end)
 
 -------------------------------
@@ -392,5 +399,31 @@ hl.window_rule({
 		fullscreen = false,
 		pin = false,
 	},
-	no_focus = true,
+	no_initial_focus = true,
+})
+
+-- Put super-productivity on workspace 6
+hl.window_rule({
+	match = {
+		class = "^superproductivity$",
+	},
+	workspace = 6,
+})
+
+-- Put my testing window on workspace 8
+hl.window_rule({
+	match = {
+		title = "^tst_.*",
+	},
+	workspace = 8,
+	no_initial_focus = true,
+	--focus=false,
+	float = true,
+})
+hl.window_rule({
+	match = {
+		title = "^Spotify$",
+	},
+	workspace = "special:magic",
+	--no_initial_focus = true,
 })

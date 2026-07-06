@@ -15,9 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -28,83 +25,29 @@ vim.g.loaded_netrwPlugin = 1
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		-- import your plugins
-		--{ "miikanissi/modus-themes.nvim", priority = 1000 },
-		{
-			"catppuccin/nvim",
-			name = "catppuccin",
-			priority = 1000,
-			config = function()
-				require("catppuccin").setup({
-					auto_integrations = true,
-				})
-			end,
-		},
-		{ "tpope/vim-sleuth", priority = 1000 },
-		{ "nvim-tree/nvim-tree.lua", priority = 1000 },
 		require("config.telescope"),
 
-		-- Config Defaults helpers
+		require("config.catppuccin"),
+		require("config.lualine"),
+		require("config.render-markdown"),
+		require("config.trouble"),
+		require("config.arborist"),
+		require("config.neogen"),
+		require("config.d2-vim"),
+
+		{ "tpope/vim-sleuth", priority = 1000 },
+		{ "nvim-tree/nvim-tree.lua", priority = 1000 },
 		{ "neovim/nvim-lspconfig", priority = 1000 },
-		{ "folke/trouble.nvim", opts = { focus = true } },
-		-- Tpope!!!
-		--{ "tpope/vim-fugitive", name="vim-fugitive", priority = 1000 },
 		{ "tpope/vim-commentary", name = "vim-commentary", priority = 1000 },
 		{ "tpope/vim-surround", name = "vim-surround", priority = 1000 },
-
-		-- Markdown rendering
-		{
-			"MeanderingProgrammer/render-markdown.nvim",
-			dependencies = { "nvim-mini/mini.icons" },
-			ft = { "markdown" },
-			opts = {},
-		},
-		-- Status line
-		{
-			"nvim-lualine/lualine.nvim",
-			dependencies = { "nvim-tree/nvim-web-devicons" },
-		},
-		{
-			"https://github.com/arborist-ts/arborist.nvim",
-			lazy = false,
-			config = function()
-				require("arborist").setup({
-					update_cadence = "daily",
-					install_popular = true,
-				})
-			end,
-		},
-		{
-			"danymat/neogen",
-			config = function()
-				require("neogen").setup({
-					enabled = true,
-					input_after_comment = true,
-					snippet_engine = "vsnip",
-				})
-			end,
-		},
-		{
-			"terrastruct/d2-vim",
-			ft = { "d2" },
-		},
-
-		-- For non-default supported file formats
 		{ "luisjure/csound-vim", name = "csound-vim", priority = 1000 },
-		require("config.auto_session_config"),
-		require("config.neogit_config"),
-		require("config.vim-table-mode_config"),
-		require("config.snacks_config"),
+		require("config.auto-session"),
+		require("config.neogit"),
+		require("config.vim-table-mode"),
+		require("config.snacks"),
 		require("config.codecompanion"),
 		require("config.cmp"),
-
-		--require("config.nvim-origami_config"),
-		--require("config.ufo_config"),
-		--require("config.avante_lazy_config")
 	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
 	install = {},
-	-- automatically check for plugin updates
 	checker = { enabled = true },
 })

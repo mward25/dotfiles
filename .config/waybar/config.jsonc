@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces"
-        //"hyprland/mode",
+        //"hyprland/submap",
         //"custom/media"
     ],
     "modules-center": [
@@ -35,16 +35,24 @@
     ],
     // Modules configuration
     "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
+        "disable-scroll": false,
+        "all-outputs": false,
         "warp-on-scroll": false,
-        "format": "{name}: {icon}",
+        "show-special": true,
+        "special-visible-only": false,
+        "format": "{icon}",
+        //"format": "{name}: {icon}",
         "format-icons": {
             "1": " ",
             "2": " ",
             "3": " ",
             "4": " ",
             "5": "🎜 ",
+            "6": " ",
+            "7": "󰦚",
+            // "8": "o",
+            // "9": "o",
+            "magic": " ",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -104,7 +112,7 @@
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10,
+        "spacing": 10
         // "icons": {
         //   "blueman": "bluetooth",
         //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
