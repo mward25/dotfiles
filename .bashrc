@@ -8,6 +8,9 @@ export EDITOR=nvim
 export BROWSER=firefox
 export TERMINAL=kitty
 export PGDATA=/var/lib/postgres/data
+# SSH Agent environment variables
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export SUDO_ASKPASS="$(which lxqt-openssh-askpass)"
 # Use elk layout engine for d2 graphs
 export D2_LAYOUT=elk
 export MOZ_ENABLE_WAYLAND=1
