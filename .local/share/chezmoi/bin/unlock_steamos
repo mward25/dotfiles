@@ -1,0 +1,10 @@
+sudo steamos-readonly disable
+
+sudo pacman-key --init
+sudo pacman-key --populate
+#sudo pacman-key --populate archlinux
+
+# Install standard packages
+sudo pacman -S --needed stow neovim kitty github-cli
+# Install development packages
+sudo pacman -S --needed base-devel cmake clang

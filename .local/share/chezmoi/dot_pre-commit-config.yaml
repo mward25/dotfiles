@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-json
+      - id: check-toml
+
+  - repo: local
+    hooks:
+      - id: stylua
+        name: stylua
+        language: system
+        entry: stylua
+        types: [lua]
+        exclude: ^\.config/koreader/
+
+      - id: prettier
+        name: prettier
+        language: system
+        entry: prettier
+        args: [--write]
+        types_or: [json, markdown]
+
+      - id: taplo
+        name: taplo
+        language: system
+        entry: taplo
+        args: [format]
+        types: [toml]
+
+      - id: shfmt
+        name: shfmt
+        language: system
+        entry: shfmt
+        args: [-w, -i, "2"]
+        types: [shell]

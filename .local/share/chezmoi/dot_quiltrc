@@ -1,0 +1,2 @@
+QUILT_DIFF_OPTS="-u -p"
+QUILT_NEW_ARGS="-p 1"

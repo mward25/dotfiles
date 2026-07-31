@@ -1,0 +1,17 @@
+
+#xrandr --setprovideroutputsource 1 0
+#autorandr wacom_tablet
+
+
+killall picom
+
+xrandr --output DVI-I-1-1 --below DP-2 --rotate left
+
+# Get all devices | Select Tablet | Remove everything up to and including id= | remove [slave pointer=NUMBER]
+TABLET_ID=$(xinput | grep "Wacom DTU-1141B Pen stylus" | sed 's/^.*id=//g' | sed 's/\[.*//g')
+
+xinput map-to-output $TABLET_ID DVI-I-1-1
+
+
+
+#vim: set filetype=sh

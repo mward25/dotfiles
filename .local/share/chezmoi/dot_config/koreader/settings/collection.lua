@@ -1,0 +1,45 @@
+-- /home/user/.config/koreader/settings/collection.lua
+return {
+    ["School"] = {
+        [1] = {
+            ["file"] = "/home/user/Documents/calibre/Limited, AXELOS;/ITIL Foundation_ ITIL 4 Edition (215)/ITIL Foundation_ ITIL 4 Edition - Limited, AXELOS;.epub",
+            ["order"] = 2,
+        },
+        [2] = {
+            ["file"] = "/home/user/Documents/calibre/Emanuelle Burton;Judy Goldsmith;Nicholas Mattei;Cory Siler;Sara-Jo Swiatek;/Computing and Technology Ethics (213)/Computing and Technology Ethics - Emanuelle Burton;Judy Goldsmith;Nicholas M.epub",
+            ["order"] = 1,
+        },
+        ["settings"] = {
+            ["order"] = 2,
+        },
+    },
+    ["favorites"] = {
+        [1] = {
+            ["file"] = "/home/user/Documents/calibre/Varley, John/Wizard (212)/Wizard - Varley, John.epub",
+            ["order"] = 2,
+        },
+        [2] = {
+            ["file"] = "/home/user/Documents/calibre/Terry Pratchett/Moving Pictures (95)/Moving Pictures - Terry Pratchett.mobi",
+            ["order"] = 3,
+        },
+        [3] = {
+            ["file"] = "/home/user/Documents/calibre/Varley, John/Titan (GAIA) (211)/Titan (GAIA) - Varley, John.epub",
+            ["order"] = 1,
+        },
+        [4] = {
+            ["file"] = "/home/user/Documents/calibre/Unknown/nicomachaen.mb (216)/nicomachaen.mb - Unknown.txt",
+            ["order"] = 5,
+        },
+        [5] = {
+            ["file"] = "/home/user/Documents/calibre/Jack L. Chalker/Quest for the Well of Souls (236)/Quest for the Well of Souls - Jack L. Chalker.epub",
+            ["order"] = 6,
+        },
+        [6] = {
+            ["file"] = "/home/user/Documents/calibre/Terry Pratchett/Terry Pratchett - [Discworld 12] - Witches Abroad (epub).epub",
+            ["order"] = 4,
+        },
+        ["settings"] = {
+            ["order"] = 1,
+        },
+    },
+}

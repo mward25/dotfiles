@@ -1,0 +1,7 @@
+#!/bin/bash
+
+hyprctl output create headless vnctest
+
+wayvnc --output=vnctest 0.0.0.0 5900
+
+echo "Please connect to $(ip -4 route get 1 | grep -oP '(?<=src )\S+')"

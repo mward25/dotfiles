@@ -1,0 +1,45 @@
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+data.location=/home/miles/.task
+
+include dark-green-256.theme
+include holidays.en-US.rc
+
+# For hooks
+rc.json.array=off
+
+# Urgency stuff
+urgency.waiting.coefficient=-9.0
+urgency.blocked.coefficient=-10.0
+urgency.due.coefficient=07
+
+urgency.inherit=on
+urgency.blocked.coefficient=0.0
+urgency.blocking.coefficient=0.0
+
+# Change coeficient for priority
+uda.priority.values=H,M,,L
+urgency.uda.priority.H.coefficient=6.0
+urgency.uda.priority.M.coefficient=1.0
+urgency.uda.priority.L.coefficient=-2.00
+
+news.version=3.4.1
+
+
+# echo You Did It | toilet -f mono9 | cat - <(echo "             (You accomplished a task you thought was impossible)            ") | lolcat -a -s 40
+
+# other
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+
+#recurrence.limit=5
+
+weekstart=monday
+sync.encryption_secret=Do you really want it?
+sync.gcp.bucket=trumpetrespas_taskwarrior_bucket
+sync.gcp.credential_path=\/home\/miles\/.config\/taskwarrior_key.json

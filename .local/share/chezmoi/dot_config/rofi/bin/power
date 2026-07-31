@@ -1,0 +1,18 @@
+#!/bin/bash
+selected=$(echo " Lock Screen
+⏼ Power Off
+󰜉 Restart
+⏾ Suspend
+󱣻 Hibernate
+󰩈 Exit Desktop Environment" | rofi -dmenu)
+
+echo "You selected $selected"
+
+case $selected in
+" Lock Screen") lock ;;
+"⏼ Power Off") shutdown now ;;
+"󰜉 Restart") reboot ;;
+"⏾ Suspend") systemctl sleep ;;
+"󱣻 Hibernate") systemctl hibernate ;;
+"󰩈 Exit Desktop Environment") loginctl terminate-session "$XDG_SESSION_ID" ;;
+esac
