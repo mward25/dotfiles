@@ -28,6 +28,12 @@ hl.monitor({
 })
 
 hl.monitor({
+	output = "DP-1",
+	mode = "preferred",
+	position = "auto-center-down",
+})
+
+hl.monitor({
 	output = "vnctest",
 	mode = "1872x1404",
 	position = "auto-down",
@@ -36,7 +42,7 @@ hl.monitor({
 
 -- Persistent workspaces
 -- Default workspace config
-hl.workspace_rule({ workspace = 1, monitor = "DP-2", persistent = true })
+hl.workspace_rule({ workspace = 1, monitor = "DP-2", persistent = true, layout = "scrolling" })
 hl.workspace_rule({ workspace = 2, monitor = "DP-2", persistent = true })
 hl.workspace_rule({
 	workspace = 3,
@@ -48,10 +54,16 @@ hl.workspace_rule({
 hl.workspace_rule({ workspace = 4, monitor = "DP-2", persistent = true })
 hl.workspace_rule({ workspace = 5, monitor = "DP-2", persistent = true })
 
-hl.workspace_rule({ workspace = 6, monitor = "eDP-1", persistent = true })
-hl.workspace_rule({ workspace = 7, monitor = "eDP-1", persistent = true })
-hl.workspace_rule({ workspace = 8, monitor = "eDP-1", persistent = true })
-hl.workspace_rule({ workspace = 9, monitor = "eDP-1", persistent = true })
+hl.workspace_rule({
+	workspace = 6,
+	monitor = "eDP-1",
+	persistent = true,
+	layout = "scrolling",
+	layout_opts = { direction = "down" },
+})
+hl.workspace_rule({ workspace = 7, monitor = "DP-1", persistent = true })
+hl.workspace_rule({ workspace = 8, monitor = "DP-1", persistent = true })
+hl.workspace_rule({ workspace = 9, monitor = "DP-1", persistent = true })
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -70,7 +82,7 @@ local menu = "rofi -show drun"
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function()
-	hl.exec_cmd("dunst")
+	hl.exec_cmd("swaync")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("waybar")
@@ -99,6 +111,12 @@ hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 
 -- QT Config
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+
+-- Try to mostly have things run in wayland native
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+
+-- Hardware acceleration on nvidia
+hl.env("NVD_BACKEND", "direct")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -271,6 +289,20 @@ local function toggle_special_workspace()
 	end
 end
 
+-- Dispatch a different action depending on the active workspace's tiled layout
+local function layout_bind(bind_table)
+	return function()
+		local workspace = hl.get_active_special_workspace() or hl.get_active_workspace()
+		if not workspace then
+			return
+		end
+		local layout = workspace.tiled_layout
+		if bind_table[layout] then
+			hl.dispatch(bind_table[layout])
+		end
+	end
+end
+
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -286,11 +318,26 @@ hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("rofi -show run -run-command 'kitty -e {cmd}'"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit")) -- dwindle
+hl.bind(
+	mainMod .. " + X",
+	layout_bind({
+		dwindle = hl.dsp.layout("togglesplit"),
+		scrolling = hl.dsp.layout("consume_or_expel prev"),
+	})
+)
+hl.bind(
+	mainMod .. " + SHIFT + X",
+	layout_bind({
+		dwindle = hl.dsp.layout("togglesplit"),
+		scrolling = hl.dsp.layout("consume_or_expel next"),
+	})
+)
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.config/rofi/bin/general"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/rofi/bin/web"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("toggle_numen.sh"))
+hl.bind(mainMod .. " + period", hl.dsp.layout("consume_or_expel prev"))
+hl.bind(mainMod .. " + comma", hl.dsp.layout("consume_or_expel next"))
 
 -- Zoom in/out (DPI scaling via cursor zoom factor)
 hl.bind(mainMod .. " + SHIFT + minus", function()
@@ -375,6 +422,7 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+hl.bind(mainMod .. " + t", hl.dsp.exec_cmd("swaync-client -t"))
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -408,6 +456,12 @@ hl.window_rule({
 		class = "^superproductivity$",
 	},
 	workspace = 6,
+})
+hl.window_rule({
+	match = {
+		initial_title = "^Super Productivity Task Widget$",
+	},
+	float = true,
 })
 
 -- Put my testing window on workspace 8

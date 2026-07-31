@@ -1,20 +1,17 @@
 skip-commit-generation-prompt = true
 
+# Use subfolder
+worktree-path = "{{ repo_path }}/.worktrees/{{ branch | sanitize }}"
+
 # Auto-copy git-town configuration when switching worktrees.
 # Git-town stores its settings under `git-town.*` in `.git/config`; each new
 # worktree gets its own `.git/config`, which triggers git-town's setup wizard.
-# This hook copies all `git-town.*` keys from the default branch worktree so
-# git-town is immediately usable in the destination worktree.
-[post-switch]
+# `pre-start` runs blocking in the new worktree immediately after creation, so
+# git-town is configured before any --execute command runs. `post-switch` runs
+# in the background on every switch, keeping config in sync after the fact.
+[pre-start]
 copy-git-town-config = """
-  # Git-town config lives in `.git/config` under `git-town.*`. Each worktree has
-  # its own `.git/config`, so copy those settings from the canonical source
-  # worktree (default branch, falling back to the primary worktree) into the
-  # destination worktree. This prevents git-town's setup wizard from re-running.
-  source_path="{{ worktree_path_of_branch(default_branch) }}"
-  if [ -z "$source_path" ]; then
-    source_path="{{ primary_worktree_path }}"
-  fi
+  source_path="{{ primary_worktree_path }}"
   dest_path="{{ worktree_path }}"
   if [ -d "$source_path/.git" ] && [ -d "$dest_path/.git" ] && [ "$source_path" != "$dest_path" ]; then
     git -C "$source_path" config --local --get-regexp '^git-town\\.' 2>/dev/null | while read -r key value; do
@@ -23,10 +20,38 @@ copy-git-town-config = """
   fi
 """
 
+[post-switch]
+copy-git-town-config = """
+  source_path="{{ primary_worktree_path }}"
+  dest_path="{{ worktree_path }}"
+  if [ -d "$source_path/.git" ] && [ -d "$dest_path/.git" ] && [ "$source_path" != "$dest_path" ]; then
+    git -C "$source_path" config --local --get-regexp '^git-town\\.' 2>/dev/null | while read -r key value; do
+      git -C "$dest_path" config --local "$key" "$value"
+    done
+  fi
+"""
+update-submodules = "git submodule update"
+
 # Git-town aliases that operate in the current worktree.
-# `wt hack` creates a new worktree for the branch and then runs `git-town hack`
-# inside it so the branch is started the git-town way, just in a worktree.
+# `wt hack` creates a new worktree for the branch, marks it as a git-town
+# feature branch, and sets its parent to the default branch. Git-town `hack`
+# itself cannot operate on an already-created branch, so we use
+# `wt switch --create` + `git town feature` + `git town set-parent` instead.
+# `--execute sh -- -c '...'` runs the commands inside the newly created
+# worktree and is the future-proof form of the -x flag.
 [aliases]
-hack = "wt switch {{ args }} && git town hack {{ args }}"
-ship = "git town ship {{ args }}"
+hack = 'wt switch --create {{ args }} --execute sh -- -c "git town feature && git town set-parent {{ default_branch }}"'
+ship = """
+pushd .
+cd {{ primary_worktree_path }}
+old_branch="git branch --show-current"
+git stash && git checkout --detach
+popd
+git town ship {{ args }} && git checkout --detach
+pushd .
+cd {{ primary_worktree_path }}
+git checkout "${old_branch}"
+popd
+wt remove .
+"""
 sync = "git town sync {{ args }}"
