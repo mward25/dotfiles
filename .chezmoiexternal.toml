@@ -1,0 +1,6 @@
+["dotprompts"]
+    type = "git-repo"
+    url = "https://github.com/mward25/dotprompts.git"
+    refreshPeriod = "87600h"
+    ["dotprompts".clone]
+        args = ["--recurse-submodules"]
