@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # On native Windows, yazi expects its config at %APPDATA%\yazi\config.
-# Chezmoi places it at %APPDATA%\yazi via dot_config/yazi/.
+# Chezmoi applies dot_config/yazi to ~/.config/yazi on all platforms.
 # This script mirrors the applied config to the Windows location after each apply.
 {{ if eq .chezmoi.os "windows" }}
 set -euo pipefail
 
-source_config="$(cygpath -u "$APPDATA")/yazi"
+source_config="$(cygpath -u "$USERPROFILE")/.config/yazi"
 target_config="$(cygpath -u "$APPDATA")/yazi/config"
 backup_dir="$(cygpath -u "$USERPROFILE")/old_config"
 
