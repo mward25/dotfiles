@@ -1,44 +1,45 @@
 # dotfiles
 
-Personal configuration files managed with [GNU Stow](https://www.gnu.org/software/stow/).
+Personal configuration files managed with [chezmoi](https://www.chezmoi.io/).
 
 ## Setup
 
-Clone the repo into your home directory:
+Install chezmoi, then initialize from this repo:
 
 ```sh
-git clone <repo-url> ~/dotfiles
-cd ~/dotfiles
+chezmoi init --apply <repo-url>
 ```
 
-Then run stow to symlink everything into place:
-
-```sh
-stow .
-```
-
-Stow uses the parent of the current directory (`~`) as the target. It mirrors the directory structure here and creates symlinks for each file — so `~/dotfiles/.config/kitty/kitty.conf` becomes `~/.config/kitty/kitty.conf`, and so on.
-
-To remove all symlinks:
-
-```sh
-stow -D .
-```
+This checks out the repository and applies the dotfiles to your home directory.
 
 ## How it works
 
-- **Source of truth** is always the file inside `~/dotfiles/`.
-- The symlinks in `~` (e.g. `~/.config/`, `~/bin/`) point back here.
-- Edit files from either path — they resolve to the same inode.
-- When reading or modifying tracked config files, prefer working from `~/dotfiles/` to avoid permission prompts from tools that don't follow symlinks.
+- The **source directory** is the chezmoi working tree (the directory that holds this `README.md`).
+- The **target directory** is `~`. chezmoi applies files from the source tree to the corresponding paths under your home directory.
+- Files such as `dot_config/kitty/kitty.conf` in the source become `~/.config/kitty/kitty.conf` on the target system.
+- **Source of truth** is always the file inside the chezmoi source directory.
+- Edit files from the source directory when possible; for existing configs you can also use `chezmoi edit <target-file>` or `chezmoi cd` to enter the source directory.
 
 ## Adding new dotfiles
 
-Move the real file into the appropriate place under `~/dotfiles/`, then re-run `stow .`:
+Tell chezmoi to manage a config file in place:
 
 ```sh
-mv ~/.config/foo/bar.conf ~/dotfiles/.config/foo/bar.conf
-stow .
+chezmoi add ~/.config/foo/bar.conf
 ```
 
-Stow will create the symlink at the original location automatically.
+Then edit it from the source directory or with `chezmoi edit ~/.config/foo/bar.conf`.
+
+## Applying and updating
+
+Apply the latest source state to `~`:
+
+```sh
+chezmoi apply
+```
+
+Pull upstream changes and re-apply:
+
+```sh
+chezmoi update
+```

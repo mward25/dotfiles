@@ -1,24 +1,25 @@
 # AGENTS.md
 
-Dotfiles repository using GNU Stow for symlink management.
+Dotfiles repository managed with [chezmoi](https://www.chezmoi.io/).
 
 ## Core Workflow
 
-- **Setup**: `stow .` creates symlinks from `~/dotfiles/` to `~/`
-- **Remove**: `stow -D .` removes all symlinks
-- **Adding new files**: Move real file to `~/dotfiles/`, then run `stow .`
+- **Setup**: `chezmoi init --apply <repo-url>` clones/initializes and applies the dotfiles to `~`
+- **Apply**: `chezmoi apply` updates `~` from the source state
+- **Update**: `chezmoi update` pulls changes and re-applies
+- **Adding new files**: `chezmoi add ~/.config/foo/bar.conf` then edit from the source directory
 
 ## Critical Rules
 
-- **NEVER copy/move files to target locations** — use stow to create symlinks
-- **ALWAYS edit files in `~/dotfiles/`** — avoid working in symlinked paths to prevent permission issues
-- **When adding new dotfiles**: `mv ~/.config/foo/bar.conf ~/dotfiles/.config/foo/bar.conf && stow .`
+- **ALWAYS edit files in the chezmoi source directory** — do not work in live paths under `~` and assume changes will be picked up automatically
+- **Use `chezmoi add` or `chezmoi edit`** to manage target files; never manually copy files from `~` into the source tree
+- **When adding new dotfiles**: `chezmoi add ~/.config/foo/bar.conf` then commit the resulting source file
 
 ## Directory Structure
 
-- `.config/` — Multi-environment setup with window managers (qtile, awesome, hypr), terminals (wezterm, kitty, alacritty), nvim
+- `dot_config/` — Multi-environment setup with window managers (qtile, awesome, hypr), terminals (wezterm, kitty, alacritty), nvim
+- `dot_bashrc`, `dot_vimrc`, etc. — Shell and application configs at the root of the source tree
 - `bin/` — Custom scripts with external dependencies
-- Root level — Shell configs (.bashrc, .vimrc, .tmux.conf), application configs
 
 ## Dependencies for bin/ scripts
 
