@@ -5,6 +5,15 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+-- Home directory that works on both Linux (HOME) and Windows (USERPROFILE).
+local function home_dir()
+	local home = os.getenv("HOME")
+	if not home or home == "" then
+		home = os.getenv("USERPROFILE")
+	end
+	return home
+end
+
 -- ---------------------------------------------------------------------------
 -- Font
 -- ---------------------------------------------------------------------------
@@ -195,7 +204,7 @@ config.keys = {
 		key = "s",
 		mods = "ALT",
 		action = act.SpawnCommandInNewTab {
-			args = { "bash", os.getenv("HOME") .. "/.config/kitty/pager_mode.sh" },
+			args = { "bash", home_dir() .. "/.config/kitty/pager_mode.sh" },
 		},
 	},
 
@@ -204,7 +213,7 @@ config.keys = {
 		key = "r",
 		mods = "ALT",
 		action = act.SpawnCommandInNewTab {
-			args = { "bash", os.getenv("HOME") .. "/.config/kitty/resize_mode.sh", "--amount=2" },
+			args = { "bash", home_dir() .. "/.config/kitty/resize_mode.sh", "--amount=2" },
 		},
 	},
 
