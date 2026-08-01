@@ -57,6 +57,7 @@ alias sls=ls
 alias slsl=ls
 alias lss=ls
 alias lssl=ls
+alias lll=ls
 
 alias s="kitten ssh"
 
