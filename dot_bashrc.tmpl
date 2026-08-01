@@ -7,19 +7,23 @@ export PAGER=less
 export EDITOR=nvim
 export BROWSER=firefox
 export TERMINAL=kitty
+
+{{ if ne .chezmoi.os "windows" }}
 export PGDATA=/var/lib/postgres/data
 # SSH Agent environment variables
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export SUDO_ASKPASS="$(which lxqt-openssh-askpass)"
+export MOZ_ENABLE_WAYLAND=1
+export TESSDATA_PREFIX=/usr/share/tessdata/
+export DASHT_DOCSETS_DIR="$HOME/.local/share/Zeal/Zeal/docsets"
+{{ end }}
+
 # Use elk layout engine for d2 graphs
 export D2_LAYOUT=elk
-export MOZ_ENABLE_WAYLAND=1
 
-export PATH=$PATH:~/bin:~/.local/bin:/opt/google-cloud-cli/bin
-export TESSDATA_PREFIX=/usr/share/tessdata/
+export PATH=$PATH:{{ joinPath .chezmoi.homeDir ".local" "bin" }}{{ if ne .chezmoi.os "windows" }}:~/bin:/opt/google-cloud-cli/bin{{ end }}
 # Use terminal scrolling
 export LESS="-R --wheel-lines=3"
-export DASHT_DOCSETS_DIR="$HOME/.local/share/Zeal/Zeal/docsets"
 test -s ~/.alias && . ~/.alias || true
 
 # make x over ssh work
@@ -42,7 +46,11 @@ export DIFFPROG='nvim -d'
 #alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
 # make commands colorful
+{{ if ne .chezmoi.os "windows" }}
 alias ls="ls --color=auto --hyperlink=auto"
+{{ else }}
+alias ls="ls --color=auto"
+{{ end }}
 #alias less="less -r"
 #alias grep="grep --color=always"
 #alias pdfgrep="pdfgrep --color=always"
@@ -59,6 +67,7 @@ alias lss=ls
 alias lssl=ls
 alias lll=ls
 
+{{ if ne .chezmoi.os "windows" }}
 alias s="kitten ssh"
 
 screen_off_until_enter() {
@@ -79,12 +88,6 @@ reflectionate() {
     sudo tee /etc/pacman.d/mirrorlist
 }
 
-quilt_cd() {
-  export QUILT_PATCHES="$(realpath "$@")"
-}
-
-#alias dialog="Xdialog"
-
 alias png2spritesheetH="convert *.png +append "
 alias png2spritesheetV="convert *.png -append "
 
@@ -100,6 +103,11 @@ mount_drives() {
 }
 
 alias clip="kitten clipboard"
+{{ end }}
+
+quilt_cd() {
+  export QUILT_PATCHES="$(realpath "$@")"
+}
 
 alias gdiff="git difftool --no-symlinks --dir-diff"
 
@@ -135,7 +143,9 @@ fi
 #PERL_MB_OPT="--install_base \"/home/miles/perl5\""; export PERL_MB_OPT;
 #PERL_MM_OPT="INSTALL_BASE=/home/miles/perl5"; export PERL_MM_OPT;
 
+{{ if ne .chezmoi.os "windows" }}
 [ -e ~/bin/timew_bash_complete_activate.sh ] && ~/bin/timew_bash_complete_activate.sh*
+{{ end }}
 
 [ -e ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -225,7 +235,9 @@ export HISTSIZE=
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi
 
+{{ if ne .chezmoi.os "windows" }}
 [ -e /usr/share/nvm/init-nvm.sh ] && . /usr/share/nvm/init-nvm.sh
+{{ end }}
 
 # >>> oh-my-opencode-slim background subagents >>>
 export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true

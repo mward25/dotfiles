@@ -43,3 +43,11 @@ Pull upstream changes and re-apply:
 ```sh
 chezmoi update
 ```
+
+## Windows support
+
+The repo also works on Windows via Git Bash and chezmoi templates:
+
+- Linux-only configs are skipped on Windows through `.chezmoiignore.tmpl`.
+- Cross-platform configs (bash, tmux, vim, nvim, yazi, bat, alacritty, wezterm) are kept.
+- Neovim and yazi configs are copied to their Windows-specific paths by `run_after_*` scripts because chezmoi cannot map one source directory to two target paths.

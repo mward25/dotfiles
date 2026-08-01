@@ -1,0 +1,8 @@
+[data]
+    # Custom variables available *after* chezmoi init generates ~/.config/chezmoi/chezmoi.toml.
+    # Templates that run before init completes should use .chezmoi.os and
+    # (.chezmoi.kernel.osrelease | lower | contains "microsoft") instead.
+    isWSL = {{ env "WSL_DISTRO_NAME" | empty | not }}
+    isWindows = {{ eq .chezmoi.os "windows" }}
+    isLinux = {{ eq .chezmoi.os "linux" }}
+    home = {{ .chezmoi.homeDir | quote }}

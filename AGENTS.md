@@ -20,6 +20,16 @@ Dotfiles repository managed with [chezmoi](https://www.chezmoi.io/).
 - `dot_config/` — Multi-environment setup with window managers (qtile, awesome, hypr), terminals (wezterm, kitty, alacritty), nvim
 - `dot_bashrc`, `dot_vimrc`, etc. — Shell and application configs at the root of the source tree
 - `bin/` — Custom scripts with external dependencies
+- `.chezmoiignore.tmpl` — OS-conditional exclusions (Linux-only configs are skipped on Windows)
+- `run_after_*.sh.tmpl` — Post-apply scripts that copy configs to Windows-specific paths where needed
+
+## Cross-Platform Notes
+
+The repo supports Linux and Windows via chezmoi templates and `.chezmoiignore.tmpl`:
+
+- Linux-only configs (window managers, Wayland/X11 tooling, GTK/Qt themes, Arch-specific tools) are ignored on Windows.
+- Bash, tmux, vim, Neovim, yazi, bat, and WezTerm are kept on Windows, typically under Git Bash.
+- Neovim and yazi configs are copied to their Windows-specific paths (`%LOCALAPPDATA%\nvim`, `%APPDATA%\yazi\config`) by `run_after_*` scripts because chezmoi cannot natively map one source directory to two target paths.
 
 ## Dependencies for bin/ scripts
 

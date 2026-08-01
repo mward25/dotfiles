@@ -1,0 +1,56 @@
+# Managed files that only make sense on Linux.
+{{- if eq .chezmoi.os "windows" }}
+
+# Window managers / compositors
+dot_config/awesome/
+dot_config/hypr/
+dot_config/qtile/
+
+# Wayland / X11 tooling
+dot_config/autorandr/
+dot_config/dunst/
+dot_config/picom/
+dot_config/quickshell/
+dot_config/rofi/
+dot_config/swaync/
+dot_config/waybar/
+
+# GTK / Qt / Linux theming
+dot_config/Kvantum/
+dot_config/qt6ct/
+dot_themes/
+
+# Hardware / voice / speech tools
+dot_config/numen/
+dot_config/speech-dispatcher/
+
+# Arch / Linux-only app configs
+dot_config/aurutils/
+dot_config/koreader/
+dot_config/spotify-launcher.conf
+dot_config/wikiman/
+
+# Compiz settings (Linux window manager)
+Default.ini
+
+# Scripts that depend on Linux-specific tools
+dot_local/
+bin/
+
+# POSIX-only rc files
+dot_profile
+dot_quiltrc
+
+# kitty terminal UI config; keep only the helper scripts for WezTerm
+dot_config/kitty/kitty.conf
+dot_config/kitty/kitty.conf.bak
+dot_config/kitty/current-theme.conf
+dot_config/kitty/java_d288.session
+dot_config/kitty/moment_eternal.session
+dot_config/kitty/ssh.conf
+
+# Windows-only run_after copy scripts; harmless on Linux but excluded for cleanliness
+run_after_20-copy-nvim-to-windows.sh
+run_after_30-copy-yazi-to-windows.sh
+
+{{- end }}

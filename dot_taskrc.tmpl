@@ -1,7 +1,7 @@
 # Use the command 'task show' to see all defaults and overrides
 
 # Files
-data.location=/home/miles/.task
+data.location={{ joinPath .chezmoi.homeDir ".task" }}
 
 include dark-green-256.theme
 include holidays.en-US.rc
@@ -42,4 +42,4 @@ report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +P
 weekstart=monday
 sync.encryption_secret=Do you really want it?
 sync.gcp.bucket=trumpetrespas_taskwarrior_bucket
-sync.gcp.credential_path=\/home\/miles\/.config\/taskwarrior_key.json
+sync.gcp.credential_path={{ joinPath .chezmoi.homeDir ".config" "taskwarrior_key.json" }}

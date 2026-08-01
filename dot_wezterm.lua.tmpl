@@ -85,7 +85,11 @@ config.colors = {
 -- ---------------------------------------------------------------------------
 -- Window / cursor / bell
 -- ---------------------------------------------------------------------------
+{{ if ne .chezmoi.os "windows" }}
 config.enable_wayland = true
+{{ else }}
+config.default_prog = { "powershell.exe", "-NoLogo" }
+{{ end }}
 config.window_decorations = "RESIZE"
 config.hide_mouse_cursor_when_typing = true
 config.audible_bell = "Disabled"
@@ -198,6 +202,7 @@ config.keys = {
 	{ key = "Tab", mods = "CTRL", action = act.DisableDefaultAssignment },
 	{ key = "Tab", mods = "CTRL|SHIFT", action = act.DisableDefaultAssignment },
 
+	{{ if ne .chezmoi.os "windows" }}
 	-- Scrollback in pager (kitty: alt+s)
 	-- Uses the same pager_mode.sh helper from kitty.
 	{
@@ -216,6 +221,7 @@ config.keys = {
 			args = { "bash", home_dir() .. "/.config/kitty/resize_mode.sh", "--amount=2" },
 		},
 	},
+	{{ end }}
 
 	-- Layout cycling (kitty: alt+] / alt+[)
 	-- WezTerm doesn't have named kitty layouts; "next layout" here just rotates
