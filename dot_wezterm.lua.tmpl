@@ -5,6 +5,8 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+local MOD = "ALT"
+
 -- Home directory that works on both Linux (HOME) and Windows (USERPROFILE).
 local function home_dir()
 	local home = os.getenv("HOME")
@@ -88,7 +90,15 @@ config.colors = {
 {{ if ne .chezmoi.os "windows" }}
 config.enable_wayland = true
 {{ else }}
-config.default_prog = { "powershell.exe", "-NoLogo" }
+-- Prefer Git Bash when available; otherwise fall back to PowerShell.
+local git_bash_path = home_dir() .. "/scoop/apps/git/current/bin/bash.exe"
+local git_bash_file = io.open(git_bash_path, "r")
+if git_bash_file then
+	git_bash_file:close()
+	config.default_prog = { git_bash_path, "--login", "-i" }
+else
+	config.default_prog = { "powershell.exe", "-NoLogo" }
+end
 {{ end }}
 config.window_decorations = "RESIZE"
 config.hide_mouse_cursor_when_typing = true
@@ -177,26 +187,33 @@ config.hyperlink_rules = wezterm.default_hyperlink_rules()
 -- Keyboard: emulate kitty_mod = alt
 -- ---------------------------------------------------------------------------
 -- kitty_mod is set to "alt" in kitty.conf, so most custom mappings use alt.
--- WezTerm needs ALT equivalents for the custom actions. The base system
--- mappings (copy/paste, font size, etc.) from kitty default to ctrl+shift are
--- left to wezterm defaults unless kitty overrides them.
+-- On Windows alt+tab is captured by the OS, so tab navigation is remapped to
+-- ctrl+alt+h/l. WezTerm needs ALT equivalents for the custom actions. The base
+-- system mappings (copy/paste, font size, etc.) from kitty default to ctrl+shift
+-- are left to wezterm defaults unless kitty overrides them.
 
 config.keys = {
-	-- Pane focus (kitty: alt+h/j/k/l)
-	{ key = "h", mods = "ALT", action = act.ActivatePaneDirection("Left") },
-	{ key = "j", mods = "ALT", action = act.ActivatePaneDirection("Down") },
-	{ key = "k", mods = "ALT", action = act.ActivatePaneDirection("Up") },
-	{ key = "l", mods = "ALT", action = act.ActivatePaneDirection("Right") },
+	-- Pane focus (kitty: alt+h/j/k/l; ctrl+shift+h/j/k/l on Windows)
+	{ key = "h", mods = MOD, action = act.ActivatePaneDirection("Left") },
+	{ key = "j", mods = MOD, action = act.ActivatePaneDirection("Down") },
+	{ key = "k", mods = MOD, action = act.ActivatePaneDirection("Up") },
+	{ key = "l", mods = MOD, action = act.ActivatePaneDirection("Right") },
 
-	-- New OS window with current cwd (kitty: alt+n)
-	{ key = "n", mods = "ALT", action = act.SpawnWindow },
+	-- New OS window with current cwd (kitty: alt+n; ctrl+shift+n on Windows)
+	{ key = "n", mods = MOD, action = act.SpawnWindow },
 
-	-- New tab with current cwd (kitty: alt+t)
-	{ key = "t", mods = "ALT", action = act.SpawnTab("CurrentPaneDomain") },
+	-- New tab with current cwd (kitty: alt+t; ctrl+shift+t on Windows)
+	{ key = "t", mods = MOD, action = act.SpawnTab("CurrentPaneDomain") },
 
 	-- Next/previous tab (kitty: alt+tab / alt+shift+tab)
-	{ key = "Tab", mods = "ALT", action = act.ActivateTabRelative(1) },
-	{ key = "Tab", mods = "ALT|SHIFT", action = act.ActivateTabRelative(-1) },
+	{{ if ne .chezmoi.os "windows" }}
+	{ key = "Tab", mods = MOD, action = act.ActivateTabRelative(1) },
+	{ key = "Tab", mods = MOD .. "|SHIFT", action = act.ActivateTabRelative(-1) },
+	{{ else }}
+	-- On Windows alt+tab is captured by the OS, so use ctrl+alt+h/l instead.
+	{ key = "l", mods = "CTRL|ALT", action = act.ActivateTabRelative(1) },
+	{ key = "h", mods = "CTRL|ALT", action = act.ActivateTabRelative(-1) },
+	{{ end }}
 
 	-- Pass ctrl+tab through to terminal programs (neovim, etc.)
 	{ key = "Tab", mods = "CTRL", action = act.DisableDefaultAssignment },
@@ -223,15 +240,15 @@ config.keys = {
 	},
 	{{ end }}
 
-	-- Layout cycling (kitty: alt+] / alt+[)
+	-- Layout cycling (kitty: alt+] / alt+[; ctrl+shift+] / ctrl+shift+[ on Windows)
 	-- WezTerm doesn't have named kitty layouts; "next layout" here just rotates
 	-- panes or zooms. Mapped to TogglePaneZoomState and RotatePanes.
-	{ key = "]", mods = "ALT", action = act.RotatePanes("Clockwise") },
-	{ key = "[", mods = "ALT", action = act.RotatePanes("CounterClockwise") },
+	{ key = "]", mods = MOD, action = act.RotatePanes("Clockwise") },
+	{ key = "[", mods = MOD, action = act.RotatePanes("CounterClockwise") },
 
-	-- Scroll line up/down (kitty: alt+shift+k / alt+shift+j)
-	{ key = "K", mods = "ALT|SHIFT", action = act.ScrollByLine(-1) },
-	{ key = "J", mods = "ALT|SHIFT", action = act.ScrollByLine(1) },
+	-- Scroll line up/down (kitty: alt+shift+k / alt+shift+j; ctrl+shift+K/J on Windows)
+	{ key = "K", mods = MOD .. "|SHIFT", action = act.ScrollByLine(-1) },
+	{ key = "J", mods = MOD .. "|SHIFT", action = act.ScrollByLine(1) },
 
 	-- Font size (kitty defaults with ctrl+shift)
 	{ key = "=", mods = "CTRL|SHIFT", action = act.IncreaseFontSize },
@@ -257,7 +274,7 @@ config.keys = {
 -- Leader-style "alt+enter" pane management (kitty chords)
 -- ---------------------------------------------------------------------------
 -- kitty uses a chord sequence alt+enter>h/j/k/l. WezTerm can approximate this
--- with a key table activated by ALT+ENTER.
+-- with a key table activated by MOD+ENTER.
 
 config.key_tables = {
 	pane_control = {
@@ -291,12 +308,12 @@ config.key_tables = {
 	},
 }
 
--- Activate pane_control key table with ALT+ENTER.
+-- Activate pane_control key table with MOD+ENTER.
 -- one_shot = true makes the table automatically exit after the next key.
 -- until_unknown = true means any key not in the table will also exit it.
 table.insert(config.keys, {
 	key = "Enter",
-	mods = "ALT",
+	mods = MOD,
 	action = act.ActivateKeyTable {
 		name = "pane_control",
 		one_shot = true,
