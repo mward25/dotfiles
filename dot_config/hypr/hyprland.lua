@@ -92,7 +92,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("nm-applet")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("sleep 5 && syncthingtray-qt6 --wait")
-	hl.exec_cmd("superproductivity")
+	hl.exec_cmd("super-productivity")
 	--hl.exec_cmd("git annex assistant --autostart")
 end)
 
@@ -453,9 +453,9 @@ hl.window_rule({
 -- Put super-productivity on workspace 6
 hl.window_rule({
 	match = {
-		class = "^superproductivity$",
+		class = "^com.super_productivity.SuperProductivity$",
 	},
-	workspace = 6,
+	workspace = 7,
 })
 hl.window_rule({
 	match = {
