@@ -40,6 +40,11 @@ hl.monitor({
 	scale = 1,
 })
 
+hl.device({
+	name="weida-hi-tech-cooltouch®-system-stylus",
+	output="HDMI-A-1"
+})
+
 -- Persistent workspaces
 -- Default workspace config
 hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "scrolling" })
