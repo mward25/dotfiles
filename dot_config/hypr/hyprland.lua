@@ -45,10 +45,15 @@ hl.device({
 	output="HDMI-A-1"
 })
 
+hl.device({
+	name="weida-hi-tech-cooltouch®-system",
+	output="HDMI-A-1"
+})
+
 -- Persistent workspaces
 -- Default workspace config
 hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "scrolling" })
-hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true })
+hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true, layout = "scrolling" })
 hl.workspace_rule({
 	workspace = 3,
 	monitor = "DP-1",
@@ -460,7 +465,7 @@ hl.window_rule({
 	match = {
 		class = "^com.super_productivity.SuperProductivity$",
 	},
-	workspace = 7,
+	workspace = 6,
 })
 hl.window_rule({
 	match = {
