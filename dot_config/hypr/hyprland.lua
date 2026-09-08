@@ -27,11 +27,11 @@ hl.monitor({
 	scale = 1,
 })
 
--- hl.monitor({
--- 	output = "DP-1",
--- 	mode = "preferred",
--- 	position = "auto-center-down",
--- })
+hl.monitor({
+	output = "DP-2",
+	mode = "preferred",
+	position = "auto-left",
+})
 
 hl.monitor({
 	output = "vnctest",
