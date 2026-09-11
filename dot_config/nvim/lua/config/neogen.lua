@@ -4,7 +4,7 @@ return {
 		require("neogen").setup({
 			enabled = true,
 			input_after_comment = true,
-			snippet_engine = "vsnip",
+			snippet_engine = "coq",
 		})
 	end,
 }

@@ -25,6 +25,7 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
+		{ "neovim/nvim-lspconfig", priority = 1000 },
 		require("config.telescope"),
 
 		require("config.catppuccin"),
@@ -38,7 +39,7 @@ require("lazy").setup({
 		{ "tpope/vim-sleuth", priority = 1000 },
 		--{ "nvim-tree/nvim-tree.lua", priority = 1000 },
 		require("config.neo-tree"),
-		{ "neovim/nvim-lspconfig", priority = 1000 },
+
 		{ "tpope/vim-commentary", name = "vim-commentary", priority = 1000 },
 		{ "tpope/vim-surround", name = "vim-surround", priority = 1000 },
 		{ "luisjure/csound-vim", name = "csound-vim", priority = 1000 },
@@ -48,7 +49,7 @@ require("lazy").setup({
 		require("config.vim-table-mode"),
 		require("config.snacks"),
 		--require("config.codecompanion"),
-		require("config.cmp"),
+		require("config.coq"),
 	},
 	install = {},
 	checker = { enabled = true },
