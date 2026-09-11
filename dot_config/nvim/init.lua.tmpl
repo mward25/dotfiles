@@ -52,11 +52,11 @@ vim.lsp.enable({
 	"clangd",
 	"qmlls",
 	-- "harper_ls",
-	"rust-analyzer",
+	"rust_analyzer",
 	"lua_ls",
-	"yaml-language-server",
-	"just-lsp",
-	"jedi-language-server"
+	"yamlls",
+	"just",
+	"jedi_language_server"
 })
 vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 vim.keymap.set("x", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions (visual)" })
@@ -183,4 +183,17 @@ vim.filetype.add({
 		qrc = "xml",
 		d2 = "d2",
 	},
+	filename = {
+		[".justfile"] = "just",
+		["justfile"] = "just",
+	},
 })
+
+-- Alias composite filetypes used by LSP configs so Neovim doesn't warn "Unknown filetype"
+for _, filetype in ipairs({ "c.doxygen", "cpp.doxygen", "qmljs" }) do
+	local existing = vim.filetype.match({ filename = "file." .. filetype })
+	if not existing then
+		vim.treesitter.language.register("c", filetype)
+		vim.filetype.add({ pattern = { [".*\\." .. vim.pesc(filetype) .. "$"] = filetype } })
+	end
+end
