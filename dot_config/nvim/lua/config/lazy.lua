@@ -25,7 +25,7 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		{ "neovim/nvim-lspconfig", priority = 1000 },
+		{ "neovim/nvim-lspconfig", lazy=false, priority = 1000 },
 		require("config.telescope"),
 
 		require("config.catppuccin"),
