@@ -5,7 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"sindrets/diffview.nvim",
 		"m00qek/baleia.nvim",
-		"nvim-telescope/telescope.nvim",
+		require("config.telescope")
 	},
 	cmd = "Neogit",
 	keys = {
@@ -83,7 +83,8 @@ return {
 			-- Allows a different telescope sorter. Defaults to 'fuzzy_with_index_bias'. The example below will use the native fzf
 			-- sorter instead. By default, this function returns `nil`.
 			telescope_sorter = function()
-				return require("telescope").extensions.fzf.native_fzf_sorter()
+				-- return require("telescope").extensions.fzf.native_fzf_sorter()
+				return nil
 			end,
 			-- Persist the values of switches/options within and across sessions
 			remember_settings = true,
