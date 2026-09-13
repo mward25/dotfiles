@@ -94,7 +94,9 @@ local menu = "rofi -show drun"
 hl.on("hyprland.start", function()
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
-	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("awww-daemon")
+	-- Sleeping is required, we want to make sure awww-daemon is launched first. 
+	hl.exec_cmd("sleep 5 && wallpaper_helper.sh")
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("sleep 5 && 1password --silent")
 	hl.exec_cmd("copyq --start-server")
