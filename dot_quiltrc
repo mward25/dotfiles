@@ -1,2 +1,2 @@
-QUILT_DIFF_OPTS="-u -p"
-QUILT_NEW_ARGS="-p 1"
+QUILT_PATCHES=..
+QUILT_DIFF_OPTS="-u -p -a"
