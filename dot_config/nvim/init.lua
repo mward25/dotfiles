@@ -1,5 +1,7 @@
 require("config.lazy")
 
+local os_setup = require("os_setup.setup")
+
 vim.opt.number = true
 vim.opt.grepprg = "rg --vimgrep"
 
@@ -155,11 +157,7 @@ local function lookup_word(word)
 
 	table.insert(options, "web browser")
 	actions["web browser"] = function()
-		{{ if eq .chezmoi.os "windows" }}
-		vim.fn.jobstart({ "cmd.exe", "/c", "start", "https://www.google.com/search?q=" .. vim.fn.escape(word, " ") }, { detach = true })
-		{{ else }}
-		vim.fn.jobstart({ "firefox", "--search", "What is " .. word }, { detach = true })
-		{{ end }}
+		os_setup.open_browser_search(word)
 	end
 
 	vim.ui.select(options, { prompt = "Look up: " .. word }, function(choice)

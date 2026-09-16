@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.os "windows" }}
+return require("os_setup.windows")
+{{ else }}
+return require("os_setup.linux")
+{{ end }}
