@@ -29,7 +29,7 @@ hl.monitor({
 
 hl.monitor({
 	output = "DP-2",
-	mode = "preferred",
+	mode = "highres",
 	position = "auto-left",
 })
 
@@ -137,8 +137,8 @@ hl.env("NVD_BACKEND", "direct")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
 	general = {
-		gaps_in = 3,
-		gaps_out = 3,
+		gaps_in = 15,
+		gaps_out = 30,
 
 		border_size = 2,
 
