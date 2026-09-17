@@ -39,6 +39,7 @@ require("lazy").setup({
 		{ "tpope/vim-sleuth", priority = 1000 },
 		--{ "nvim-tree/nvim-tree.lua", priority = 1000 },
 		require("config.neo-tree"),
+		require("config.yazi"),
 
 		{ "tpope/vim-commentary", name = "vim-commentary", priority = 1000 },
 		{ "tpope/vim-surround", name = "vim-surround", priority = 1000 },
@@ -50,6 +51,7 @@ require("lazy").setup({
 		require("config.snacks"),
 		--require("config.codecompanion"),
 		require("config.coq"),
+		require("config.huant")
 	},
 	install = {},
 	checker = { enabled = true },

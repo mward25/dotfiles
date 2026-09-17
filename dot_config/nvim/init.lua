@@ -26,30 +26,6 @@ vim.opt.spelloptions = "camel"
 -- LSP Config
 vim.lsp.config("qmlls", { cmd = { "qmlls6" } })
 
--- vim.lsp.config("harper_ls", {
--- 	settings = {
--- 		["harper-ls"] = {
--- 			userDictPath = "",
--- 			fileDictPath = "",
--- 			filetypes = {
--- 				"markdown",
--- 				"tex",
--- 				"text",
--- 				"rst", -- reStructuredText
--- 				"asciidoc",
--- 				"org", -- Org mode
--- 				"mail", -- mutt/email
--- 				"gitcommit",
--- 				"html", -- debatable, but prose-heavy
--- 			},
--- 			linters = {
--- 				SpellCheck = false,
--- 				SentenceCapitalization = false,
--- 				SplitWords = false,
--- 			},
--- 		},
--- 	},
--- })
 vim.lsp.enable({
 	"clangd",
 	"qmlls",
@@ -60,6 +36,7 @@ vim.lsp.enable({
 	"just",
 	"jedi_language_server"
 })
+
 vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 vim.keymap.set("x", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions (visual)" })
 vim.keymap.set("n", "<leader>d", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics" })
@@ -83,19 +60,11 @@ vim.opt.listchars:append({
 })
 vim.opt.list = true
 
---require("nvim-tree").setup({ sync_root_with_cwd = true })
-
--- local function nvimtree_sync_cwd()
--- 	require("nvim-tree.api").tree.change_root(vim.fn.getcwd(-1, 0))
--- end
--- vim.api.nvim_create_autocmd("TabEnter", { callback = nvimtree_sync_cwd })
--- vim.api.nvim_create_autocmd("DirChanged", { pattern = "tabpage", callback = nvimtree_sync_cwd })
-
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>t", ":Neotree toggle<CR>")
 
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
+vim.keymap.set("n", "<C-p>", builtin.buffers, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
@@ -195,3 +164,6 @@ for _, filetype in ipairs({ "c.doxygen", "cpp.doxygen", "qmljs" }) do
 		vim.filetype.add({ pattern = { [".*\\." .. vim.pesc(filetype) .. "$"] = filetype } })
 	end
 end
+
+
+

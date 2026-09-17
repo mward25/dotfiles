@@ -435,6 +435,11 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tru
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
 hl.bind(mainMod .. " + t", hl.dsp.exec_cmd("swaync-client -t"))
+
+-- Super Productivity global shortcuts (work even when its window isn't focused)
+hl.bind("SUPER + A", hl.dsp.global("superproductivity:17C340A4C3FE006F23F072A2F5EFA350-Command+A"))
+hl.bind("SUPER + N", hl.dsp.global("superproductivity:95490853E510B6A48FDEBAB9C4A576F0-Command+N"))
+
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -465,7 +470,7 @@ hl.window_rule({
 -- Put super-productivity on workspace 6
 hl.window_rule({
 	match = {
-		class = "^com.super_productivity.SuperProductivity$",
+		class = "^superproductivity$",
 	},
 	workspace = 6,
 })
