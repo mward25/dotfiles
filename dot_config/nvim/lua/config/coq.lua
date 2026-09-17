@@ -11,7 +11,7 @@ return {
 		vim.g.coq_settings = {
 			-- auto_start = "shut-up",
 			keymap = {
-				-- recommended = false,
+				recommended = true,
 				-- manual_complete = "<c-n>",
 			},
 		}
