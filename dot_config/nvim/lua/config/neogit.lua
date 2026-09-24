@@ -3,7 +3,7 @@ return {
 	lazy = true,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"sindrets/diffview.nvim",
+		require("config.diffview"),
 		"m00qek/baleia.nvim",
 		require("config.telescope")
 	},

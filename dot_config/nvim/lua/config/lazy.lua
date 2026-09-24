@@ -45,6 +45,7 @@ require("lazy").setup({
 		{ "tpope/vim-surround", name = "vim-surround", priority = 1000 },
 		{ "luisjure/csound-vim", name = "csound-vim", priority = 1000 },
 		{ "nemanjamalesija/smart-paste.nvim", event = "VeryLazy", config = true },
+		require("config.diffview"),
 		require("config.auto-session"),
 		require("config.neogit"),
 		require("config.vim-table-mode"),

@@ -29,6 +29,9 @@ authorColors:
   '*': '#b7bdf8'
 
 git:
+  diffRenderers:
+    - colorArg: always
+      command: delta -s --dark --paging=never --24-bit-color=never
   paging:
     colorArg: always
     pager: delta -s --dark --paging=never --24-bit-color=never
