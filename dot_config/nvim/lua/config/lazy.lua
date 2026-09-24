@@ -51,7 +51,8 @@ require("lazy").setup({
 		require("config.snacks"),
 		--require("config.codecompanion"),
 		require("config.coq"),
-		require("config.huant")
+		require("config.huant"),
+		require("config.lazygit")
 	},
 	install = {},
 	checker = { enabled = true },

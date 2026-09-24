@@ -105,6 +105,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("sleep 5 && syncthingtray-qt6 --wait")
 	hl.exec_cmd("super-productivity")
+	hl.exec_cmd("workrave")
 	--hl.exec_cmd("git annex assistant --autostart")
 end)
 

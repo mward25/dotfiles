@@ -34,7 +34,8 @@ vim.lsp.enable({
 	"lua_ls",
 	"yamlls",
 	"just",
-	"jedi_language_server"
+	"jedi_language_server",
+	"kotlin-lsp"
 })
 
 vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })

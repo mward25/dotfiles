@@ -9,7 +9,7 @@ return {
 	},
 	cmd = "Neogit",
 	keys = {
-		{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+		{ "<leader>gG", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
 	},
 	config = function()
 		local neogit = require("neogit")
