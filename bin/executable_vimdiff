@@ -1,0 +1,8 @@
+#!/bin/env sh
+
+# Run nvimdiff if neovim is installed
+if command -v nvim >/dev/null; then
+		nvimdiff $@
+else
+		vimdiff $@
+fi
