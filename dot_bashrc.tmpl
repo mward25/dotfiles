@@ -22,6 +22,7 @@ export DASHT_DOCSETS_DIR="$HOME/.local/share/Zeal/Zeal/docsets"
 export D2_LAYOUT=elk
 
 export PATH=$PATH:{{ joinPath .chezmoi.homeDir ".local" "bin" }}{{ if ne .chezmoi.os "windows" }}:~/bin:/opt/google-cloud-cli/bin{{ end }}
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 # Use terminal scrolling
 export LESS="-R --wheel-lines=3"
 test -s ~/.alias && . ~/.alias || true
@@ -127,7 +128,9 @@ fi
 #[ -e "$(pkg-config --variable=completionsdir bash-completion)/git" ] && "$(pkg-config --variable=completionsdir bash-completion)/git"
 
 # If pandoc exists, generate completion
-which pandoc &>/dev/null && eval "$(pandoc --bash-completion)"
+which pandoc &>/dev/null && eval "$(pandoc --completion=bash)"
+
+which mlr &>/dev/null && eval "$(mlr completion bash)"
 
 # Make opengl work better
 #export LIBGL_ALWAYS_INDIRECT=0
