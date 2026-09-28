@@ -166,5 +166,11 @@ for _, filetype in ipairs({ "c.doxygen", "cpp.doxygen", "qmljs" }) do
 	end
 end
 
+sitting_langs = require("config.sitting_langs")
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = sitting_langs,
+	callback = function() vim.treesitter.start() end,
+})
 
 
