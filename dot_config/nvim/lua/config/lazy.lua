@@ -52,7 +52,6 @@ require("lazy").setup({
 		require("config.snacks"),
 		--require("config.codecompanion"),
 		require("config.coq"),
-		require("config.huant"),
 		require("config.lazygit"),
 		require("config.nvim-treesitter"),
 	},
