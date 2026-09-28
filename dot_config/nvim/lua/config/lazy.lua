@@ -54,6 +54,8 @@ require("lazy").setup({
 		require("config.coq"),
 		require("config.lazygit"),
 		require("config.nvim-treesitter"),
+		require("config.nvim-ts-autotag"),
+		require("config.nvim-autopairs"),
 	},
 	install = {},
 	checker = { enabled = true },
