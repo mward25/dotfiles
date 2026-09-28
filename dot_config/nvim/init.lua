@@ -35,7 +35,11 @@ vim.lsp.enable({
 	"yamlls",
 	"just",
 	"jedi_language_server",
-	"kotlin-lsp"
+	"kotlin_lsp",
+	"neocmake",
+	"phpactor",
+	"tailwindcss",
+	"tombi"
 })
 
 vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
