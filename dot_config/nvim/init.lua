@@ -162,13 +162,14 @@ vim.filetype.add({
 })
 
 -- Alias composite filetypes used by LSP configs so Neovim doesn't warn "Unknown filetype"
-for _, filetype in ipairs({ "c.doxygen", "cpp.doxygen", "qmljs" }) do
-	local existing = vim.filetype.match({ filename = "file." .. filetype })
-	if not existing then
-		vim.treesitter.language.register("c", filetype)
-		vim.filetype.add({ pattern = { [".*\\." .. vim.pesc(filetype) .. "$"] = filetype } })
-	end
-end
+-- for _, filetype in ipairs({ "c.doxygen", "cpp.doxygen", "qmljs" }) do
+-- 	local existing = vim.filetype.match({ filename = "file." .. filetype })
+-- 	if not existing then
+-- 		vim.treesitter.language.register("c", filetype)
+-- 		vim.filetype.add({ pattern = { [".*\\." .. vim.pesc(filetype) .. "$"] = filetype } })
+-- 	end
+-- end
+
 
 sitting_langs = require("config.sitting_langs")
 
