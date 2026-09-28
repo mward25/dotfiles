@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -e "src" ]; then
+		>&2 echo "src already exists, would you like to delete and start over?"
+		>&2 printf "[y/n]"
+		read confirm
+		[ "${confirm}" = "y" ] || exit 0
+		rm -rf ./src && rm -rf ./src.*
+fi
+
+>&2 echo "Cloning new src"
+
+makepkg -od
+
+>&2 echo "Making orig and new"
+
+cp -R ./src ./src.orig
+cp -R ./src ./src.new
+
+>&2 echo "All done! Make your modifications in src.new, then run patchfinish."
