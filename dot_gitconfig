@@ -1,0 +1,79 @@
+[core]
+	autocrlf = input
+
+[init]
+	defaultBranch = main
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+
+[user]
+	email = milesward2004@gmail.com
+	name = Miles Ward
+[merge]
+	tool = nvimdiff2
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+
+[pager]
+	difftool = true
+[alias]
+	dlog = -c diff.external=difft log --ext-diff
+	dshow = -c diff.external=difft show --ext-diff
+	ddiff = -c diff.external=difft diff
+	dl = -c diff.external=difft log -p --ext-diff
+	ds = -c diff.external=difft show --ext-diff
+	dft = -c diff.external=difft diff
+
+[protocol "file"]
+	allow = always
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[rerere]
+	enabled = true
+[submodule]
+	recurse = true
+[rebase]
+	autosquash = true
+[git-town]
+	sync-feature-strategy = rebase
+	ship-strategy = always-merge
+	github-connector = gh
+	auto-resolve = true
+[alias]
+	sync = town sync
+	continue = town continue
+	skip = town skip
+	hack = town hack
+	ship = town ship
+	force = push --force-with-lease
+	append = town append
+	compress = town compress
+	contribute = town contribute
+	delete = town delete
+	diff-parent = town diff-parent
+	down = town down
+	observe = town observe
+	park = town park
+	prepend = town prepend
+	propose = town propose
+	rename = town rename
+	repo = town repo
+	set-parent = town set-parent
+	up = town up
+	view = town branch
+	# Change branch
+	ch = town switch
+[push]
+	autoSetupRemote = true
+[credential]
+	helper = cache --timeout 21600
+	helper = oauth
