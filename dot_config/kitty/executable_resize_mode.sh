@@ -27,5 +27,6 @@ while IFS= read -r -s -n1 key; do
   k) kitty @ resize-window --increment="${AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
   j) kitty @ resize-window --increment="-${AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
   q | $'\n' | $'\r' | $'\x1b') break ;;
+  *) printf "Key '%b' is invalid" "$key"
   esac
 done
