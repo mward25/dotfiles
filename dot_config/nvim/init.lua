@@ -23,6 +23,8 @@ vim.opt.showbreak = "=> "
 vim.opt.spell = true
 vim.opt.spelloptions = "camel"
 
+vim.opt.iskeyword:append("-")
+
 -- LSP Config
 vim.lsp.config("qmlls", { cmd = { "qmlls6" } })
 
@@ -175,7 +177,9 @@ sitting_langs = require("config.sitting_langs")
 
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = sitting_langs,
-	callback = function() vim.treesitter.start() end,
+	callback = function()
+		vim.treesitter.start()
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
 })
 
-vim.opt_local.iskeyword:append("-")
