@@ -1,3 +1,12 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 
-nvim -d $@
+# Call with $@, prints proper command to run for diff.
+get_diff_view_command() {
+  if [ $# -ge 3 ]; then
+    echo -n DiffviewMergeFiles
+  else
+    echo -n DiffviewDiffFiles
+  fi
+}
+
+nvim -c "$(get_diff_view_command "$@") ${*// /\\ }"
