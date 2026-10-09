@@ -354,6 +354,21 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("toggle_numen.sh"))
 hl.bind(mainMod .. " + period", hl.dsp.layout("consume_or_expel prev"))
 hl.bind(mainMod .. " + comma", hl.dsp.layout("consume_or_expel next"))
 
+-- Set active column width: 100% (scrolling layout)
+hl.bind(
+	mainMod .. " + m",
+	layout_bind({
+		scrolling = hl.dsp.layout("colresize 1.0"),
+	})
+)
+-- Set active column width: 50% (scrolling layout)
+hl.bind(
+	mainMod .. " + SHIFT + M",
+	layout_bind({
+		scrolling = hl.dsp.layout("colresize 0.5"),
+	})
+)
+
 -- Zoom in/out (DPI scaling via cursor zoom factor)
 hl.bind(mainMod .. " + SHIFT + minus", function()
 	adjust_zoom("in")
