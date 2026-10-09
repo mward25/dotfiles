@@ -1,12 +1,16 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-# Call with $@, prints proper command to run for diff.
-get_diff_view_command() {
-  if [ $# -ge 3 ]; then
-    echo -n DiffviewMergeFiles
-  else
-    echo -n DiffviewDiffFiles
-  fi
-}
+# git mergetool passes: BASE LOCAL REMOTE MERGED.
+# diffview expects: {output} [{base}] {left} {right}
+if [ "$#" -eq 4 ]; then
+  set -- "$4" "$1" "$2" "$3"
+fi
 
-nvim -c "$(get_diff_view_command "$@") ${*// /\\ }"
+# Quote args safely for nvim
+args=$(printf ' "%q"' "$@")
+
+if [ "$#" -eq 2 ]; then
+  exec nvim -f -c "DiffviewDiffFiles$args"
+else
+  exec nvim -f -c "DiffviewMergeFiles$args"
+fi
