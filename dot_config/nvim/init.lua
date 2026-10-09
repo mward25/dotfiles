@@ -41,16 +41,16 @@ vim.lsp.enable({
 	"neocmake",
 	"phpactor",
 	"tailwindcss",
-	"tombi"
+	"tombi",
 })
 
 vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 vim.keymap.set("x", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions (visual)" })
 vim.keymap.set("n", "<leader>d", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics" })
-vim.keymap.set("n", "g]", function()
+vim.keymap.set("n", "]d", function()
 	vim.diagnostic.goto_next()
 end, { desc = "Next LSP diagnostic" })
-vim.keymap.set("n", "g[", function()
+vim.keymap.set("n", "[d]", function()
 	vim.diagnostic.goto_prev()
 end, { desc = "Prev LSP diagnostic" })
 vim.keymap.set("n", "<leader>gd", ":Neogen<CR>", { desc = "Generate annotation (Neogen)" })
@@ -172,10 +172,9 @@ vim.filetype.add({
 -- 	end
 -- end
 
-
 sitting_langs = require("config.sitting_langs")
 
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd("FileType", {
 	pattern = sitting_langs,
 	callback = function()
 		vim.treesitter.start()
@@ -183,3 +182,22 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 
+vim.api.nvim_create_user_command("Cdfd", "cd %:p:h", { desc = "cd to the directory the current file is in" })
+
+vim.keymap.set("n", "<leader>qk", function()
+	local out = vim.fn.system({
+		"kitty",
+		"@",
+		"get-text",
+		"--match",
+		"recent:1", -- the window you were in before nvim
+		"--extent",
+		"last_non_empty_output", -- just the last command's output
+	})
+	vim.fn.setqflist({}, " ", {
+		title = "kitty",
+		lines = vim.split(out, "\n"),
+		efm = vim.o.errorformat,
+	})
+	vim.cmd("copen")
+end, { desc = "Kitty last output -> quickfix" })

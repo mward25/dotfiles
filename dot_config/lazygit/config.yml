@@ -30,8 +30,10 @@ authorColors:
 
 git:
   diffRenderers:
-    - colorArg: always
-      command: delta -s --dark --paging=never --24-bit-color=never
-  paging:
-    colorArg: always
-    pager: delta -s --dark --paging=never --24-bit-color=never
+    - command: delta --dark --paging=never
+  # diffRenderers:
+  #   - colorArg: always
+  #     command: delta -s --dark --paging=never --24-bit-color=never --color-only
+  # paging:
+  #   colorArg: always
+  #   pager: delta -s --dark --paging=never --24-bit-color=never --color-only

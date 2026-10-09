@@ -15,10 +15,10 @@
 	email = milesward2004@gmail.com
 	name = Miles Ward
 [merge]
-	tool = nvimdiff2
+	tool = ~/bin/nvimdiff
 [merge "mergiraf"]
-    name = mergiraf
-    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 
 [pager]
 	difftool = true
@@ -77,3 +77,9 @@
 [credential]
 	helper = cache --timeout 21600
 	helper = oauth
+
+[include]
+	path = ~/catppuccin.gitconfig
+
+[delta]
+	features = catppuccin-macchiato

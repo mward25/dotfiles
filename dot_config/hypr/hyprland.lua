@@ -13,17 +13,19 @@ local colors = require("catppuccin.macchiato")
 ------------------
 
 -- -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+
+
 hl.monitor({
 	output = "DP-1",
 	mode = "preferred",
-	position = "auto",
+	position = "0x0",
 	scale = 1,
 })
 
 hl.monitor({
 	output = "HDMI-A-1",
 	mode = "preferred",
-	position = "auto-left",
+	position = "auto-down",
 	scale = 1,
 })
 
@@ -103,9 +105,9 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("blueman-applet")
 	hl.exec_cmd("nm-applet")
 	hl.exec_cmd("hypridle")
-	hl.exec_cmd("sleep 5 && syncthingtray-qt6 --wait")
+	hl.exec_cmd("sleep 5 && syncthingtray --wait")
 	hl.exec_cmd("super-productivity")
-	hl.exec_cmd("workrave")
+	hl.exec_cmd("sleep 3 && workrave")
 	--hl.exec_cmd("git annex assistant --autostart")
 end)
 
@@ -323,7 +325,7 @@ end
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal .. " -1"))
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + CTRL + M", hl.dsp.exit())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
@@ -498,4 +500,18 @@ hl.window_rule({
 	},
 	workspace = "special:magic",
 	--no_initial_focus = true,
+})
+hl.window_rule({
+	match = {
+		title = "^Workrave$",
+	},
+	float = true,
+	monitor = "DP-1",
+	move = {2445,1347},
+	pin = true,
+	opacity = "0.8",
+	-- border_size = 0,
+	-- xray = true,
+	no_blur = true,
+	-- opaque = true
 })
