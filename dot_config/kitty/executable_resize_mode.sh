@@ -18,15 +18,29 @@ if ! [[ "$AMOUNT" =~ ^[0-9]+$ ]] || ((AMOUNT <= 0)); then
   exit 1
 fi
 
-echo "RESIZE (amount=${AMOUNT}): h/l wider/narrower  k/j taller/shorter  q/ESC/Enter to exit"
+BIG_AMOUNT=$(($AMOUNT * 10))
 
-while IFS= read -r -s -n1 key; do
+echo "RESIZE (amount=${AMOUNT}): h/l wider/narrower  k/j taller/shorter  q/ESC/Enter to exit (Shift+these options to do more!)"
+
+ESCAPE_KEY=$'\x1b'
+ENTER_KEY=$'\n'
+
+while IFS= read -r -s -N 1 key; do
   case "$key" in
   h) kitty @ resize-window --increment="${AMOUNT}" --axis=horizontal --match "id:${KITTY_WINDOW_ID}" ;;
   l) kitty @ resize-window --increment="-${AMOUNT}" --axis=horizontal --match "id:${KITTY_WINDOW_ID}" ;;
   k) kitty @ resize-window --increment="${AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
   j) kitty @ resize-window --increment="-${AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
-  q | $'\n' | $'\r' | $'\x1b') break ;;
-  *) printf "Key '%b' is invalid" "$key"
+
+  H) kitty @ resize-window --increment="${BIG_AMOUNT}" --axis=horizontal --match "id:${KITTY_WINDOW_ID}" ;;
+  L) kitty @ resize-window --increment="-${BIG_AMOUNT}" --axis=horizontal --match "id:${KITTY_WINDOW_ID}" ;;
+  K) kitty @ resize-window --increment="${BIG_AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
+  J) kitty @ resize-window --increment="-${BIG_AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
+  q | $ENTER_KEY | $ESCAPE_KEY) break ;;
+  *) printf "Key '%q' is invalid" "$key"
   esac
 done
+# $CTRL_H_KEY) kitty @ resize-window --increment="${AMOUNT}" --axis=horizontal --match "id:${KITTY_WINDOW_ID}" ;;
+# $CTRL_L_KEY) kitty @ resize-window --increment="-${AMOUNT}" --axis=horizontal --match "id:${KITTY_WINDOW_ID}" ;;
+# $CTRL_K_KEY) kitty @ resize-window --increment="${AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
+# $CTRL_J_KEY) kitty @ resize-window --increment="-${AMOUNT}" --axis=vertical --match "id:${KITTY_WINDOW_ID}" ;;
