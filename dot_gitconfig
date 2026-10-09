@@ -1,5 +1,6 @@
 [core]
 	autocrlf = input
+	pager = delta
 
 [init]
 	defaultBranch = main
@@ -15,7 +16,12 @@
 	email = milesward2004@gmail.com
 	name = Miles Ward
 [merge]
-	tool = ~/bin/nvimdiff
+	tool = nvimdiff
+	conflictStyle = zdiff3
+[mergetool "nvimdiff"]
+	cmd = ~/bin/nvimdiff "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+[mergetool]
+	keepBackup = false
 [merge "mergiraf"]
 	name = mergiraf
 	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
@@ -70,6 +76,7 @@
 	set-parent = town set-parent
 	up = town up
 	view = town branch
+	undo = town undo
 	# Change branch
 	ch = town switch
 [push]
@@ -81,5 +88,10 @@
 [include]
 	path = ~/catppuccin.gitconfig
 
+[interactive]
+    diffFilter = delta --color-only
 [delta]
+	dark = true
 	features = catppuccin-macchiato
+	hyprlinks = true
+	side-by-side = true
