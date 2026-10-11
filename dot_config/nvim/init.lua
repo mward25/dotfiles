@@ -23,6 +23,9 @@ vim.opt.showbreak = "=> "
 vim.opt.spell = true
 vim.opt.spelloptions = "camel"
 
+vim.opt.diffopt:append("inline:word")
+-- vim.opt.diffopt = "inline:word"
+
 vim.opt.iskeyword:append("-")
 
 -- LSP Config

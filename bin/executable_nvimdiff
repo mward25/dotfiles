@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
-# git mergetool passes: BASE LOCAL REMOTE MERGED.
-# diffview expects: {output} [{base}] {left} {right}
-if [ "$#" -eq 4 ]; then
-  set -- "$4" "$1" "$2" "$3"
+# diffs.nvim mergetool: git passes BASE LOCAL REMOTE MERGED, but diffs.nvim
+# only wants the merged working file — it detects conflict markers itself.
+if [ "$#" -ge 3 ]; then
+  set -- "${@: -1}"   # keep only the last arg ($MERGED)
 fi
 
-# Quote args safely for nvim
+# %q quotes each arg safely (spaces, quotes, globs).
 args=$(printf ' "%q"' "$@")
 
 if [ "$#" -eq 2 ]; then
-  exec nvim -f -c "DiffviewDiffFiles$args"
+  # Plain two-file diff (difftool / manual, no VCS involved): :Diff files
+  exec nvim -f -c "Diff files$args"
 else
-  exec nvim -f -c "DiffviewMergeFiles$args"
+  # Mergetool / single file: conflict markers are detected by diffs.nvim.
+  exec nvim -f "$@"
 fi

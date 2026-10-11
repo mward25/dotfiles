@@ -44,7 +44,7 @@ require("lazy").setup({
 		-- { "shoukoo/commentary.nvim", config = true },
 		{ "luisjure/csound-vim", name = "csound-vim", priority = 1000 },
 		{ "nemanjamalesija/smart-paste.nvim", config = true },
-		require("config.diffview"),
+		require("config.diffs"),
 		require("config.auto-session"),
 		require("config.neogit"),
 		require("config.vim-table-mode"),

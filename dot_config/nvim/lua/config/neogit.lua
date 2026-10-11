@@ -3,7 +3,7 @@ return {
 	lazy = true,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		require("config.diffview"),
+		require("config.diff"),
 		"m00qek/baleia.nvim",
 		require("config.telescope")
 	},
@@ -12,6 +12,11 @@ return {
 		{ "<leader>gG", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
 	},
 	config = function()
+		-- vim.g.diffs = {
+		-- 	integrations = {
+		-- 		neogit = true,
+		-- 	}
+		-- }
 		local neogit = require("neogit")
 
 		neogit.setup({
