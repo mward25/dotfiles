@@ -7,11 +7,13 @@ return {
 			"MunifTanjim/nui.nvim",
 			"nvim-tree/nvim-web-devicons", -- optional, but recommended
 		},
-		config = {
-			hijack_netrw_behavior = "open_default",
+		opts = {
 			use_libuv_file_watcher = true,
 			follow_current_file = { enabled = true },
 			filesystem = {
+				-- Leave netrw alone so oil.nvim handles ":e .";
+				-- neo-tree stays as the file tree opened with <leader>t.
+				hijack_netrw_behavior = "disabled",
 				window = {
 					mappings = {
 						["y"] = "yank_path",
