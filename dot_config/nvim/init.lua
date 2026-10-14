@@ -100,7 +100,7 @@ vim.opt.listchars:append({
 vim.opt.list = true
 
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>t", ":Neotree toggle<CR>")
+-- vim.keymap.set("n", "<leader>t", ":Neotree toggle<CR>")
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.buffers, { desc = "Telescope find files" })

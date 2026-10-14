@@ -38,7 +38,8 @@ require("lazy").setup({
 
 		{ "tpope/vim-sleuth", priority = 1000 },
 		--{ "nvim-tree/nvim-tree.lua", priority = 1000 },
-		require("config.neo-tree"),
+		-- require("config.neo-tree"),
+		require("config.chadtree"),
 		require("config.oil"),
 		-- require("config.yazi"),
 
