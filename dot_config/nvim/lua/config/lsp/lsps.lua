@@ -1,0 +1,17 @@
+return {
+	"clangd",
+	"qmlls",
+	-- "harper_ls",
+	"rust_analyzer",
+	"lua_ls",
+	"yamlls",
+	"just",
+	"jedi_language_server",
+	"kotlin_lsp",
+	"neocmake",
+	"laravel_lsp",
+	"phpantom_lsp",
+	"tailwindcss",
+	"tombi",
+	"qmlls",
+}

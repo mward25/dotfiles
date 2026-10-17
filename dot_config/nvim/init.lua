@@ -1,6 +1,9 @@
 require("config.lazy")
-
 local os_setup = require("os_setup.setup")
+
+require("config.files.cabab_handling").setup()
+
+-- require('config.lsp.enable').setup()
 
 vim.opt.number = true
 vim.opt.grepprg = "rg --vimgrep"
@@ -19,6 +22,8 @@ vim.opt.foldenable = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.showbreak = "=> "
+vim.opt.breakindent = true
+vim.opt.breakindentopt = "shift:4"
 
 vim.opt.spell = true
 vim.opt.spelloptions = "camel"
@@ -26,26 +31,27 @@ vim.opt.spelloptions = "camel"
 vim.opt.diffopt:append("inline:word")
 -- vim.opt.diffopt = "inline:word"
 
-vim.opt.iskeyword:append("-")
+vim.opt.iskeyword:append("$")
+-- vim.opt.iskeyword:append(":")
 
--- LSP Config
-vim.lsp.config("qmlls", { cmd = { "qmlls6" } })
-
-vim.lsp.enable({
-	"clangd",
-	"qmlls",
-	-- "harper_ls",
-	"rust_analyzer",
-	"lua_ls",
-	"yamlls",
-	"just",
-	"jedi_language_server",
-	"kotlin_lsp",
-	"neocmake",
-	"phpactor",
-	"tailwindcss",
-	"tombi",
-})
+-- -- LSP Config
+-- vim.lsp.config("qmlls", { cmd = { "qmlls6" } })
+--
+-- vim.lsp.enable({
+-- 	"clangd",
+-- 	"qmlls",
+-- 	-- "harper_ls",
+-- 	"rust_analyzer",
+-- 	"lua_ls",
+-- 	"yamlls",
+-- 	"just",
+-- 	"jedi_language_server",
+-- 	"kotlin_lsp",
+-- 	"neocmake",
+-- 	"phpantom_lsp",
+-- 	"tailwindcss",
+-- 	"tombi",
+-- })
 
 vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 vim.keymap.set("x", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions (visual)" })
@@ -58,36 +64,8 @@ vim.keymap.set("n", "[d]", function()
 end, { desc = "Prev LSP diagnostic" })
 vim.keymap.set("n", "<leader>gd", ":Neogen<CR>", { desc = "Generate annotation (Neogen)" })
 
--- :HarperToggle — load harper_ls for the current buffer, or stop it if already attached.
--- harper_ls is kept out of vim.lsp.enable() so it only runs on demand.
-vim.api.nvim_create_user_command("HarperToggle", function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients({ bufnr = bufnr, name = "harper_ls" })
 
-	if #clients == 0 then
-		local config = vim.lsp.config["harper_ls"]
-		if not config then
-			vim.notify("harper_ls config not found (is nvim-lspconfig installed?)", vim.log.levels.WARN)
-			return
-		end
-		vim.lsp.start(config, {
-			bufnr = bufnr,
-			reuse_client = config.reuse_client,
-			_root_markers = config.root_markers,
-		})
-		vim.notify("harper_ls started for this buffer")
-	else
-		for _, client in ipairs(clients) do
-			vim.lsp.buf_detach_client(bufnr, client.id)
-			if vim.tbl_count(client.attached_buffers) == 0 then
-				client:stop()
-			end
-		end
-		vim.notify("harper_ls stopped for this buffer")
-	end
-end, { desc = "Toggle harper_ls for the current buffer" })
-
-vim.opt.tabstop = 4
+-- vim.opt.tabstop = 4
 
 local space = " "
 vim.opt.listchars:append({
@@ -140,50 +118,6 @@ vim.keymap.set("n", "<leader>wr", function()
 	vim.api.nvim_echo({ { "", "Normal" } }, false, {})
 end, { desc = "Window resize mode" })
 
--- Shift-K lookup menu (man / tldr / web)
-local function lookup_word(word)
-	if not word or word == "" then
-		return
-	end
-
-	local options = {}
-	local actions = {}
-
-	if vim.fn.system("man -w " .. vim.fn.shellescape(word) .. " 2>/dev/null"):match("%S") then
-		table.insert(options, "man")
-		actions["man"] = function()
-			vim.cmd("Man " .. vim.fn.fnameescape(word))
-		end
-	end
-
-	if vim.fn.executable("tldr") == 1 then
-		table.insert(options, "tldr")
-		actions["tldr"] = function()
-			vim.cmd("split | terminal tldr " .. vim.fn.shellescape(word))
-		end
-	end
-
-	table.insert(options, "web browser")
-	actions["web browser"] = function()
-		os_setup.open_browser_search(word)
-	end
-
-	vim.ui.select(options, { prompt = "Look up: " .. word }, function(choice)
-		actions[choice or "web browser"]()
-	end)
-end
-
-vim.keymap.set("n", "K", function()
-	lookup_word(vim.fn.expand("<cword>"))
-end, { desc = "Lookup word (man/tldr/web)" })
-
-vim.keymap.set("v", "K", function()
-	local line_start, col_start = vim.fn.line("'<"), vim.fn.col("'<")
-	local line_end, col_end = vim.fn.line("'>"), vim.fn.col("'>")
-	local lines = vim.api.nvim_buf_get_text(0, line_start - 1, col_start - 1, line_end - 1, col_end, {})
-	lookup_word(table.concat(lines, " "):match("^%s*(.-)%s*$"))
-end, { desc = "Lookup selection (man/tldr/web)" })
-
 vim.filetype.add({
 	extension = {
 		qrc = "xml",
@@ -222,7 +156,7 @@ vim.keymap.set("n", "<leader>qk", function()
 		"@",
 		"get-text",
 		"--match",
-		"recent:1", -- the window you were in before nvim
+		"recent:1",        -- the window you were in before nvim
 		"--extent",
 		"last_non_empty_output", -- just the last command's output
 	})
@@ -233,3 +167,29 @@ vim.keymap.set("n", "<leader>qk", function()
 	})
 	vim.cmd("copen")
 end, { desc = "Kitty last output -> quickfix" })
+
+-- vim.lsp.config("laravel_lsp", {
+--     cmd = { "laravel-lsp" },
+--     filetypes = { "php", "blade" },
+--     root_dir = function(bufnr, on_dir)
+--         local root = vim.fs.root(bufnr, "artisan")
+--
+--         if root then
+--             on_dir(root)
+--         end
+--     end,
+-- })
+
+-- vim.lsp.config("laravel_lsp", {
+-- 	cmd = { "laravel-lsp" },
+-- 	filetypes = { "php", "blade" },
+-- 	root_dir = function(bufnr, on_dir)
+-- 		local root = vim.fs.root(bufnr, "artisan")
+--
+-- 		if root then
+-- 			on_dir(root)
+-- 		end
+-- 	end,
+-- })
+--
+-- vim.lsp.enable("laravel_lsp")

@@ -5,6 +5,8 @@ quicklinks=(
   ["Git"]="lazygit"
   ["Files"]="yazi"
   ["Editor"]="nvim"
+  ["Code Review"]="tuicr"
+  ["Open Code"]="opencode"
 )
 
 to_launch="$( printf "%s\0" "${!quicklinks[@]}" | fzf --read0 )"

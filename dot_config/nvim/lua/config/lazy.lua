@@ -26,6 +26,7 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
 	spec = {
 		{ "neovim/nvim-lspconfig", lazy=false, priority = 1000 },
+		require("config.coq"),
 		require("config.telescope"),
 
 		require("config.catppuccin"),
@@ -52,13 +53,15 @@ require("lazy").setup({
 		require("config.vim-table-mode"),
 		require("config.snacks"),
 		--require("config.codecompanion"),
-		require("config.coq"),
 		require("config.lazygit"),
 		require("config.nvim-treesitter"),
 		require("config.nvim-ts-autotag"),
 		require("config.nvim-autopairs"),
 		require("config.nvim-surround"),
 		require("config.nvim-comment"),
+		require("config.nvim_project_config"),
+		require("config.laravel")
+		-- require('config.nvim_doc_view')
 	},
 	install = {},
 	checker = { enabled = true },
