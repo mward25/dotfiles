@@ -54,14 +54,14 @@ hl.device({
 
 -- Persistent workspaces
 -- Default workspace config
-hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "scrolling" })
-hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true, layout = "scrolling" })
+hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "dwindle" })
+hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true, layout = "dwindle" })
 hl.workspace_rule({
 	workspace = 3,
 	monitor = "DP-1",
 	persistent = true,
 	layout = "scrolling",
-	layout_opts = { direction = "right" },
+	layout_opts = { direction = "up", focus_follow = 0 },
 })
 hl.workspace_rule({ workspace = 4, monitor = "DP-1", persistent = true })
 hl.workspace_rule({ workspace = 5, monitor = "DP-1", persistent = true })
@@ -318,6 +318,47 @@ local function layout_bind(bind_table)
 	end
 end
 
+-- Cycle the active workspace through a list of tiling layouts.
+local layouts = { "dwindle", "scrolling", "monocle" }
+
+local function cycle_layout(direction)
+	local special = hl.get_active_special_workspace()
+	local workspace = special or hl.get_active_workspace()
+	if not workspace then
+		return
+	end
+
+	local current = workspace.tiled_layout
+
+	local idx = 1
+	for i, layout in ipairs(layouts) do
+		if layout == current then
+			idx = i
+			break
+		end
+	end
+
+	local next_idx
+	if direction == "prev" then
+		next_idx = idx - 1
+		if next_idx < 1 then
+			next_idx = #layouts
+		end
+	else
+		next_idx = idx + 1
+		if next_idx > #layouts then
+			next_idx = 1
+		end
+	end
+
+	hl.workspace_rule({
+		workspace = tostring(special and workspace.name or workspace.id),
+		layout = layouts[next_idx],
+	})
+
+	hl.dsp.exec_cmd("pkill -RTMIN+8 waybar")
+end
+
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -353,6 +394,14 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/rofi/bin/web"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("toggle_numen.sh"))
 hl.bind(mainMod .. " + period", hl.dsp.layout("consume_or_expel prev"))
 hl.bind(mainMod .. " + comma", hl.dsp.layout("consume_or_expel next"))
+
+-- Cycle the active workspace's tiling layout
+hl.bind(mainMod .. " + bracketright", function()
+	cycle_layout("next")
+end)
+hl.bind(mainMod .. " + bracketleft", function()
+	cycle_layout("prev")
+end)
 
 -- Set active column width: 100% (scrolling layout)
 hl.bind(
