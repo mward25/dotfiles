@@ -2,7 +2,7 @@
 {
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 34, // Waybar height (to be removed for auto height)
+    // "height": 34, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
@@ -11,9 +11,9 @@
         //"hyprland/submap",
         //"custom/media"
     ],
-    "modules-center": [
-        "hyprland/window"
-    ],
+    // "modules-center": [
+    //     "hyprland/window"
+    // ],
     "modules-right": [
         //"mpd",
         "idle_inhibitor",
@@ -42,7 +42,7 @@
         "show-special": true,
         "special-visible-only": false,
         "format": "{icon} {windows}",
-         "format-window-separator": "",
+        "format-window-separator": "",
         //"format": "{name}: {icon}",
         "format-icons": {
             "1": " ",
@@ -62,13 +62,14 @@
         "workspace-taskbar": {
             "enable": true,
             "update-active-window": true,
-            "active-window-position": "first",
-            "format": "{icon}",
+            // "active-window-position": "first",
+            "format": "{icon} {title}",
             "icon-size": 18,
             "icon-theme": ["Colloid-Purple-Catppuccin-Dark", "Papirus-Dark", "Papirus", "hicolor"],
+            "ignore-list": ["Workrave"],
             // "icon-theme": ["Papirus-Dark", "Papirus", "hicolor"],
             "orientation": "horizontal",
-            "on-click-window": "hyprctl dispatch focuswindow address:{address}"
+            // "on-click-window": "hyprctl dispatch focuswindow address:{address}"
         }
     },
     "keyboard-state": {
