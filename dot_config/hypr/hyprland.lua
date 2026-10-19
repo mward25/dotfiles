@@ -54,8 +54,8 @@ hl.device({
 
 -- Persistent workspaces
 -- Default workspace config
-hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "dwindle" })
-hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true, layout = "dwindle" })
+hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "dwindle", layout_opts = { direction = "up", focus_follow = 0 } })
+hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true, layout = "dwindle", layout_opts = { direction = "up", focus_follow = 0 } })
 hl.workspace_rule({
 	workspace = 3,
 	monitor = "DP-1",
@@ -63,19 +63,19 @@ hl.workspace_rule({
 	layout = "scrolling",
 	layout_opts = { direction = "up", focus_follow = 0 },
 })
-hl.workspace_rule({ workspace = 4, monitor = "DP-1", persistent = true })
-hl.workspace_rule({ workspace = 5, monitor = "DP-1", persistent = true })
+hl.workspace_rule({ workspace = 4, monitor = "DP-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
+hl.workspace_rule({ workspace = 5, monitor = "DP-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
 
 hl.workspace_rule({
 	workspace = 6,
 	monitor = "HDMI-A-1",
 	persistent = true,
 	layout = "scrolling",
-	layout_opts = { direction = "down" },
+	layout_opts = { direction = "up", focus_follow = 0 },
 })
-hl.workspace_rule({ workspace = 7, monitor = "HDMI-A-1", persistent = true })
-hl.workspace_rule({ workspace = 8, monitor = "HDMI-A-1", persistent = true })
-hl.workspace_rule({ workspace = 9, monitor = "HDMI-A-1", persistent = true })
+hl.workspace_rule({ workspace = 7, monitor = "HDMI-A-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
+hl.workspace_rule({ workspace = 8, monitor = "HDMI-A-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
+hl.workspace_rule({ workspace = 9, monitor = "HDMI-A-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -125,7 +125,8 @@ hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 
 -- QT Config
-hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("QT_QPA_PLATFORM", "wayland")
+hl.env("QT_QPA_PLATFORMTHEME", "hyprqt6engine")
 
 -- Try to mostly have things run in wayland native
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
@@ -354,6 +355,7 @@ local function cycle_layout(direction)
 	hl.workspace_rule({
 		workspace = tostring(special and workspace.name or workspace.id),
 		layout = layouts[next_idx],
+		layout_opts = { direction = "up", focus_follow = 0 },
 	})
 
 	hl.dsp.exec_cmd("pkill -RTMIN+8 waybar")
@@ -461,7 +463,7 @@ end, { repeating = true })
 for i = 1, 10 do
 	local key = i % 10 -- 10 maps to key 0
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, silent = true }))
+	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
 -- Focus urgent window
