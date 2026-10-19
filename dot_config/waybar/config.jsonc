@@ -12,7 +12,8 @@
         //"custom/media"
     ],
     // "modules-center": [
-    //     "hyprland/window"
+    //     // "hyprland/window"
+    //     // "custom/launcher"
     // ],
     "modules-right": [
         //"mpd",
@@ -249,4 +250,12 @@
         "signal": 8,
         "format": "{text}"
     },
+    "custom/launcher": {
+        "format": "{text}",
+        "return-type": "json",
+        "exec": "pgrep -x nwg-menu >/dev/null && echo '{\"text\":\" \",\"class\":\"running\"}' || echo '{\"text\":\" \",\"class\":\"\"}'",
+        "on-click": "sh -c 'if pgrep -x nwg-menu >/dev/null; then pkill -x nwg-menu; else nohup nwg-menu -va top >/dev/null 2>&1 & fi'",
+        "interval": 1,
+        "tooltip": false
+    }
 }

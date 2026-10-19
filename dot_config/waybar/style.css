@@ -369,3 +369,36 @@ label:focus {
     box-shadow: inset 0 -2px @blue;
 }
 
+/* Application launcher (nwg-menu) styling */
+#custom-launcher {
+    padding: 0 12px;
+    margin: 0 10px;
+    border-radius: 12px;
+    background-color: @surface0;
+    color: @text;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#custom-launcher:hover {
+    background-color: @surface1;
+
+}
+
+#custom-launcher.running {
+    background-color: @crust;
+    color: @subtext0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.45);
+
+    animation: launcher-running 1.4s ease-in-out infinite;
+}
+
+@keyframes launcher-running {
+    0% { opacity: 1; }
+    50% { opacity: 0.75; }
+    100% { opacity: 1; }
+}
+
+#custom-launcher.running:hover {
+
+}
+
