@@ -25,8 +25,8 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		{ "neovim/nvim-lspconfig", lazy=false, priority = 1000 },
 		require("config.coq"),
+		require("config.lspconfig"),
 		require("config.telescope"),
 
 		require("config.catppuccin"),
@@ -37,7 +37,7 @@ require("lazy").setup({
 		require("config.neogen"),
 		require("config.d2-vim"),
 
-		{ "tpope/vim-sleuth", priority = 1000 },
+		require("config.guess-indent"),
 		--{ "nvim-tree/nvim-tree.lua", priority = 1000 },
 		-- require("config.neo-tree"),
 		require("config.chadtree"),
@@ -45,8 +45,8 @@ require("lazy").setup({
 		-- require("config.yazi"),
 
 		-- { "shoukoo/commentary.nvim", config = true },
-		{ "luisjure/csound-vim", name = "csound-vim", priority = 1000 },
-		{ "nemanjamalesija/smart-paste.nvim", config = true },
+		{ "luisjure/csound-vim", name = "csound-vim" },
+		require("config.smart-paste"),
 		require("config.diffs"),
 		require("config.auto-session"),
 		require("config.neogit"),

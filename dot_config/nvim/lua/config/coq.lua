@@ -2,17 +2,18 @@ return {
 	"ms-jpq/coq_nvim",
 	branch = "coq",
 	lazy = false,
+	priority = 100,
 	dependencies = {
-		{ "neovim/nvim-lspconfig", lazy = false},
+		require("config.lspconfig"),
+		require("config.nvim-treesitter"),
 		{ "ms-jpq/coq.artifacts", branch = "artifacts" },
 		require("config.nvim-autopairs"),
 	},
 	init = function()
 		-- vim.opt.autocomplete = true
-		vim.opt.complete = ""
-		vim.opt.complete = ""
+		-- vim.opt.complete = ""
+		-- vim.opt.complete = ""
 		vim.g.coq_settings = {
-			auto_start = "shut-up",
 			keymap = {
 				recommended = true,
 				manual_complete = "<c-space>"

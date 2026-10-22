@@ -2,6 +2,7 @@ local sitting_langs=require("config.sitting_langs")
 return {
 	'nvim-treesitter/nvim-treesitter',
 	lazy = false,
+	priority = 300,
 	build = ':TSUpdate',
 	config = function()
 		nvim_treesitter = require("nvim-treesitter")

@@ -37,10 +37,11 @@
     ],
     // Modules configuration
     "hyprland/workspaces": {
-        "disable-scroll": false,
+        "disable-scroll": true,
         "all-outputs": false,
         "warp-on-scroll": false,
         "show-special": true,
+"max-windows": 2,
         "special-visible-only": false,
         "format": "{icon} {windows}",
         "format-window-separator": "",
@@ -64,8 +65,9 @@
             "enable": true,
             "update-active-window": true,
             // "active-window-position": "first",
-            "format": "{icon} {title}",
+            "format": "{icon} {title:.20}",
             "icon-size": 18,
+"max-icons": 2,
             "icon-theme": ["Colloid-Purple-Catppuccin-Dark", "Papirus-Dark", "Papirus", "hicolor"],
             "ignore-list": ["Workrave"],
             // "icon-theme": ["Papirus-Dark", "Papirus", "hicolor"],
@@ -194,7 +196,8 @@
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+"max-length": 28
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -204,6 +207,7 @@
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
+"max-length": 24,
         "format-icons": {
             "headphone": "",
             "hands-free": "",

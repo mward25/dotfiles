@@ -9,7 +9,7 @@ return {
 	"jedi_language_server",
 	"kotlin_lsp",
 	"neocmake",
-	"laravel_lsp",
+	-- "laravel_lsp",
 	"phpantom_lsp",
 	"tailwindcss",
 	"tombi",
