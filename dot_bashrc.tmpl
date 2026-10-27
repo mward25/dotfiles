@@ -253,4 +253,13 @@ which rbenv &>/dev/null && eval "$(rbenv init -)"
 
 alias oc=opencode
 
+export CAMOFOX_CRASH_REPORT_ENABLED=false
+
 export PATH="/home/miles/.bun/bin:$PATH"
+
+source /etc/profile.d/android-emulator.sh
+source /etc/profile.d/android-sdk-platform-tools.sh
+source /etc/profile.d/android-sdk-cmdline-tools-latest.sh  
+source /etc/profile.d/android-sdk.sh
+
+alias camofox-interactive="CAMOFOX_INTERACTIVE=desktop camofox-browser"
