@@ -437,6 +437,12 @@ hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 
+-- Focus monitor (switch monitor) with super+ctrl+shift + vim keys
+hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.focus({ monitor = "l" }))
+hl.bind(mainMod .. " + CTRL + SHIFT + K", hl.dsp.focus({ monitor = "u" }))
+hl.bind(mainMod .. " + CTRL + SHIFT + J", hl.dsp.focus({ monitor = "d" }))
+hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.focus({ monitor = "r" }))
+
 -- Swap window with another
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.swap({ direction = "left" }))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ direction = "up" }))
@@ -444,7 +450,7 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "down" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "right" }))
 
 -- Resize window
-local resize_vel = 10
+local resize_vel = 20
 hl.bind(mainMod .. " + CTRL + H", function()
 	resize_window(-resize_vel, 0)
 end, { repeating = true })
