@@ -62,7 +62,8 @@ require("lazy").setup({
 		require("config.nvim-surround"),
 		require("config.nvim-comment"),
 		require("config.nvim_project_config"),
-		require("config.laravel")
+		require("config.mason")
+		--require("config.laravel")
 		-- require('config.nvim_doc_view')
 	},
 	install = {},
