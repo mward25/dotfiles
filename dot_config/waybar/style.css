@@ -404,4 +404,7 @@ label:focus {
     margin: 2px;
 }
 
-
+#custom-notification {
+    background-color: @surface0;
+    border-radius: 3px;
+}

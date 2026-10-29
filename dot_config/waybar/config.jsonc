@@ -32,7 +32,8 @@
         "battery#bat2",
         "clock",
         "tray",
-        "custom/hyprlayout"
+        "custom/hyprlayout",
+        "custom/notification"
         //"custom/power"
     ],
     // Modules configuration
@@ -41,7 +42,7 @@
         "all-outputs": false,
         "warp-on-scroll": false,
         "show-special": true,
-"max-windows": 2,
+        "max-windows": 2,
         "special-visible-only": false,
         "format": "{icon} {windows}",
         "format-window-separator": "",
@@ -261,5 +262,25 @@
         "on-click": "sh -c 'if pgrep -x nwg-menu >/dev/null; then pkill -x nwg-menu; else nohup nwg-menu -va top >/dev/null 2>&1 & fi'",
         "interval": 1,
         "tooltip": false
-    }
+    },
+    "custom/notification": {
+        "tooltip": true,
+        "format": " {icon}",
+        "format-icons": {
+           "notification": "󱅫 ",
+           "none": "󰂜 ",
+           "dnd-notification": "󰂠 ",
+           "dnd-none": "󰪓 ",
+           "inhibited-notification": "󰂛 ",
+           "inhibited-none": "󰪑 ",
+           "dnd-inhibited-notification": "󰂛 ",
+           "dnd-inhibited-none": "󰪑 "
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
 }

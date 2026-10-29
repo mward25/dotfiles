@@ -291,7 +291,7 @@ local function adjust_zoom(direction)
 	elseif direction == "out" then
 		zoom_factor = math.max(zoom_factor - zoom_step, zoom_min)
 	end
-	hl.dispatch(hl.dsp.global("cursor:zoom_factor", tostring(zoom_factor)))
+	hl.dispatch(hl.dsp.cursor({zoom_factor = zoom_factor}))
 end
 
 -- Window resize with animation (replaces hypr_resize.sh)
