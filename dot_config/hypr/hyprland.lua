@@ -296,9 +296,9 @@ end
 
 -- Window resize with animation (replaces hypr_resize.sh)
 local function resize_window(x_delta, y_delta)
-	hl.dispatch(hl.dsp.global("misc:animate_manual_resizes", true))
+	hl.dispatch(hl.dsp.exec_cmd("hyprctl keyword misc:animate_manual_resizes true"))
 	hl.dispatch(hl.dsp.window.resize({ x = x_delta, y = y_delta, relative = true }))
-	hl.dispatch(hl.dsp.global("misc:animate_manual_resizes", false))
+	hl.dispatch(hl.dsp.exec_cmd("hyprctl keyword misc:animate_manual_resizes false"))
 end
 
 -- Special workspace toggle (replaces toggle_special.sh)
