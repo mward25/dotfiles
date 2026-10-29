@@ -54,28 +54,28 @@ hl.device({
 
 -- Persistent workspaces
 -- Default workspace config
-hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "dwindle", layout_opts = { direction = "up", focus_follow = 0 } })
-hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true, layout = "dwindle", layout_opts = { direction = "up", focus_follow = 0 } })
+hl.workspace_rule({ workspace = 1, monitor = "DP-1", persistent = true, layout = "dwindle", layout_opts = {  focus_follow = 0 } })
+hl.workspace_rule({ workspace = 2, monitor = "DP-1", persistent = true, layout = "dwindle", layout_opts = {  focus_follow = 0 } })
 hl.workspace_rule({
 	workspace = 3,
 	monitor = "DP-1",
 	persistent = true,
 	layout = "scrolling",
-	layout_opts = { direction = "up", focus_follow = 0 },
+	layout_opts = {  focus_follow = 0 },
 })
-hl.workspace_rule({ workspace = 4, monitor = "DP-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
-hl.workspace_rule({ workspace = 5, monitor = "DP-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
+hl.workspace_rule({ workspace = 4, monitor = "DP-1", persistent = true, layout_opts = {  focus_follow = 0 } })
+hl.workspace_rule({ workspace = 5, monitor = "DP-1", persistent = true, layout_opts = {  focus_follow = 0 } })
 
 hl.workspace_rule({
 	workspace = 6,
 	monitor = "HDMI-A-1",
 	persistent = true,
 	layout = "scrolling",
-	layout_opts = { direction = "up", focus_follow = 0 },
+	layout_opts = {  focus_follow = 0 },
 })
-hl.workspace_rule({ workspace = 7, monitor = "HDMI-A-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
-hl.workspace_rule({ workspace = 8, monitor = "HDMI-A-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
-hl.workspace_rule({ workspace = 9, monitor = "HDMI-A-1", persistent = true, layout_opts = { direction = "up", focus_follow = 0 } })
+hl.workspace_rule({ workspace = 7, monitor = "HDMI-A-1", persistent = true, layout_opts = {  focus_follow = 0 } })
+hl.workspace_rule({ workspace = 8, monitor = "HDMI-A-1", persistent = true, layout_opts = {  focus_follow = 0 } })
+hl.workspace_rule({ workspace = 9, monitor = "HDMI-A-1", persistent = true, layout_opts = {  focus_follow = 0 } })
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -181,6 +181,14 @@ hl.config({
 			passes = 1,
 			vibrancy = 0.1696,
 		},
+		wobble = {
+			enabled = true,
+			mass = 0.5
+		},
+		motion_blur = {
+			enabled = true,
+			samples = 64
+		}
 	},
 
 	animations = {
@@ -355,7 +363,7 @@ local function cycle_layout(direction)
 	hl.workspace_rule({
 		workspace = tostring(special and workspace.name or workspace.id),
 		layout = layouts[next_idx],
-		layout_opts = { direction = "up", focus_follow = 0 },
+		layout_opts = {  focus_follow = 0 },
 	})
 
 	hl.dsp.exec_cmd("pkill -RTMIN+8 waybar")
@@ -587,3 +595,7 @@ hl.window_rule({
 	no_blur = true,
 	-- opaque = true
 })
+-- hl.curve( "workspace_bezier", { type = "bezier", points = { {0.42, 0}, {0.58, 1} } })
+-- hl.animation({ leaf = "workspaces", enabled = true, speed = 8, bezier = "workspace_bezier" })
+-- hl.curve( "rubber", { type = "spring", mass = 1, stiffness = 10, damping = 10 } )
+-- hl.animation({ leaf = "workspaces", enabled = true, speed = 8, curve = "default", style = "slidefade 20%", spring = "rubber"})
