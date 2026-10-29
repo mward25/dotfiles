@@ -27,9 +27,6 @@ export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 export LESS="-R --wheel-lines=3"
 test -s ~/.alias && . ~/.alias || true
 
-# make x over ssh work
-#export DISPLAY=:0.0
-
 export GH_EDITOR=nvim
 
 # Generate compile_commands.json
@@ -257,9 +254,13 @@ export CAMOFOX_CRASH_REPORT_ENABLED=false
 
 export PATH="/home/miles/.bun/bin:$PATH"
 
-source /etc/profile.d/android-emulator.sh
-source /etc/profile.d/android-sdk-platform-tools.sh
-source /etc/profile.d/android-sdk-cmdline-tools-latest.sh  
-source /etc/profile.d/android-sdk.sh
+android_env() {
+  source /etc/profile.d/android-emulator.sh
+  source /etc/profile.d/android-sdk-platform-tools.sh
+  source /etc/profile.d/android-sdk-cmdline-tools-latest.sh  
+  source /etc/profile.d/android-sdk.sh
+}
 
-alias camofox-interactive="CAMOFOX_INTERACTIVE=desktop camofox-browser"
+camofox-interactive() {
+  CAMOFOX_INTERACTIVE=desktop camofox-browser
+}

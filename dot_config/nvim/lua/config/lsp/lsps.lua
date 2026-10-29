@@ -14,4 +14,6 @@ return {
 	"tailwindcss",
 	"tombi",
 	"qmlls",
+	"ts_ls",
+	"deno",
 }
