@@ -55,11 +55,10 @@ vim.opt.iskeyword:append("$")
 
 vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions" })
 vim.keymap.set("x", "g.", vim.lsp.buf.code_action, { desc = "Vim Lsp Code Actions (visual)" })
-vim.keymap.set("n", "<leader>d", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics" })
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.goto_next()
 end, { desc = "Next LSP diagnostic" })
-vim.keymap.set("n", "[d]", function()
+vim.keymap.set("n", "[d", function()
 	vim.diagnostic.goto_prev()
 end, { desc = "Prev LSP diagnostic" })
 -- vim.keymap.set("n", "<leader>gd", ":Neogen<CR>", { desc = "Generate annotation (Neogen)" })
@@ -80,14 +79,6 @@ vim.opt.list = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = ";"
 -- vim.keymap.set("n", "<leader>t", ":Neotree toggle<CR>")
-
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.buffers, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
-vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope find keymaps" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
