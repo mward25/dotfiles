@@ -62,7 +62,7 @@ end, { desc = "Next LSP diagnostic" })
 vim.keymap.set("n", "[d]", function()
 	vim.diagnostic.goto_prev()
 end, { desc = "Prev LSP diagnostic" })
-vim.keymap.set("n", "<leader>gd", ":Neogen<CR>", { desc = "Generate annotation (Neogen)" })
+-- vim.keymap.set("n", "<leader>gd", ":Neogen<CR>", { desc = "Generate annotation (Neogen)" })
 
 
 -- vim.opt.tabstop = 4

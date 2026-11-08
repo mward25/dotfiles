@@ -4,7 +4,10 @@ return {
 		require("neogen").setup({
 			enabled = true,
 			input_after_comment = true,
-			snippet_engine = "coq",
+			snippet_engine = "nvim",
 		})
 	end,
+	keys = {
+		{ "<leader>gd", "<cmd>Neogen<CR>", { desc = "Generate annotation (Neogen)" } }
+	}
 }
