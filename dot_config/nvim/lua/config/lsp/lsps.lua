@@ -16,5 +16,7 @@ return {
 	"qmlls",
 	-- "ts_ls",
 	-- "deno",
-	"vtsls"
+	"vtsls",
+	"sqlls",
+	"biome"
 }
