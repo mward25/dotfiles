@@ -94,6 +94,12 @@ local menu = "rofi -show drun"
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function()
+	hl.exec_cmd('restart-hypr-portal')
+	--hl.exec_cmd('dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland')
+	-- hl.exec_cmd('dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE')
+	-- hl.exec_cmd('sleep 2 && dbus-update-activation-environment --systemd --all && systemctl --user import-environment QT_QPA_PLATFORMTHEME')
+	 -- hl.exec_cmd('systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland')
+	-- Maybe try this too :D dbus-update-activation-environment --systemd --all &&  systemctl --user import-environment QT_QPA_PLATFORMTHEME
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 	hl.exec_cmd("awww-daemon")
@@ -125,14 +131,23 @@ hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 
 -- QT Config
-hl.env("QT_QPA_PLATFORM", "wayland")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_QPA_PLATFORMTHEME", "hyprqt6engine")
+
+-- SDL Config
+hl.env("SDL_VIDEODRIVER", "wayland")
+
+-- GTK Config
+hl.env("GDK_BACKEND", "wayland,x11,*")
 
 -- Try to mostly have things run in wayland native
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 -- Hardware acceleration on nvidia
 hl.env("NVD_BACKEND", "direct")
+
+-- Clutter config
+hl.env("CLUTTER_BACKEND", "wayland")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -194,6 +209,9 @@ hl.config({
 	animations = {
 		enabled = true,
 	},
+	xwayland = {
+		force_zero_scaling = true
+	}
 })
 
 -- Custom curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
