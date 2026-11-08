@@ -37,7 +37,6 @@ return {
 	"csv",
 	"cuda",
 	"cue",
-	"cylc",
 	"d",
 	"dart",
 	"desktop",
