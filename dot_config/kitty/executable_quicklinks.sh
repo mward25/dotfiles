@@ -5,7 +5,7 @@ quicklinks=(
   ["Git"]="lazygit"
   ["Files"]="yazi"
   ["Editor"]="nvim"
-  ["Code Review"]="tuicr"
+  ["tuicr"]="tuicr"
   ["Open Code"]="opencode"
 )
 
