@@ -21,7 +21,7 @@ export DASHT_DOCSETS_DIR="$HOME/.local/share/Zeal/Zeal/docsets"
 # Use elk layout engine for d2 graphs
 export D2_LAYOUT=elk
 
-export PATH=$PATH:{{ joinPath .chezmoi.homeDir ".local" "bin" }}{{ if ne .chezmoi.os "windows" }}:~/bin:/opt/google-cloud-cli/bin{{ end }}
+export PATH="$PATH:{{ joinPath .chezmoi.homeDir ".local" "bin" }}{{ if ne .chezmoi.os "windows" }}:~/bin:/opt/google-cloud-cli/bin{{ end }}"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 # Use terminal scrolling
 export LESS="-R --wheel-lines=3"
