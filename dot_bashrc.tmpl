@@ -264,3 +264,5 @@ android_env() {
 camofox-interactive() {
   CAMOFOX_INTERACTIVE=desktop camofox-browser
 }
+
+alias enter_android_craft="podman run -ti --rm -v ~/craft-kde-android:/home/user/CraftRoot:Z --userns keep-id invent-registry.kde.org/sysadmin/ci-images/android-qt611 bash"

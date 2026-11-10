@@ -31,7 +31,7 @@ require("lazy").setup({
 
 		require("config.catppuccin"),
 		require("config.lualine"),
-		require("config.render-markdown"),
+		-- require("config.render-markdown"),
 		require("config.trouble"),
 		require("config.mdkite"),
 		--require("config.arborist"),
